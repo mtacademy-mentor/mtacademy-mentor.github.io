@@ -111,12 +111,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnNext = document.getElementById('slider-next');
 
   if (slider && btnPrev && btnNext) {
+    const getScrollAmount = () => {
+      const slide = slider.querySelector('.review-slide');
+      // 24px matches the 1.5rem gap
+      return slide ? slide.offsetWidth + 24 : 320;
+    };
+
     btnNext.addEventListener('click', () => {
-      // scroll amount roughly equal to card width
-      slider.scrollBy({ left: 320, behavior: 'smooth' });
+      slider.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
     });
     btnPrev.addEventListener('click', () => {
-      slider.scrollBy({ left: -320, behavior: 'smooth' });
+      slider.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
     });
   }
 });

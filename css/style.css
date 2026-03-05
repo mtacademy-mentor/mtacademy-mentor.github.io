@@ -2473,11 +2473,23 @@
 
     .review-slide {
       flex: 0 0 auto;
-      width: 80%;
-      /* Show one image at a time with a bit of the next */
-      max-width: 400px;
-      /* Limit max width */
+      /* Show exactly 3 items, account for 2 gaps of 1.5rem */
+      width: calc((100% - 3rem) / 3);
       scroll-snap-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .review-slide {
+        /* Show 2 items on tablet, account for 1 gap */
+        width: calc((100% - 1.5rem) / 2);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .review-slide {
+        /* Show 1 item on mobile */
+        width: 100%;
+      }
     }
 
     .review-slide img {
