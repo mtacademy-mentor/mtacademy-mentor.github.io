@@ -31,8 +31,8 @@ The platform is designed to be fully responsive, bilingual (Arabic & English), a
 ## 📊 Program Statistics
 
 Our program has a proven track record of success:
--   👤 **85+** Mentees successfully mentored.
--   🌍 **8+** Countries reached globally.
+-   👤 **90+** Mentees successfully mentored.
+-   🌍 **9+** Countries reached globally.
 -   🎓 **22K+** Students on Udemy.
 -   ⏳ **7+** Years of professional experience in Software Engineering.
 
