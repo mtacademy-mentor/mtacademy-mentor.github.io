@@ -2471,6 +2471,17 @@
       scrollbar-width: none;
     }
 
+    /* Safely center sliders with few items */
+    .center-slider {
+      justify-content: center;
+    }
+    
+    @media (max-width: 480px) {
+      .center-slider {
+        justify-content: flex-start;
+      }
+    }
+
     .review-slide {
       flex: 0 0 auto;
       /* Show exactly 3 items, account for 2 gaps of 1.5rem */

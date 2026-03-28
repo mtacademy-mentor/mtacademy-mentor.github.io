@@ -106,22 +106,26 @@ document.addEventListener('DOMContentLoaded', () => {
   reveals.forEach(el => revealObserver.observe(el));
 
   // Slider Navigation
-  const slider = document.getElementById('reviews-slider');
-  const btnPrev = document.getElementById('slider-prev');
-  const btnNext = document.getElementById('slider-next');
+  const sliderContainers = document.querySelectorAll('.reviews-slider-container');
+  
+  sliderContainers.forEach(container => {
+    const slider = container.querySelector('.reviews-slider');
+    const btnPrev = container.querySelector('.slider-prev');
+    const btnNext = container.querySelector('.slider-next');
 
-  if (slider && btnPrev && btnNext) {
-    const getScrollAmount = () => {
-      const slide = slider.querySelector('.review-slide');
-      // 24px matches the 1.5rem gap
-      return slide ? slide.offsetWidth + 24 : 320;
-    };
+    if (slider && btnPrev && btnNext) {
+      const getScrollAmount = () => {
+        const slide = slider.querySelector('.review-slide');
+        // 24px matches the 1.5rem gap
+        return slide ? slide.offsetWidth + 24 : 320;
+      };
 
-    btnNext.addEventListener('click', () => {
-      slider.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
-    });
-    btnPrev.addEventListener('click', () => {
-      slider.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
-    });
-  }
+      btnNext.addEventListener('click', () => {
+        slider.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+      });
+      btnPrev.addEventListener('click', () => {
+        slider.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+      });
+    }
+  });
 });
