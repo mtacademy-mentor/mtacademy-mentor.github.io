@@ -128,4 +128,65 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   });
+
+  // ── ELSEWEDY ELECTRIC dedicated slider (full-width, single slide, dots + autoplay) ──
+  const elsewedySlider  = document.getElementById('elsewedy-slider');
+  const elsewedyPrev    = document.getElementById('elsewedy-prev');
+  const elsewedyNext    = document.getElementById('elsewedy-next');
+  const elsewedyDots    = document.querySelectorAll('.elsewedy-dot');
+  const elsewedySlides  = document.querySelectorAll('.elsewedy-slide');
+
+  if (elsewedySlider && elsewedySlides.length) {
+    let currentIndex = 0;
+    let autoplayTimer = null;
+
+    const goTo = (index) => {
+      currentIndex = (index + elsewedySlides.length) % elsewedySlides.length;
+      elsewedySlider.scrollTo({
+        left: elsewedySlides[currentIndex].offsetLeft,
+        behavior: 'smooth'
+      });
+      elsewedyDots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+    };
+
+    if (elsewedyNext) elsewedyNext.addEventListener('click', () => { resetAutoplay(); goTo(currentIndex + 1); });
+    if (elsewedyPrev) elsewedyPrev.addEventListener('click', () => { resetAutoplay(); goTo(currentIndex - 1); });
+
+    elsewedyDots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        resetAutoplay();
+        goTo(parseInt(dot.dataset.index, 10));
+      });
+    });
+
+    // Update active dot on manual scroll
+    elsewedySlider.addEventListener('scroll', () => {
+      const scrollLeft = elsewedySlider.scrollLeft;
+      const slideWidth = elsewedySlides[0].offsetWidth;
+      const newIndex = Math.round(scrollLeft / slideWidth);
+      if (newIndex !== currentIndex) {
+        currentIndex = newIndex;
+        elsewedyDots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+      }
+    }, { passive: true });
+
+    const startAutoplay = () => {
+      autoplayTimer = setInterval(() => goTo(currentIndex + 1), 4000);
+    };
+
+    const resetAutoplay = () => {
+      clearInterval(autoplayTimer);
+      startAutoplay();
+    };
+
+    // Pause autoplay when not in viewport
+    const autoplayObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { startAutoplay(); }
+        else { clearInterval(autoplayTimer); }
+      });
+    }, { threshold: 0.3 });
+
+    autoplayObserver.observe(elsewedySlider);
+  }
 });
