@@ -847,7 +847,7 @@
 
     .photo-frame {
       position: relative;
-      border-radius: 4px;
+      border-radius: 52px;
       overflow: hidden;
       aspect-ratio: 3/4;
       max-height: 600px;
@@ -2475,7 +2475,7 @@
     .center-slider {
       justify-content: center;
     }
-    
+
     @media (max-width: 480px) {
       .center-slider {
         justify-content: flex-start;
