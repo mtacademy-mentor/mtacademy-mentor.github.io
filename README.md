@@ -1,100 +1,95 @@
 # Online Mentorship Program 🚀
-## Powered By MT Software Solutions & Academy
 
-![Mentorship Program Banner](https://img.shields.io/badge/Status-Active-brightgreen)
-![Bilingual](https://img.shields.io/badge/Language-Bilingual-blue)
-![License](https://img.shields.io/badge/License-Apache%202.0-orange)
+The official website for the **Online Mentorship Program**, powered by **MT Software Solutions & Academy** and led by **Eng. Mohamed Tamer**.
 
-Welcome to the official repository of the **Online Mentorship Program**, a professional platform designed to help aspiring and established developers start their journey in Software Engineering with expert guidance.
+[![Status: Active](https://img.shields.io/badge/status-active-brightgreen)](https://mtacademy-mentor.github.io/)
+[![Languages: Arabic and English](https://img.shields.io/badge/languages-Arabic%20%7C%20English-blue)](#features)
+[![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-orange)](LICENSE)
 
----
+[View the live website](https://mtacademy-mentor.github.io/)
 
-## 🌟 Project Overview
+## Overview
 
-This website serves as the digital front for the mentorship program led by **Eng. Mohamed Tamer**. It offers a comprehensive view of the services, subscription plans, and the expert's background, providing a seamless experience for potential mentees worldwide.
+This responsive, bilingual website introduces the mentorship program, its services and plans, the mentor's background, and testimonials from previous mentees. Visitors can explore the program in Arabic or English and contact the mentor directly through WhatsApp.
 
-The platform is designed to be fully responsive, bilingual (Arabic & English), and highly interactive, ensuring that information is accessible to a diverse audience.
+## Features
 
----
+- Arabic (RTL) and English (LTR) content with a persistent language preference
+- Responsive layouts for desktop, tablet, and mobile screens
+- Mentorship services and subscription-plan comparisons
+- Mentee testimonials, achievements, and program statistics
+- Animated content reveals and interactive testimonial sliders
+- Direct booking and contact links through WhatsApp
+- Links to the mentor's courses, profiles, and community channels
 
-## ✨ Key Features
+## Program at a Glance
 
--   **Bilingual Support**: Full toggle support for Arabic (RTL) and English (LTR) languages.
--   **Fully Responsive**: Optimized for all devices using Bootstrap 5 and custom media queries.
--   **Service Showcasing**: Detailed sections for 1:1 sessions, career coaching, and professional development.
--   **Dynamic UI**: Modern aesthetics with smooth animations, hover effects, and a glassmorphism-inspired design.
--   **Interactive Navigation**: Smooth scrolling and a dedicated language switcher.
--   **Direct Contact**: Integrated WhatsApp link for immediate communication.
+- **127+** mentees
+- **13+** countries reached
+- **22K** Udemy students
+- **7+** years of software engineering experience
 
----
+## Built With
 
-## 📊 Program Statistics
+- Semantic HTML5
+- CSS3 with custom properties, responsive breakpoints, and animations
+- Vanilla JavaScript for language switching, navigation, scroll effects, and sliders
+- [Font Awesome 6](https://fontawesome.com/) for icons
+- [Google Fonts](https://fonts.google.com/) using Cairo and Playfair Display
 
-Our program has a proven track record of success:
--   👤 **90+** Mentees successfully mentored.
--   🌍 **9+** Countries reached globally.
--   🎓 **22K+** Students on Udemy.
--   ⏳ **7+** Years of professional experience in Software Engineering.
+No build step or package installation is required.
 
----
-
-## 🛠️ Tech Stack
-
--   **Frontend**: HTML5, CSS3 (Vanilla & Custom Variables)
--   **Framework**: [Bootstrap 5](https://getbootstrap.com/)
--   **Icons**: [Font Awesome 6](https://fontawesome.com/)
--   **Typography**: [Google Fonts](https://fonts.google.com/) (Cairo for Arabic, Playfair Display for headers)
--   **Scripting**: Vanilla JavaScript for language toggling and UI interactions.
-
----
-
-## 📂 Project Structure
+## Project Structure
 
 ```text
 .
-├── assets/             # Images, logos, and visual resources
+├── assets/
+│   └── images/         # Branding, mentor photos, reviews, flags, and payment logos
 ├── css/
-│   └── style.css       # Main stylesheet containing design tokens and custom styles
+│   └── style.css       # Design system, layouts, animations, and responsive styles
 ├── js/
-│   └── script.js       # Logic for language switching and UI effects
-├── index.html          # Main entry point (Bilingual content)
-├── LICENSE             # Apache 2.0 License
-└── README.md           # Project documentation
+│   └── script.js       # Language, navigation, reveal, and slider interactions
+├── index.html          # Main bilingual page
+├── LICENSE             # Apache License 2.0
+└── README.md
 ```
 
----
+## Run Locally
 
-## 🚀 Getting Started
+1. Clone the repository:
 
-To run this project locally:
+   ```bash
+   git clone https://github.com/mtacademy-mentor/mtacademy-mentor.github.io.git
+   cd mtacademy-mentor.github.io
+   ```
 
-1.  **Clone the repository**:
-    ```bash
-    git clone https://github.com/mentorshipprogrambymt/mentorshipprogrambymt.github.io.git
-    ```
-2.  **Open in Browser**:
-    Simply open the `index.html` file in any modern web browser.
-3.  **Local Development**:
-    It is recommended to use a local server like "Live Server" in VS Code to ensure all assets load correctly.
+2. Start a local static server:
 
----
+   ```bash
+   python3 -m http.server 8000
+   ```
 
-## 👨‍🏫 About the Mentor
+3. Open [http://localhost:8000](http://localhost:8000) in your browser.
 
-**Eng. Mohamed Tamer** is a seasoned Software Engineer and Mentor with a passion for teaching. Through this program, he provides personalized 1:1 sessions focusing on:
--   Clean Code & Architecture
--   Web Development Technologies
--   Career Coaching & Interview Preparation
--   Professional Growth in the Tech Industry
+You can also open `index.html` directly, but a local server more closely matches the deployed environment. An internet connection is needed to load externally hosted fonts, icons, and the Udemy logo.
 
----
+## Making Changes
 
-## 📄 License
+- Update page content and links in `index.html`.
+- Adjust colors, spacing, typography, and responsive behavior in `css/style.css`.
+- Update language, navigation, reveal, or slider behavior in `js/script.js`.
+- Add or replace images under `assets/images/` and keep their paths in `index.html` in sync.
 
-This project is licensed under the **Apache License 2.0**. See the [LICENSE](LICENSE) file for details.
+After making changes, check both languages and test the page at desktop and mobile widths.
 
----
+## Deployment
+
+The project is a static site designed for GitHub Pages. Changes published from the repository's configured Pages branch are available at [mtacademy-mentor.github.io](https://mtacademy-mentor.github.io/).
+
+## License
+
+Licensed under the [Apache License 2.0](LICENSE).
 
 <p align="center">
-  MADE BY <a href="https://github.com/mentorshipprogrambymt">MT SOFTWARE SOLUTIONS & ACADEMY</a>
+  Made by <a href="https://github.com/mtacademy-mentor">MT Software Solutions &amp; Academy</a>
 </p>
