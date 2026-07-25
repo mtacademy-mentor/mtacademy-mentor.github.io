@@ -44,11 +44,12 @@ No build step or package installation is required.
 ```text
 .
 ├── assets/
-│   └── images/         # Branding, mentor photos, reviews, flags, and payment logos
-├── css/
-│   └── style.css       # Design system, layouts, animations, and responsive styles
-├── js/
-│   └── script.js       # Language, navigation, reveal, and slider interactions
+│   ├── css/
+│   │   └── style.css   # All project-authored styles
+│   ├── images/         # Branding, mentor photos, reviews, flags, and payment logos
+│   └── js/
+│       └── main.js     # All project-authored site behavior
+├── faq.html            # Bilingual Online Mentorship FAQ page
 ├── index.html          # Main bilingual page
 ├── LICENSE             # Apache License 2.0
 └── README.md
@@ -75,9 +76,10 @@ You can also open `index.html` directly, but a local server more closely matches
 
 ## Making Changes
 
-- Update page content and links in `index.html`.
-- Adjust colors, spacing, typography, and responsive behavior in `css/style.css`.
-- Update language, navigation, reveal, or slider behavior in `js/script.js`.
+- Update homepage content and links in `index.html`.
+- Update FAQ content in `faq.html`.
+- Adjust colors, spacing, typography, and responsive behavior in `assets/css/style.css`.
+- Update language, navigation, FAQ controls, reveal, or slider behavior in `assets/js/main.js`.
 - Add or replace images under `assets/images/` and keep their paths in `index.html` in sync.
 
 After making changes, check both languages and test the page at desktop and mobile widths.

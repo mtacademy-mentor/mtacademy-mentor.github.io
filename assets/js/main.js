@@ -1,3 +1,4 @@
+// Shared site behavior
 // Navigation and Scroll Effects
 window.addEventListener('scroll', () => {
   const navbar = document.getElementById('navbar');
@@ -78,6 +79,14 @@ document.addEventListener('DOMContentLoaded', () => {
     langSwitch.addEventListener('click', toggleLanguage);
   }
 
+  const scrollControls = document.querySelectorAll('[data-scroll-target]');
+  scrollControls.forEach((control) => {
+    control.addEventListener('click', () => {
+      const target = document.getElementById(control.dataset.scrollTarget);
+      target?.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
   const navLinks = document.getElementById('nav-links');
   if (navLinks) {
     const links = navLinks.querySelectorAll('a');
@@ -101,13 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
     html.setAttribute('dir', savedLang === 'ar' ? 'rtl' : 'ltr');
   }
 
-  // Initial reveal check
-  const reveals = document.querySelectorAll('.reveal');
-  reveals.forEach(el => revealObserver.observe(el));
-
   // Slider Navigation
   const sliderContainers = document.querySelectorAll('.reviews-slider-container');
-  
+
   sliderContainers.forEach(container => {
     const slider = container.querySelector('.reviews-slider');
     const btnPrev = container.querySelector('.slider-prev');
@@ -190,3 +195,49 @@ document.addEventListener('DOMContentLoaded', () => {
     autoplayObserver.observe(elsewedySlider);
   }
 });
+
+// FAQ page metadata and accordion controls
+(() => {
+  const faqList = document.getElementById('faq-list');
+
+  if (!faqList) {
+    return;
+  }
+
+  const html = document.documentElement;
+  const metadata = document.querySelectorAll('[data-ar][data-en]');
+  const faqItems = faqList.querySelectorAll('.faq-item');
+  const expandAllButton = document.getElementById('expand-all');
+  const collapseAllButton = document.getElementById('collapse-all');
+
+  const updateLocalizedMetadata = () => {
+    const language = html.getAttribute('lang') === 'en' ? 'en' : 'ar';
+
+    metadata.forEach((element) => {
+      const localizedValue = element.dataset[language];
+
+      if (element.tagName === 'TITLE') {
+        element.textContent = localizedValue;
+      } else if (localizedValue) {
+        element.setAttribute('content', localizedValue);
+      }
+    });
+  };
+
+  const setAllItemsOpen = (open) => {
+    faqItems.forEach((item) => {
+      item.open = open;
+    });
+  };
+
+  updateLocalizedMetadata();
+
+  const languageObserver = new MutationObserver(updateLocalizedMetadata);
+  languageObserver.observe(html, {
+    attributes: true,
+    attributeFilter: ['lang']
+  });
+
+  expandAllButton?.addEventListener('click', () => setAllItemsOpen(true));
+  collapseAllButton?.addEventListener('click', () => setAllItemsOpen(false));
+})();

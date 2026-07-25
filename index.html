@@ -10,7 +10,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
@@ -18,7 +18,7 @@
 
   <!-- NAV -->
   <nav id="navbar">
-    <a href="#" class="nav-logo" style="text-decoration: none;">
+    <a href="#" class="nav-logo">
       <div class="nav-logo-text">
         <span class="lang-ar">
           <span class="main-title"><span class="brand-gold">Online</span> <span class="brand-ink">Mentorship
@@ -35,6 +35,7 @@
     <div class="menu-btn" id="menu-btn"><i class="fa-solid fa-bars"></i></div>
     <ul class="nav-links" id="nav-links">
       <li><a href="#"><span class="lang-ar">الرئيسية</span><span class="lang-en">Home</span></a></li>
+      <li><a href="faq.html"><span class="lang-ar">الأسئلة الشائعة</span><span class="lang-en">FAQ</span></a></li>
       <li><a href="#about"><span class="lang-ar">عن المينتور</span><span class="lang-en">About</span></a></li>
       <li><a href="#services"><span class="lang-ar">الخدمات</span><span class="lang-en">Services</span></a></li>
       <li><a href="#plans"><span class="lang-ar">الخطط</span><span class="lang-en">Plans</span></a></li>
@@ -75,11 +76,11 @@
           that has reached more than <strong>127+ mentees</strong> in <strong>13+ countries</strong> worldwide.</span>
       </p>
       <div class="hero-btns">
-        <button class="btn-primary" onclick="document.getElementById('plans').scrollIntoView({behavior:'smooth'})">
+        <button class="btn-primary" type="button" data-scroll-target="plans">
           <span class="lang-ar">اختار خطتك الآن</span>
           <span class="lang-en">Choose Your Plan Now</span>
         </button>
-        <button class="btn-outline" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+        <button class="btn-outline" type="button" data-scroll-target="about">
           <span class="lang-ar">تعرف علي أكتر</span>
           <span class="lang-en">Learn More</span>
         </button>
@@ -166,12 +167,11 @@
           <span class="lang-ar">Online Mentorship <span>Program</span></span>
           <span class="lang-en">Online Mentorship <span>Program</span></span>
         </div>
-        <p class="s-sub"
-          style="max-width: 100%; text-align: justify; text-justify: inter-word; text-align-last: center;">
+        <p class="s-sub about-summary">
           <span class="lang-ar">
             ساعد أكتر من <strong>127+ متدرب</strong> يحققوا تقدم حقيقي في مسيرتهم في <strong>13+ دولة</strong>.
             <br>
-            <span style="font-size: 0.9em; opacity: 0.9;">Software Engineer | Ex- Elsewedy Electric | Founder & CEO |
+            <span class="about-role-line">Software Engineer | Ex- Elsewedy Electric | Founder & CEO |
               Udemy Instructor | Mentor |
               Computer Science Postgraduate Diploma | ITIL® v4 | Technical Articles Writer</span>
           </span>
@@ -179,7 +179,7 @@
             Helped over <strong>127+ mentees</strong> achieve real progress in their careers across <strong>13+
               countries</strong>.
             <br>
-            <span style="font-size: 0.9em; opacity: 0.9;">Software Engineer | Ex- Elsewedy Electric | Founder & CEO |
+            <span class="about-role-line">Software Engineer | Ex- Elsewedy Electric | Founder & CEO |
               Udemy Instructor | Mentor |
               Computer Science Postgraduate Diploma | ITIL® v4 | Technical Articles Writer</span>
           </span>
@@ -305,8 +305,7 @@
           </div>
         </div>
         <div class="abox">
-          <div class="abox-num">5.0<span style="font-size: 0.6em; margin-right: 6px; vertical-align: middle;"><i
-                class="fa-solid fa-star"></i></span></div>
+          <div class="abox-num">5.0<span class="rating-star"><i class="fa-solid fa-star"></i></span></div>
           <div class="abox-label">
             <span class="lang-ar">تقييم المتدربين</span>
             <span class="lang-en">Mentees Rating</span>
@@ -620,7 +619,7 @@
         </a>
       </div>
     </div>
-    <p style="text-align:center;margin-top:1.5rem;color:var(--text-muted);font-size:0.85rem">
+    <p class="single-session-note">
       <span class="lang-ar">💡 متاح كمان خيار الجلسة الواحدة لأي استشارة أو توجيه سريع</span>
       <span class="lang-en">💡 Single session option is also available for consultations</span>
     </p>
@@ -644,47 +643,36 @@
           <span class="lang-ar">اختار الخطة المناسبة ليك واحجز دلوقتي.</span>
           <span class="lang-en">Choose the plan that suits you and book now.</span>
         </p>
-        <div class="booking-form-wrap reveal"
-          style="margin-top:2rem; padding: 3rem; background: var(--bg-card); border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); text-align: center;">
-          <div class="form-header"
-            style="margin-bottom: 1.5rem; font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--text-heading-on-dark);">
+        <div class="booking-form-wrap payment-card reveal">
+          <div class="form-header payment-card-title">
             <span class="lang-ar">طرق الدفع المتاحة</span>
             <span class="lang-en">Available Payment Methods</span>
           </div>
           <div class="form-body">
-            <p style="margin-bottom: 2rem; color: var(--text-muted); font-size: 1.1rem; line-height: 1.6;">
+            <p class="payment-card-intro">
               <span class="lang-ar">جميع الحجوزات تتم من خلال التواصل المباشر عبر الواتساب. يمكنك الدفع باستخدام إحدى
                 الطرق التالية:</span>
               <span class="lang-en">All bookings are made through direct WhatsApp contact. You can pay using one of the
                 following methods:</span>
             </p>
-            <div class="payment-methods-logos"
-              style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto;">
-              <div
-                style="background: #f9f9f9; border: 1px solid #eee; border-radius: 12px; padding: 1rem; display: flex; align-items: center; justify-content: center; height: 130px;">
+            <div class="payment-methods-logos">
+              <div class="payment-logo-card payment-logo-card-featured">
                 <img src="assets/images/payment/vodafone-cash.png" alt="Vodafone Cash"
-                  style="max-height: 100px; max-width: 100%; object-fit: contain;">
+                  class="payment-logo payment-logo-featured">
               </div>
-              <div
-                style="background: #f9f9f9; border: 1px solid #eee; border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; justify-content: center; height: 120px;">
-                <img src="assets/images/payment/instapay.png" alt="InstaPay"
-                  style="max-height: 80px; max-width: 100%; object-fit: contain;">
+              <div class="payment-logo-card">
+                <img src="assets/images/payment/instapay.png" alt="InstaPay" class="payment-logo">
               </div>
-              <div
-                style="background: #f9f9f9; border: 1px solid #eee; border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; justify-content: center; height: 120px;">
-                <img src="assets/images/payment/paypal.png" alt="PayPal"
-                  style="max-height: 80px; max-width: 100%; object-fit: contain;">
+              <div class="payment-logo-card">
+                <img src="assets/images/payment/paypal.png" alt="PayPal" class="payment-logo">
               </div>
-              <div
-                style="background: #f9f9f9; border: 1px solid #eee; border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; justify-content: center; height: 120px;">
-                <img src="assets/images/payment/bank-transfer.png" alt="Bank Transfer"
-                  style="max-height: 80px; max-width: 100%; object-fit: contain;">
+              <div class="payment-logo-card">
+                <img src="assets/images/payment/bank-transfer.png" alt="Bank Transfer" class="payment-logo">
               </div>
             </div>
 
             <a href="https://wa.me/201032105166?text=أهلاً م/ محمد، أنا مهتم بالاشتراك في البرنامج التدريبي"
-              target="_blank" class="btn-book"
-              style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: auto; padding: 1rem 2.5rem; text-decoration: none;">
+              target="_blank" class="btn-book payment-contact-link">
               <span class="lang-ar">تواصل للحجز عبر الواتساب</span>
               <span class="lang-en">Contact via WhatsApp to Book</span>
             </a>
@@ -736,21 +724,21 @@
           </h4>
           <div class="contact-direct">
             <a href="https://wa.me/201032105166" target="_blank" class="contact-btn wa-btn">
-              <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
+              <i class="fab fa-whatsapp contact-icon"></i>
               <div><strong>
                   <span class="lang-ar">واتساب</span>
                   <span class="lang-en">WhatsApp</span>
                 </strong>
-                <div style="font-size:0.78rem;opacity:0.8">+201032105166</div>
+                <div class="contact-detail">+201032105166</div>
               </div>
             </a>
             <a href="mailto:mohamedtamerdev@gmail.com" class="contact-btn em-btn">
-              <i class="far fa-envelope" style="font-size: 1.5rem;"></i>
+              <i class="far fa-envelope contact-icon"></i>
               <div><strong>
                   <span class="lang-ar">إيميل</span>
                   <span class="lang-en">Email</span>
                 </strong>
-                <div style="font-size:0.78rem;opacity:0.8">mohamedtamerdev@gmail.com</div>
+                <div class="contact-detail">mohamedtamerdev@gmail.com</div>
               </div>
             </a>
           </div>
@@ -760,9 +748,7 @@
             <span class="lang-ar">تقييمات المتدربين</span>
             <span class="lang-en">Mentees Reviews</span>
           </h4>
-          <a href="https://shorturl.at/qYjwF" target="_blank"
-            style="display:inline-flex;align-items:center;gap:0.5rem;color:var(--text-accent);text-decoration:none;font-weight:700;font-size:0.88rem;padding:0.7rem 1rem;border:1px solid var(--color-brand-gold);border-radius:2px;transition:background 0.2s"
-            onmouseover="this.style.background='rgba(201,168,76,0.1)'" onmouseout="this.style.background='transparent'">
+          <a href="https://shorturl.at/qYjwF" target="_blank" class="reviews-link">
             <span class="lang-ar">شوف تقييمات المتدربين ←</span>
             <span class="lang-en">See mentees reviews ←</span>
           </a>
@@ -773,18 +759,17 @@
 
   <!-- TESTIMONIALS -->
   <section class="t-section">
-    <div style="text-align:center">
-      <div class="s-tag" style="justify-content:center;display:block">
+    <div class="section-heading-centered">
+      <div class="s-tag s-tag-centered">
         <span class="lang-ar">آراء المتدربين</span>
         <span class="lang-en">Trainees' Feedback</span>
       </div>
-      <div class="s-title" style="direction: ltr;">
+      <div class="s-title section-title-ltr">
         <span class="lang-ar">MentorShip Program Reviews +127 ⭐</span>
         <span class="lang-en">MentorShip Program Reviews +127 ⭐</span>
       </div>
     </div>
-    <div class="reviews-slider-container reveal"
-      style="position: relative; /* max-width: 1000px; */ margin: 0 auto; direction: ltr; padding: 0 40px;">
+    <div class="reviews-slider-container reveal">
       <button class="slider-btn slider-prev"><i class="fa-solid fa-chevron-left"></i></button>
       <div class="reviews-slider">
         <div class="review-slide"><img src="assets/images/reviews/1.png" alt="Review 1"></div>
@@ -876,7 +861,7 @@
       </div>
       <button class="slider-btn slider-next"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
-    <div style="text-align:center;margin-top:2rem">
+    <div class="section-action">
       <a href="https://shorturl.at/qYjwF" target="_blank" class="btn-outline">
         <span class="lang-ar">شوف كل التقييمات ←</span>
         <span class="lang-en">See all reviews ←</span>
@@ -887,18 +872,17 @@
 
   <!-- TESTIMONIALS 2 -->
   <section class="t-section">
-    <div style="text-align:center">
-      <div class="s-tag" style="justify-content:center;display:block">
+    <div class="section-heading-centered">
+      <div class="s-tag s-tag-centered">
         <span class="lang-ar">إنجازات المتدربين</span>
         <span class="lang-en">Trainees' Achievements</span>
       </div>
-      <div class="s-title" style="direction: ltr;">
+      <div class="s-title section-title-ltr">
         <span class="lang-ar">Mentorship Achievements : Success Stories & Job Placements 💼</span>
         <span class="lang-en">Mentorship Achievements : Success Stories & Job Placements 💼</span>
       </div>
     </div>
-    <div class="reviews-slider-container reveal"
-      style="position: relative; /* max-width: 1000px; */ margin: 0 auto; direction: ltr; padding: 0 40px;">
+    <div class="reviews-slider-container reveal">
       <button class="slider-btn slider-prev"><i class="fa-solid fa-chevron-left"></i></button>
       <div class="reviews-slider center-slider">
         <div class="review-slide"><img src="assets/images/Achievements/1.png" alt="Achievement 1"></div>
@@ -907,7 +891,7 @@
       </div>
       <button class="slider-btn slider-next"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
-    <div style="text-align:center;margin-top:2rem">
+    <div class="section-action">
       <a href="https://shorturl.at/qYjwF" target="_blank" class="btn-outline">
         <span class="lang-ar">شوف كل التقييمات ←</span>
         <span class="lang-en">See all reviews ←</span>
@@ -918,24 +902,23 @@
 
   <!-- MENTORSHIP & INTERNSHIP AT ELSEWEDY ELECTRIC -->
   <section class="t-section" id="elsewedy-mentorship">
-    <div style="text-align:center">
-      <div class="s-tag" style="justify-content:center;display:block">
+    <div class="section-heading-centered">
+      <div class="s-tag s-tag-centered">
         <span class="lang-ar">مينتورشيب وتدريب ميداني</span>
         <span class="lang-en">Mentorship &amp; Internship</span>
       </div>
-      <div class="s-title" style="direction: ltr;">
+      <div class="s-title section-title-ltr">
         <span class="lang-ar">Mentorship &amp; Internship Program with Students at ELSEWEDY ELECTRIC 🏭</span>
         <span class="lang-en">Mentorship &amp; Internship Program with Students at ELSEWEDY ELECTRIC 🏭</span>
       </div>
-      <p class="s-sub" style="text-align:center;max-width:680px;margin:0.75rem auto 0;">
+      <p class="s-sub elsewedy-subtitle">
         <span class="lang-ar">تجربة ميدانية حقيقية داخل إحدى أكبر شركات الصناعة في منطقة الشرق الأوسط وأفريقيا تدريب
           ومتابعة مباشرة للطلاب.</span>
         <span class="lang-en">Real on-site experience inside one of the largest industrial companies in MENA hands-on
           training and direct mentoring for students.</span>
       </p>
     </div>
-    <div class="reviews-slider-container reveal elsewedy-slider-container"
-      style="position: relative; margin: 2rem auto 0; direction: ltr; padding: 0 50px; max-width: 960px;">
+    <div class="reviews-slider-container reveal elsewedy-slider-container">
       <button class="slider-btn slider-prev" id="elsewedy-prev"><i class="fa-solid fa-chevron-left"></i></button>
       <div class="reviews-slider elsewedy-slider" id="elsewedy-slider">
         <div class="review-slide elsewedy-slide">
@@ -954,15 +937,15 @@
       <button class="slider-btn slider-next" id="elsewedy-next"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
     <!-- Dot indicators -->
-    <div class="elsewedy-dots" style="display:flex;justify-content:center;gap:8px;margin-top:1.5rem;">
+    <div class="elsewedy-dots">
       <span class="elsewedy-dot active" data-index="0"></span>
       <span class="elsewedy-dot" data-index="1"></span>
       <span class="elsewedy-dot" data-index="2"></span>
     </div>
     <!-- Article link -->
-    <div style="text-align:center;margin-top:2rem">
+    <div class="section-action">
       <a href="https://lnkd.in/dSStXQCj" target="_blank" class="btn-outline">
-        <i class="fab fa-linkedin-in" style="margin-inline-end:0.45rem;"></i>
+        <i class="fab fa-linkedin-in linkedin-link-icon"></i>
         <span class="lang-ar">اقرأ المقال على LinkedIn ←</span>
         <span class="lang-en">Read the Article on LinkedIn ←</span>
       </a>
@@ -972,7 +955,7 @@
 
   <!-- SOCIAL HUB SECTION -->
   <section class="social-hub reveal">
-    <div class="s-tag" style="justify-content:center;display:block">
+    <div class="s-tag s-tag-centered">
       <span class="lang-ar">قنواتنا ومنصاتنا الرسمية</span>
       <span class="lang-en">Official Channels & Platforms</span>
     </div>
@@ -980,7 +963,7 @@
       <span class="lang-ar">اتصل بي وتعرف أكثر</span>
       <span class="lang-en">Contact me & Know More</span>
     </h2>
-    <p class="s-sub" style="margin-left:auto;margin-right:auto">
+    <p class="s-sub social-hub-intro">
       <span class="lang-ar">كل حساباتي الشخصية والصفحات والجروبات الرسمية في مكان واحد</span>
       <span class="lang-en">All my personal accounts, pages, and official groups in one place</span>
     </p>
@@ -1061,7 +1044,7 @@
         </div>
       </a>
       <a href="https://www.udemy.com/user/mohamed-tamer-15" target="_blank" class="social-card sc-udemy">
-        <img src="https://logo.svgcdn.com/logos/udemy-icon.svg" alt="Udemy" class="platform-logo">
+        <img src="assets/images/Udemy.svg" alt="Udemy" class="platform-logo">
         <span>Udemy Courses</span>
         <div class="platform-detail">
           <span class="lang-ar">دورات أونلاين</span>
@@ -1189,7 +1172,7 @@
 
   <!-- MODAL -->
 
-  <script src="js/script.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 
 </html>
