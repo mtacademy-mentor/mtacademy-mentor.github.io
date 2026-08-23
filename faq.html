@@ -4,6 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (() => {
+      try {
+        const language = localStorage.getItem('preferredLanguage');
+        if (language === 'en' || language === 'ar') {
+          document.documentElement.lang = language;
+          document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+        }
+      } catch (_) { /* The default Arabic interface remains available. */ }
+    })();
+  </script>
   <title
     data-ar="الأسئلة الشائعة | Online Mentorship Program"
     data-en="FAQ | Online Mentorship Program">
@@ -52,7 +63,12 @@
 </head>
 
 <body>
-  <nav id="navbar" aria-label="Primary navigation">
+  <a class="skip-link" href="#main-content">
+    <span class="lang-ar">انتقل إلى المحتوى الرئيسي</span>
+    <span class="lang-en">Skip to main content</span>
+  </a>
+
+  <nav id="navbar" aria-label="التنقل الرئيسي" data-label-ar="التنقل الرئيسي" data-label-en="Primary navigation">
     <a href="index.html" class="nav-logo">
       <div class="nav-logo-text">
         <span class="lang-ar">
@@ -67,7 +83,10 @@
         </span>
       </div>
     </a>
-    <button class="menu-btn" id="menu-btn" type="button" aria-label="Open navigation menu">
+    <button class="menu-btn" id="menu-btn" type="button" aria-label="فتح قائمة التنقل"
+      aria-expanded="false" aria-controls="nav-links" data-label-open-ar="فتح قائمة التنقل"
+      data-label-open-en="Open navigation menu" data-label-close-ar="إغلاق قائمة التنقل"
+      data-label-close-en="Close navigation menu">
       <i class="fa-solid fa-bars" aria-hidden="true"></i>
     </button>
     <ul class="nav-links" id="nav-links">
@@ -85,14 +104,15 @@
         </a>
       </li>
     </ul>
-    <button class="lang-switch" id="lang-switch" type="button" aria-label="Switch language">
+    <button class="lang-switch" id="lang-switch" type="button" aria-label="Switch to English"
+      data-label-ar="Switch to English" data-label-en="التبديل إلى العربية">
       <i class="fa-solid fa-globe" aria-hidden="true"></i>
       <span class="lang-ar">English</span>
       <span class="lang-en">العربية</span>
     </button>
   </nav>
 
-  <main class="faq-page">
+  <main class="faq-page" id="main-content" tabindex="-1">
     <header class="faq-hero">
       <div class="faq-hero-inner">
         <div class="faq-eyebrow">
@@ -132,7 +152,8 @@
             </div>
           </div>
 
-          <aside class="faq-quick-facts" aria-label="Program highlights">
+          <aside class="faq-quick-facts" aria-label="أهم معلومات البرنامج"
+            data-label-ar="أهم معلومات البرنامج" data-label-en="Program highlights">
             <div class="faq-fact">
               <div class="faq-fact-icon"><i class="fa-regular fa-comments" aria-hidden="true"></i></div>
               <div>
@@ -176,7 +197,8 @@
               <span class="lang-en">Open any question to read the details, or show every answer at once.</span>
             </p>
           </div>
-          <div class="faq-controls" aria-label="FAQ controls">
+          <div class="faq-controls" aria-label="أدوات التحكم في الأسئلة الشائعة"
+            data-label-ar="أدوات التحكم في الأسئلة الشائعة" data-label-en="FAQ controls">
             <button class="faq-control" id="expand-all" type="button">
               <i class="fa-solid fa-plus" aria-hidden="true"></i>
               <span class="lang-ar">عرض الكل</span>

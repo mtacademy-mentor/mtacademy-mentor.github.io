@@ -4,11 +4,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Mentorship Program Powerd By MT Software Solutions & Academy</title>
+  <title>Online Mentorship Program Powerd By MT Software Solutions &amp; Academy</title>
+  <script>
+    (() => {
+      try {
+        const language = localStorage.getItem('preferredLanguage');
+        if (language === 'en' || language === 'ar') {
+          document.documentElement.lang = language;
+          document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+        }
+      } catch (_) { /* The default Arabic interface remains available. */ }
+    })();
+  </script>
   <link rel="icon" type="image/x-icon" href="assets/images/MT-Academy.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
-    href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&amp;family=Playfair+Display:ital,wght@0,700;0,900;1,700&amp;display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -16,50 +27,60 @@
 
 <body>
 
+  <a class="skip-link" href="#main-content">
+    <span class="lang-ar">انتقل إلى المحتوى الرئيسي</span>
+    <span class="lang-en">Skip to main content</span>
+  </a>
+
   <!-- NAV -->
-  <nav id="navbar">
-    <a href="#" class="nav-logo">
+  <nav id="navbar" aria-label="التنقل الرئيسي" data-label-ar="التنقل الرئيسي" data-label-en="Primary navigation">
+    <a href="#home" class="nav-logo">
       <div class="nav-logo-text">
         <span class="lang-ar">
           <span class="main-title"><span class="brand-gold">Online</span> <span class="brand-ink">Mentorship
               Program</span></span>
-          <span class="sub-title">Powered By <span class="brand-company">MT Software Solutions & Academy</span></span>
+          <span class="sub-title">Powered By <span class="brand-company">MT Software Solutions &amp; Academy</span></span>
         </span>
         <span class="lang-en">
           <span class="main-title"><span class="brand-gold">Online</span> <span class="brand-ink">Mentorship
               Program</span></span>
-          <span class="sub-title">Powered By <span class="brand-company">MT Software Solutions & Academy</span></span>
+          <span class="sub-title">Powered By <span class="brand-company">MT Software Solutions &amp; Academy</span></span>
         </span>
       </div>
     </a>
-    <div class="menu-btn" id="menu-btn"><i class="fa-solid fa-bars"></i></div>
+    <button class="menu-btn" id="menu-btn" type="button" aria-label="فتح قائمة التنقل"
+      aria-expanded="false" aria-controls="nav-links" data-label-open-ar="فتح قائمة التنقل"
+      data-label-open-en="Open navigation menu" data-label-close-ar="إغلاق قائمة التنقل"
+      data-label-close-en="Close navigation menu"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
     <ul class="nav-links" id="nav-links">
-      <li><a href="#"><span class="lang-ar">الرئيسية</span><span class="lang-en">Home</span></a></li>
+      <li><a href="#home" class="active" aria-current="location"><span class="lang-ar">الرئيسية</span><span class="lang-en">Home</span></a></li>
       <li><a href="faq.html"><span class="lang-ar">الأسئلة الشائعة</span><span class="lang-en">FAQ</span></a></li>
       <li><a href="#about"><span class="lang-ar">عن المينتور</span><span class="lang-en">About</span></a></li>
       <li><a href="#services"><span class="lang-ar">الخدمات</span><span class="lang-en">Services</span></a></li>
       <li><a href="#plans"><span class="lang-ar">الخطط</span><span class="lang-en">Plans</span></a></li>
       <li><a href="#booking"><span class="lang-ar">احجز جلسة</span><span class="lang-en">Book Now</span></a></li>
-      <li class="nav-mobile-cta"><a href="https://wa.me/201032105166" target="_blank"><span class="lang-ar">تواصل معايا
+      <li class="nav-mobile-cta"><a href="https://wa.me/201032105166" target="_blank" rel="noopener noreferrer"><span class="lang-ar">تواصل معايا
             💬</span><span class="lang-en">Get in Touch 💬</span></a></li>
     </ul>
-    <button class="lang-switch" id="lang-switch">
-      <i class="fa-solid fa-globe"></i>
+    <button class="lang-switch" id="lang-switch" type="button" aria-label="Switch to English"
+      data-label-ar="Switch to English" data-label-en="التبديل إلى العربية">
+      <i class="fa-solid fa-globe" aria-hidden="true"></i>
       <span class="lang-ar">English</span>
       <span class="lang-en">العربية</span>
     </button>
-    <!-- <a href="https://wa.me/201032105166" target="_blank" class="btn-nav">
+    <!-- <a href="https://wa.me/201032105166" target="_blank" rel="noopener noreferrer" class="btn-nav">
       <span class="lang-ar">تواصل معايا</span>
       <span class="lang-en">Get in Touch</span>
     </a> -->
   </nav>
 
+  <main id="main-content" tabindex="-1">
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" id="home" aria-labelledby="hero-heading">
     <div class="hero-grid"></div>
     <div class="hero-left">
       <div class="hero-eyebrow">Online Mentorship Program</div>
-      <h1>
+      <h1 id="hero-heading">
         <span class="lang-ar">ابدأ رحلتك في عالم</span>
         <span class="lang-en">Start Your Journey in</span>
         <br>
@@ -122,23 +143,26 @@
           <span class="lang-ar">برنامج وصل لـ 13+ دولة</span>
           <span class="lang-en">Reached 13+ Countries</span>
         </span>
-        <div class="flags"><img src="assets/images/countries/egypt.png" class="flag-badge-img"><img
-            src="assets/images/countries/saudi-arabia.png" class="flag-badge-img"><img
-            src="assets/images/countries/jordan.png" class="flag-badge-img">
-          <img src="assets/images/countries/kuwait.png" class="flag-badge-img">
-          <img src="assets/images/countries/algeria.png" class="flag-badge-img">
-          <img src="assets/images/countries/lebanon.png" class="flag-badge-img">
-          <img src="assets/images/countries/Syria.png" class="flag-badge-img">
-          <img src="assets/images/countries/canada.png" class="flag-badge-img">
-          <img src="assets/images/countries/yemen.png" class="flag-badge-img">
-          <img src="assets/images/countries/morocco.png" class="flag-badge-img">
-          <img src="assets/images/countries/united-states.png" class="flag-badge-img">
-          <img src="assets/images/countries/palestine.png" class="flag-badge-img">
-          <img src="assets/images/countries/sweden.png" class="flag-badge-img">
+        <div class="flags" aria-hidden="true"><img src="assets/images/countries/egypt.png" alt="" width="512" height="512" class="flag-badge-img"><img
+            src="assets/images/countries/saudi-arabia.png" alt="" width="512" height="512" class="flag-badge-img"><img
+            src="assets/images/countries/jordan.png" alt="" width="512" height="512" class="flag-badge-img">
+          <img src="assets/images/countries/kuwait.png" alt="" width="512" height="512" class="flag-badge-img">
+          <img src="assets/images/countries/algeria.png" alt="" width="512" height="512" class="flag-badge-img">
+          <img src="assets/images/countries/lebanon.png" alt="" width="512" height="512" class="flag-badge-img">
+          <img src="assets/images/countries/Syria.png" alt="" width="512" height="512" class="flag-badge-img">
+          <img src="assets/images/countries/canada.png" alt="" width="512" height="512" class="flag-badge-img">
+          <img src="assets/images/countries/yemen.png" alt="" width="512" height="512" class="flag-badge-img">
+          <img src="assets/images/countries/morocco.png" alt="" width="512" height="512" class="flag-badge-img">
+          <img src="assets/images/countries/united-states.png" alt="" width="512" height="512" class="flag-badge-img">
+          <img src="assets/images/countries/palestine.png" alt="" width="512" height="512" class="flag-badge-img">
+          <img src="assets/images/countries/sweden.png" alt="" width="512" height="512" class="flag-badge-img">
         </div>
       </div>
       <div class="photo-frame">
-        <img src="assets/images/Mentor.png" alt="م/ محمد تامر - Software Engineer & Mentor">
+        <img src="assets/images/Mentor.png" alt="م/ محمد تامر - مهندس برمجيات ومينتور"
+          data-alt-ar="م/ محمد تامر - مهندس برمجيات ومينتور"
+          data-alt-en="Mohamed Tamer - Software Engineer and Mentor" width="948" height="1659"
+          fetchpriority="high" decoding="sync">
         <div class="photo-badge">
           <strong>7+</strong>
           <span class="lang-ar">سنوات خبرة</span>
@@ -147,8 +171,8 @@
       </div>
       <!-- Company Logos -->
       <div class="company-logos">
-        <img src="assets/images/MT-Software-Solutions.png" alt="MT Software Solutions" class="company-logo">
-        <img src="assets/images/MT-Academy.png" alt="MT Academy" class="company-logo">
+        <img src="assets/images/MT-Software-Solutions.png" alt="MT Software Solutions" width="1000" height="1000" class="company-logo">
+        <img src="assets/images/MT-Academy.png" alt="MT Academy" width="1000" height="1000" class="company-logo">
       </div>
     </div>
   </section>
@@ -171,7 +195,7 @@
           <span class="lang-ar">
             ساعد أكتر من <strong>127+ متدرب</strong> يحققوا تقدم حقيقي في مسيرتهم في <strong>13+ دولة</strong>.
             <br>
-            <span class="about-role-line">Software Engineer | Ex- Elsewedy Electric | Founder & CEO |
+            <span class="about-role-line">Software Engineer | Ex- Elsewedy Electric | Founder &amp; CEO |
               Udemy Instructor | Mentor |
               Computer Science Postgraduate Diploma | ITIL® v4 | Technical Articles Writer</span>
           </span>
@@ -179,7 +203,7 @@
             Helped over <strong>127+ mentees</strong> achieve real progress in their careers across <strong>13+
               countries</strong>.
             <br>
-            <span class="about-role-line">Software Engineer | Ex- Elsewedy Electric | Founder & CEO |
+            <span class="about-role-line">Software Engineer | Ex- Elsewedy Electric | Founder &amp; CEO |
               Udemy Instructor | Mentor |
               Computer Science Postgraduate Diploma | ITIL® v4 | Technical Articles Writer</span>
           </span>
@@ -203,9 +227,9 @@
           </div>
           <div class="cred-item">
             <div class="cred-text">
-              <span class="lang-ar">مؤسس ومدير تنفيذي <strong>(Founder & CEO)</strong> لشركة <strong>MT Software
+              <span class="lang-ar">مؤسس ومدير تنفيذي <strong>(Founder &amp; CEO)</strong> لشركة <strong>MT Software
                   Solutions | Academy</strong></span>
-              <span class="lang-en"><strong>Founder & CEO</strong> of <strong>MT Software Solutions |
+              <span class="lang-en"><strong>Founder &amp; CEO</strong> of <strong>MT Software Solutions |
                   Academy</strong>.</span>
             </div>
           </div>
@@ -225,9 +249,9 @@
           </div>
           <div class="cred-item">
             <div class="cred-text">
-              <span class="lang-ar">حاصل على <strong>Oracle Cloud Infrastructure – OCI (2023 & 2025)</strong> و
+              <span class="lang-ar">حاصل على <strong>Oracle Cloud Infrastructure – OCI (2023 &amp; 2025)</strong> و
                 <strong>ITIL® v4</strong></span>
-              <span class="lang-en">Certified in <strong>Oracle Cloud Infrastructure – OCI (2023 & 2025)</strong> and
+              <span class="lang-en">Certified in <strong>Oracle Cloud Infrastructure – OCI (2023 &amp; 2025)</strong> and
                 <strong>ITIL® v4</strong>.</span>
             </div>
           </div>
@@ -305,7 +329,7 @@
           </div>
         </div>
         <div class="abox">
-          <div class="abox-num">5.0<span class="rating-star"><i class="fa-solid fa-star"></i></span></div>
+          <div class="abox-num">5.0<span class="rating-star"><i aria-hidden="true" class="fa-solid fa-star"></i></span></div>
           <div class="abox-label">
             <span class="lang-ar">تقييم المتدربين</span>
             <span class="lang-en">Mentees Rating</span>
@@ -323,14 +347,14 @@
       <span class="lang-ar">الخدمات</span>
       <span class="lang-en">Services</span>
     </div>
-    <div class="s-title">Our Services</div>
+    <div class="s-title"><span class="lang-ar">خدماتنا</span><span class="lang-en">Our Services</span></div>
     <p class="s-sub">
       <span class="lang-ar">تغطية شاملة لكل المجالات اللي محتاجها كـ Software Engineer.</span>
       <span class="lang-en">Comprehensive coverage for every field you need as a Software Engineer.</span>
     </p>
     <div class="services-grid reveal">
       <div class="srv">
-        <i class="fa-solid fa-laptop-code srv-icon"></i>
+        <i aria-hidden="true" class="fa-solid fa-laptop-code srv-icon"></i>
         <h3>Web Development</h3>
         <p>
           <span class="lang-ar">تطوير مواقع ويب احترافية وبناء مشاريع حقيقية تضيفها لـ Portfolio بتاعك.</span>
@@ -338,7 +362,7 @@
         </p>
       </div>
       <div class="srv">
-        <i class="fa-solid fa-mobile-screen-button srv-icon"></i>
+        <i aria-hidden="true" class="fa-solid fa-mobile-screen-button srv-icon"></i>
         <h3>Mobile Application Development</h3>
         <p>
           <span class="lang-ar">تطوير تطبيقات موبايل وتعلم أحدث التقنيات المطلوبة في سوق العمل.</span>
@@ -347,7 +371,7 @@
         </p>
       </div>
       <div class="srv">
-        <i class="fa-solid fa-database srv-icon"></i>
+        <i aria-hidden="true" class="fa-solid fa-database srv-icon"></i>
         <h3>Database Development</h3>
         <p>
           <span class="lang-ar">تصميم وإدارة قواعد البيانات وحل مشاكل الـ Performance.</span>
@@ -355,7 +379,7 @@
         </p>
       </div>
       <div class="srv">
-        <i class="fa-solid fa-bolt-lightning srv-icon"></i>
+        <i aria-hidden="true" class="fa-solid fa-bolt-lightning srv-icon"></i>
         <h3>Low-Code Development</h3>
         <p>
           <span class="lang-ar">بناء حلول سريعة وفعّالة باستخدام أدوات الـ Low-Code الحديثة.</span>
@@ -363,7 +387,7 @@
         </p>
       </div>
       <div class="srv">
-        <i class="fa-solid fa-chart-line srv-icon"></i>
+        <i aria-hidden="true" class="fa-solid fa-chart-line srv-icon"></i>
         <h3>Career Development Coaching</h3>
         <p>
           <span class="lang-ar">خطة مسار مهني واضحة وتوجيه عملي للوصول لأفضل الفرص الوظيفية.</span>
@@ -372,7 +396,7 @@
         </p>
       </div>
       <div class="srv">
-        <i class="fa-solid fa-user-tie srv-icon"></i>
+        <i aria-hidden="true" class="fa-solid fa-user-tie srv-icon"></i>
         <h3>Interview Preparation</h3>
         <p>
           <span class="lang-ar">تحضير شامل لمقابلات التوظيف التقنية وتقوية الـ Problem Solving.</span>
@@ -381,7 +405,7 @@
         </p>
       </div>
       <div class="srv">
-        <i class="fa-solid fa-file-contract srv-icon"></i>
+        <i aria-hidden="true" class="fa-solid fa-file-contract srv-icon"></i>
         <h3>Resume Review</h3>
         <p>
           <span class="lang-ar">مراجعة CV بتاعك واستراتيجيات لرفع فرصك في الحصول على المقابلات.</span>
@@ -390,8 +414,8 @@
         </p>
       </div>
       <div class="srv">
-        <i class="fa-solid fa-circle-nodes srv-icon"></i>
-        <h3>Life Coaching & More...</h3>
+        <i aria-hidden="true" class="fa-solid fa-circle-nodes srv-icon"></i>
+        <h3>Life Coaching &amp; More...</h3>
         <p>
           <span class="lang-ar">إدارة الوقت، بناء عادات ناجحة، Freelancing Strategy، وغيرها كتير من التقنيات.</span>
           <span class="lang-en">Time management, building successful habits, freelancing strategy, and much more.</span>
@@ -411,37 +435,37 @@
       <span class="lang-en">Program reached 13+ countries</span>
     </div>
     <div class="countries-track">
-      <div class="country-pill"><img src="/assets/images/countries/egypt.png" alt="مصر" class="flag-img"><span><span
+      <div class="country-pill"><img src="/assets/images/countries/egypt.png" alt="" loading="lazy" decoding="async" width="512" height="512" class="flag-img"><span><span
             class="lang-ar">مصر</span><span class="lang-en">Egypt</span></span>
       </div>
-      <div class="country-pill"><img src="/assets/images/countries/saudi-arabia.png" alt="السعودية"
-          class="flag-img"><span><span class="lang-ar">السعودية</span><span class="lang-en">Saudi
+      <div class="country-pill"><img src="/assets/images/countries/saudi-arabia.png" alt=""
+          loading="lazy" decoding="async" width="512" height="512" class="flag-img"><span><span class="lang-ar">السعودية</span><span class="lang-en">Saudi
             Arabia</span></span></div>
-      <div class="country-pill"><img src="/assets/images/countries/Syria.png" alt="سوريا" class="flag-img"><span><span
+      <div class="country-pill"><img src="/assets/images/countries/Syria.png" alt="" loading="lazy" decoding="async" width="512" height="512" class="flag-img"><span><span
             class="lang-ar">سوريا</span><span class="lang-en">Syria</span></span>
       </div>
-      <div class="country-pill"><img src="/assets/images/countries/jordan.png" alt="الأردن" class="flag-img"><span><span
+      <div class="country-pill"><img src="/assets/images/countries/jordan.png" alt="" loading="lazy" decoding="async" width="512" height="512" class="flag-img"><span><span
             class="lang-ar">الأردن</span><span class="lang-en">Jordan</span></span></div>
-      <div class="country-pill"><img src="/assets/images/countries/yemen.png" alt="اليمن" class="flag-img"><span><span
+      <div class="country-pill"><img src="/assets/images/countries/yemen.png" alt="" loading="lazy" decoding="async" width="512" height="512" class="flag-img"><span><span
             class="lang-ar">اليمن</span><span class="lang-en">Yemen</span></span>
       </div>
-      <div class="country-pill"><img src="/assets/images/countries/canada.png" alt="كندا" class="flag-img"><span><span
+      <div class="country-pill"><img src="/assets/images/countries/canada.png" alt="" loading="lazy" decoding="async" width="512" height="512" class="flag-img"><span><span
             class="lang-ar">كندا</span><span class="lang-en">Canada</span></span>
       </div>
-      <div class="country-pill"><img src="/assets/images/countries/algeria.png" alt="الجزائر"
-          class="flag-img"><span><span class="lang-ar">الجزائر</span><span class="lang-en">Algeria</span></span></div>
-      <div class="country-pill"><img src="/assets/images/countries/kuwait.png" alt="الكويت" class="flag-img"><span><span
+      <div class="country-pill"><img src="/assets/images/countries/algeria.png" alt=""
+          loading="lazy" decoding="async" width="512" height="512" class="flag-img"><span><span class="lang-ar">الجزائر</span><span class="lang-en">Algeria</span></span></div>
+      <div class="country-pill"><img src="/assets/images/countries/kuwait.png" alt="" loading="lazy" decoding="async" width="512" height="512" class="flag-img"><span><span
             class="lang-ar">الكويت</span><span class="lang-en">Kuwait</span></span></div>
-      <div class="country-pill"><img src="/assets/images/countries/lebanon.png" alt="لبنان" class="flag-img"><span><span
+      <div class="country-pill"><img src="/assets/images/countries/lebanon.png" alt="" loading="lazy" decoding="async" width="512" height="512" class="flag-img"><span><span
             class="lang-ar">لبنان</span><span class="lang-en">Lebanon</span></span></div>
-      <div class="country-pill"><img src="/assets/images/countries/morocco.png" alt="المغرب"
-          class="flag-img"><span><span class="lang-ar">المغرب</span><span class="lang-en">Morocco</span></span></div>
-      <div class="country-pill"><img src="/assets/images/countries/united-states.png" alt="الولايات المتحدة"
-          class="flag-img"><span><span class="lang-ar">الولايات المتحدة</span><span class="lang-en">United
+      <div class="country-pill"><img src="/assets/images/countries/morocco.png" alt=""
+          loading="lazy" decoding="async" width="512" height="512" class="flag-img"><span><span class="lang-ar">المغرب</span><span class="lang-en">Morocco</span></span></div>
+      <div class="country-pill"><img src="/assets/images/countries/united-states.png" alt=""
+          loading="lazy" decoding="async" width="512" height="512" class="flag-img"><span><span class="lang-ar">الولايات المتحدة</span><span class="lang-en">United
             States</span></span></div>
-      <div class="country-pill"><img src="/assets/images/countries/palestine.png" alt="فلسطين"
-          class="flag-img"><span><span class="lang-ar">فلسطين</span><span class="lang-en">Palestine</span></span></div>
-      <div class="country-pill"><img src="/assets/images/countries/sweden.png" alt="السويد" class="flag-img"><span><span
+      <div class="country-pill"><img src="/assets/images/countries/palestine.png" alt=""
+          loading="lazy" decoding="async" width="512" height="512" class="flag-img"><span><span class="lang-ar">فلسطين</span><span class="lang-en">Palestine</span></span></div>
+      <div class="country-pill"><img src="/assets/images/countries/sweden.png" alt="" loading="lazy" decoding="async" width="512" height="512" class="flag-img"><span><span
             class="lang-ar">السويد</span><span class="lang-en">Sweden</span></span></div>
 
     </div>
@@ -451,7 +475,7 @@
   <section id="plans">
     <div class="s-tag">
       <span class="lang-ar">✦ الخطط والأسعار</span>
-      <span class="lang-en">✦ Plans & Pricing</span>
+      <span class="lang-en">✦ Plans &amp; Pricing</span>
     </div>
     <div class="s-title">
       <span class="lang-ar">اختار الخطة المناسبة ليك</span>
@@ -488,10 +512,10 @@
           </div>
           <div class="plan-feature">
             <span class="lang-ar">مناسب للبداية والاستشارات السريعة</span>
-            <span class="lang-en">Suitable for starting & quick consulting</span>
+            <span class="lang-en">Suitable for starting &amp; quick consulting</span>
           </div>
         </div>
-        <a href="https://wa.me/201032105166?text=أهلاً م/ محمد، عايز أعرف تفاصيل الـ Lite Plan" target="_blank"
+        <a href="https://wa.me/201032105166?text=أهلاً م/ محمد، عايز أعرف تفاصيل الـ Lite Plan" target="_blank" rel="noopener noreferrer"
           class="plan-cta">
           <span class="lang-ar">اشترك الآن</span>
           <span class="lang-en">Subscribe Now</span>
@@ -526,7 +550,7 @@
             <span class="lang-en">Career Plan</span>
           </div>
         </div>
-        <a href="https://wa.me/201032105166?text=أهلاً م/ محمد، عايز أعرف تفاصيل الـ Standard Plan" target="_blank"
+        <a href="https://wa.me/201032105166?text=أهلاً م/ محمد، عايز أعرف تفاصيل الـ Standard Plan" target="_blank" rel="noopener noreferrer"
           class="plan-cta">
           <span class="lang-ar">اشترك الآن</span>
           <span class="lang-en">Subscribe Now</span>
@@ -569,7 +593,7 @@
             <span class="lang-en">Full Interview Preparation</span>
           </div>
         </div>
-        <a href="https://wa.me/201032105166?text=أهلاً م/ محمد، عايز أعرف تفاصيل الـ Pro Plan" target="_blank"
+        <a href="https://wa.me/201032105166?text=أهلاً م/ محمد، عايز أعرف تفاصيل الـ Pro Plan" target="_blank" rel="noopener noreferrer"
           class="plan-cta">
           <span class="lang-ar">اشترك الآن</span>
           <span class="lang-en">Subscribe Now</span>
@@ -609,10 +633,10 @@
           </div>
           <div class="plan-feature">
             <span class="lang-ar">أقصى مستوى من الدعم والتطوير</span>
-            <span class="lang-en">Maximum Support & Development</span>
+            <span class="lang-en">Maximum Support &amp; Development</span>
           </div>
         </div>
-        <a href="https://wa.me/201032105166?text=أهلاً م/ محمد، عايز أعرف تفاصيل الـ Premium Plan" target="_blank"
+        <a href="https://wa.me/201032105166?text=أهلاً م/ محمد، عايز أعرف تفاصيل الـ Premium Plan" target="_blank" rel="noopener noreferrer"
           class="plan-cta">
           <span class="lang-ar">اشترك الآن</span>
           <span class="lang-en">Subscribe Now</span>
@@ -657,22 +681,26 @@
             </p>
             <div class="payment-methods-logos">
               <div class="payment-logo-card payment-logo-card-featured">
-                <img src="assets/images/payment/vodafone-cash.png" alt="Vodafone Cash"
+                <img src="assets/images/payment/vodafone-cash.png" alt="Vodafone Cash" loading="lazy" decoding="async"
+                  width="600" height="600"
                   class="payment-logo payment-logo-featured">
               </div>
               <div class="payment-logo-card">
-                <img src="assets/images/payment/instapay.png" alt="InstaPay" class="payment-logo">
+                <img src="assets/images/payment/instapay.png" alt="InstaPay" loading="lazy" decoding="async"
+                  width="512" height="512" class="payment-logo">
               </div>
               <div class="payment-logo-card">
-                <img src="assets/images/payment/paypal.png" alt="PayPal" class="payment-logo">
+                <img src="assets/images/payment/paypal.png" alt="PayPal" loading="lazy" decoding="async"
+                  width="593" height="585" class="payment-logo">
               </div>
               <div class="payment-logo-card">
-                <img src="assets/images/payment/bank-transfer.png" alt="Bank Transfer" class="payment-logo">
+                <img src="assets/images/payment/bank-transfer.png" alt="Bank Transfer" loading="lazy" decoding="async"
+                  width="512" height="512" class="payment-logo">
               </div>
             </div>
 
             <a href="https://wa.me/201032105166?text=أهلاً م/ محمد، أنا مهتم بالاشتراك في البرنامج التدريبي"
-              target="_blank" class="btn-book payment-contact-link">
+              target="_blank" rel="noopener noreferrer" class="btn-book payment-contact-link">
               <span class="lang-ar">تواصل للحجز عبر الواتساب</span>
               <span class="lang-en">Contact via WhatsApp to Book</span>
             </a>
@@ -686,7 +714,7 @@
             <span class="lang-ar">تفاصيل مهمة</span>
             <span class="lang-en">Important Details</span>
           </h4>
-          <div class="info-item"><span class="ico"></span>
+          <div class="info-item"><span class="ico" aria-hidden="true"><i aria-hidden="true" class="fa-regular fa-clock"></i></span>
             <div>
               <span class="lang-ar"><strong>مدة الجلسة</strong>90 دقيقة كاملة لكل مكالمة — ميزة مش موجودة في أي منصة
                 تانية!</span>
@@ -694,7 +722,7 @@
                 feature!</span>
             </div>
           </div>
-          <div class="info-item"><span class="ico"></span>
+          <div class="info-item"><span class="ico" aria-hidden="true"><i aria-hidden="true" class="fa-solid fa-user-check"></i></span>
             <div>
               <span class="lang-ar"><strong>جلسات فردية 1:1</strong>كل الجلسات فردية تماماً — أونلاين — بجدول
                 منظم</span>
@@ -702,14 +730,14 @@
                 organized schedule</span>
             </div>
           </div>
-          <div class="info-item"><span class="ico"></span>
+          <div class="info-item"><span class="ico" aria-hidden="true"><i aria-hidden="true" class="fa-regular fa-comments"></i></span>
             <div>
               <span class="lang-ar"><strong>دعم مستمر</strong>دعم غير محدود عبر الدردشة والرد خلال 24 ساعة أو أقل</span>
               <span class="lang-en"><strong>Ongoing Support</strong>Unlimited chat support with response within 24
                 hours</span>
             </div>
           </div>
-          <div class="info-item"><span class="ico"></span>
+          <div class="info-item"><span class="ico" aria-hidden="true"><i aria-hidden="true" class="fa-solid fa-ticket"></i></span>
             <div>
               <span class="lang-ar"><strong>عدد الأماكن محدود</strong>يُفضل الحجز بدري عشان تضمن مكانك</span>
               <span class="lang-en"><strong>Limited Slots</strong>Early booking is recommended to guarantee your
@@ -723,22 +751,22 @@
             <span class="lang-en">Direct Contact</span>
           </h4>
           <div class="contact-direct">
-            <a href="https://wa.me/201032105166" target="_blank" class="contact-btn wa-btn">
-              <i class="fab fa-whatsapp contact-icon"></i>
+            <a href="https://wa.me/201032105166" target="_blank" rel="noopener noreferrer" class="contact-btn wa-btn">
+              <i aria-hidden="true" class="fab fa-whatsapp contact-icon"></i>
               <div><strong>
                   <span class="lang-ar">واتساب</span>
                   <span class="lang-en">WhatsApp</span>
                 </strong>
-                <div class="contact-detail">+201032105166</div>
+                <div class="contact-detail"><bdi dir="ltr">+201032105166</bdi></div>
               </div>
             </a>
             <a href="mailto:mohamedtamerdev@gmail.com" class="contact-btn em-btn">
-              <i class="far fa-envelope contact-icon"></i>
+              <i aria-hidden="true" class="far fa-envelope contact-icon"></i>
               <div><strong>
                   <span class="lang-ar">إيميل</span>
                   <span class="lang-en">Email</span>
                 </strong>
-                <div class="contact-detail">mohamedtamerdev@gmail.com</div>
+                <div class="contact-detail"><bdi dir="ltr">mohamedtamerdev@gmail.com</bdi></div>
               </div>
             </a>
           </div>
@@ -748,7 +776,7 @@
             <span class="lang-ar">تقييمات المتدربين</span>
             <span class="lang-en">Mentees Reviews</span>
           </h4>
-          <a href="https://shorturl.at/qYjwF" target="_blank" class="reviews-link">
+          <a href="https://shorturl.at/qYjwF" target="_blank" rel="noopener noreferrer" class="reviews-link">
             <span class="lang-ar">شوف تقييمات المتدربين ←</span>
             <span class="lang-en">See mentees reviews ←</span>
           </a>
@@ -769,100 +797,103 @@
         <span class="lang-en">MentorShip Program Reviews +127 ⭐</span>
       </div>
     </div>
-    <div class="reviews-slider-container reveal">
-      <button class="slider-btn slider-prev"><i class="fa-solid fa-chevron-left"></i></button>
-      <div class="reviews-slider">
-        <div class="review-slide"><img src="assets/images/reviews/1.png" alt="Review 1"></div>
-        <div class="review-slide"><img src="assets/images/reviews/2.png" alt="Review 2"></div>
-        <div class="review-slide"><img src="assets/images/reviews/3.png" alt="Review 3"></div>
-        <div class="review-slide"><img src="assets/images/reviews/4.png" alt="Review 4"></div>
-        <div class="review-slide"><img src="assets/images/reviews/5.png" alt="Review 5"></div>
-        <div class="review-slide"><img src="assets/images/reviews/6.png" alt="Review 6"></div>
-        <div class="review-slide"><img src="assets/images/reviews/7.png" alt="Review 7"></div>
-        <div class="review-slide"><img src="assets/images/reviews/8.png" alt="Review 8"></div>
-        <div class="review-slide"><img src="assets/images/reviews/9.png" alt="Review 9"></div>
-        <div class="review-slide"><img src="assets/images/reviews/10.png" alt="Review 10"></div>
-        <div class="review-slide"><img src="assets/images/reviews/11.png" alt="Review 11"></div>
-        <div class="review-slide"><img src="assets/images/reviews/12.png" alt="Review 12"></div>
-        <div class="review-slide"><img src="assets/images/reviews/13.png" alt="Review 13"></div>
-        <div class="review-slide"><img src="assets/images/reviews/14.png" alt="Review 14"></div>
-        <div class="review-slide"><img src="assets/images/reviews/15.png" alt="Review 15"></div>
-        <div class="review-slide"><img src="assets/images/reviews/16.png" alt="Review 16"></div>
-        <div class="review-slide"><img src="assets/images/reviews/17.png" alt="Review 17"></div>
-        <div class="review-slide"><img src="assets/images/reviews/18.png" alt="Review 18"></div>
-        <div class="review-slide"><img src="assets/images/reviews/19.png" alt="Review 19"></div>
-        <div class="review-slide"><img src="assets/images/reviews/20.png" alt="Review 20"></div>
-        <div class="review-slide"><img src="assets/images/reviews/21.png" alt="Review 21"></div>
-        <div class="review-slide"><img src="assets/images/reviews/22.png" alt="Review 22"></div>
-        <div class="review-slide"><img src="assets/images/reviews/23.png" alt="Review 23"></div>
-        <div class="review-slide"><img src="assets/images/reviews/24.png" alt="Review 24"></div>
-        <div class="review-slide"><img src="assets/images/reviews/25.png" alt="Review 25"></div>
-        <div class="review-slide"><img src="assets/images/reviews/26.png" alt="Review 26"></div>
-        <div class="review-slide"><img src="assets/images/reviews/27.png" alt="Review 27"></div>
-        <div class="review-slide"><img src="assets/images/reviews/28.png" alt="Review 28"></div>
-        <div class="review-slide"><img src="assets/images/reviews/29.png" alt="Review 29"></div>
-        <div class="review-slide"><img src="assets/images/reviews/30.png" alt="Review 30"></div>
-        <div class="review-slide"><img src="assets/images/reviews/31.png" alt="Review 31"></div>
-        <div class="review-slide"><img src="assets/images/reviews/32.png" alt="Review 32"></div>
-        <div class="review-slide"><img src="assets/images/reviews/33.png" alt="Review 33"></div>
-        <div class="review-slide"><img src="assets/images/reviews/34.png" alt="Review 34"></div>
-        <div class="review-slide"><img src="assets/images/reviews/35.png" alt="Review 35"></div>
-        <div class="review-slide"><img src="assets/images/reviews/36.png" alt="Review 36"></div>
-        <div class="review-slide"><img src="assets/images/reviews/37.png" alt="Review 37"></div>
-        <div class="review-slide"><img src="assets/images/reviews/38.png" alt="Review 38"></div>
-        <div class="review-slide"><img src="assets/images/reviews/39.png" alt="Review 39"></div>
-        <div class="review-slide"><img src="assets/images/reviews/40.png" alt="Review 40"></div>
-        <div class="review-slide"><img src="assets/images/reviews/41.png" alt="Review 41"></div>
-        <div class="review-slide"><img src="assets/images/reviews/42.png" alt="Review 42"></div>
-        <div class="review-slide"><img src="assets/images/reviews/43.png" alt="Review 43"></div>
-        <div class="review-slide"><img src="assets/images/reviews/44.png" alt="Review 44"></div>
-        <div class="review-slide"><img src="assets/images/reviews/45.png" alt="Review 45"></div>
-        <div class="review-slide"><img src="assets/images/reviews/46.png" alt="Review 46"></div>
-        <div class="review-slide"><img src="assets/images/reviews/47.png" alt="Review 47"></div>
-        <div class="review-slide"><img src="assets/images/reviews/48.png" alt="Review 48"></div>
-        <div class="review-slide"><img src="assets/images/reviews/49.png" alt="Review 49"></div>
-        <div class="review-slide"><img src="assets/images/reviews/50.png" alt="Review 50"></div>
-        <div class="review-slide"><img src="assets/images/reviews/51.png" alt="Review 51"></div>
-        <div class="review-slide"><img src="assets/images/reviews/52.png" alt="Review 52"></div>
-        <div class="review-slide"><img src="assets/images/reviews/53.png" alt="Review 53"></div>
-        <div class="review-slide"><img src="assets/images/reviews/54.png" alt="Review 54"></div>
-        <div class="review-slide"><img src="assets/images/reviews/55.png" alt="Review 55"></div>
-        <div class="review-slide"><img src="assets/images/reviews/56.png" alt="Review 56"></div>
-        <div class="review-slide"><img src="assets/images/reviews/57.png" alt="Review 57"></div>
-        <div class="review-slide"><img src="assets/images/reviews/58.png" alt="Review 58"></div>
-        <div class="review-slide"><img src="assets/images/reviews/59.png" alt="Review 59"></div>
-        <div class="review-slide"><img src="assets/images/reviews/60.png" alt="Review 60"></div>
-        <div class="review-slide"><img src="assets/images/reviews/61.png" alt="Review 61"></div>
-        <div class="review-slide"><img src="assets/images/reviews/62.png" alt="Review 62"></div>
-        <div class="review-slide"><img src="assets/images/reviews/63.png" alt="Review 63"></div>
-        <div class="review-slide"><img src="assets/images/reviews/64.png" alt="Review 64"></div>
-        <div class="review-slide"><img src="assets/images/reviews/65.png" alt="Review 65"></div>
-        <div class="review-slide"><img src="assets/images/reviews/66.png" alt="Review 66"></div>
-        <div class="review-slide"><img src="assets/images/reviews/67.png" alt="Review 67"></div>
-        <div class="review-slide"><img src="assets/images/reviews/68.png" alt="Review 68"></div>
-        <div class="review-slide"><img src="assets/images/reviews/69.png" alt="Review 69"></div>
-        <div class="review-slide"><img src="assets/images/reviews/70.png" alt="Review 70"></div>
-        <div class="review-slide"><img src="assets/images/reviews/71.png" alt="Review 71"></div>
-        <div class="review-slide"><img src="assets/images/reviews/72.png" alt="Review 72"></div>
-        <div class="review-slide"><img src="assets/images/reviews/73.png" alt="Review 73"></div>
-        <div class="review-slide"><img src="assets/images/reviews/74.png" alt="Review 74"></div>
-        <div class="review-slide"><img src="assets/images/reviews/75.png" alt="Review 75"></div>
-        <div class="review-slide"><img src="assets/images/reviews/76.png" alt="Review 76"></div>
-        <div class="review-slide"><img src="assets/images/reviews/77.png" alt="Review 77"></div>
-        <div class="review-slide"><img src="assets/images/reviews/78.png" alt="Review 78"></div>
-        <div class="review-slide"><img src="assets/images/reviews/79.png" alt="Review 79"></div>
-        <div class="review-slide"><img src="assets/images/reviews/80.png" alt="Review 80"></div>
-        <div class="review-slide"><img src="assets/images/reviews/81.png" alt="Review 81"></div>
-        <div class="review-slide"><img src="assets/images/reviews/82.png" alt="Review 82"></div>
-        <div class="review-slide"><img src="assets/images/reviews/83.png" alt="Review 83"></div>
-        <div class="review-slide"><img src="assets/images/reviews/84.png" alt="Review 84"></div>
-        <div class="review-slide"><img src="assets/images/reviews/85.png" alt="Review 85"></div>
-        <div class="review-slide"><img src="assets/images/reviews/86.png" alt="Review 86"></div>
+    <div class="reviews-slider-container reveal" role="region" aria-roledescription="carousel"
+      aria-label="تقييمات المتدربين" data-label-ar="تقييمات المتدربين" data-label-en="Mentee reviews">
+      <button class="slider-btn slider-prev" type="button" aria-label="التقييمات السابقة"
+        data-label-ar="التقييمات السابقة" data-label-en="Previous reviews"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+      <div class="reviews-slider" tabindex="0">
+        <div class="review-slide"><img src="assets/images/reviews-640/1.jpg" srcset="assets/images/reviews-640/1.jpg 640w, assets/images/reviews-960/1.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 1"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/2.jpg" srcset="assets/images/reviews-640/2.jpg 640w, assets/images/reviews-960/2.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 2"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/3.jpg" srcset="assets/images/reviews-640/3.jpg 640w, assets/images/reviews-960/3.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 3"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/4.jpg" srcset="assets/images/reviews-640/4.jpg 640w, assets/images/reviews-960/4.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 4"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/5.jpg" srcset="assets/images/reviews-640/5.jpg 640w, assets/images/reviews-960/5.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 5"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/6.jpg" srcset="assets/images/reviews-640/6.jpg 640w, assets/images/reviews-960/6.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 6"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/7.jpg" srcset="assets/images/reviews-640/7.jpg 640w, assets/images/reviews-960/7.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 7"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/8.jpg" srcset="assets/images/reviews-640/8.jpg 640w, assets/images/reviews-960/8.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 8"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/9.jpg" srcset="assets/images/reviews-640/9.jpg 640w, assets/images/reviews-960/9.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 9"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/10.jpg" srcset="assets/images/reviews-640/10.jpg 640w, assets/images/reviews-960/10.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 10"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/11.jpg" srcset="assets/images/reviews-640/11.jpg 640w, assets/images/reviews-960/11.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 11"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/12.jpg" srcset="assets/images/reviews-640/12.jpg 640w, assets/images/reviews-960/12.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 12"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/13.jpg" srcset="assets/images/reviews-640/13.jpg 640w, assets/images/reviews-960/13.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 13"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/14.jpg" srcset="assets/images/reviews-640/14.jpg 640w, assets/images/reviews-960/14.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 14"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/15.jpg" srcset="assets/images/reviews-640/15.jpg 640w, assets/images/reviews-960/15.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 15"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/16.jpg" srcset="assets/images/reviews-640/16.jpg 640w, assets/images/reviews-960/16.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 16"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/17.jpg" srcset="assets/images/reviews-640/17.jpg 640w, assets/images/reviews-960/17.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 17"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/18.jpg" srcset="assets/images/reviews-640/18.jpg 640w, assets/images/reviews-960/18.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 18"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/19.jpg" srcset="assets/images/reviews-640/19.jpg 640w, assets/images/reviews-960/19.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 19"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/20.jpg" srcset="assets/images/reviews-640/20.jpg 640w, assets/images/reviews-960/20.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 20"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/21.jpg" srcset="assets/images/reviews-640/21.jpg 640w, assets/images/reviews-960/21.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 21"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/22.jpg" srcset="assets/images/reviews-640/22.jpg 640w, assets/images/reviews-960/22.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 22"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/23.jpg" srcset="assets/images/reviews-640/23.jpg 640w, assets/images/reviews-960/23.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 23"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/24.jpg" srcset="assets/images/reviews-640/24.jpg 640w, assets/images/reviews-960/24.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 24"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/25.jpg" srcset="assets/images/reviews-640/25.jpg 640w, assets/images/reviews-960/25.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 25"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/26.jpg" srcset="assets/images/reviews-640/26.jpg 640w, assets/images/reviews-960/26.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 26"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/27.jpg" srcset="assets/images/reviews-640/27.jpg 640w, assets/images/reviews-960/27.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 27"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/28.jpg" srcset="assets/images/reviews-640/28.jpg 640w, assets/images/reviews-960/28.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 28"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/29.jpg" srcset="assets/images/reviews-640/29.jpg 640w, assets/images/reviews-960/29.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 29"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/30.jpg" srcset="assets/images/reviews-640/30.jpg 640w, assets/images/reviews-960/30.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 30"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/31.jpg" srcset="assets/images/reviews-640/31.jpg 640w, assets/images/reviews-960/31.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 31"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/32.jpg" srcset="assets/images/reviews-640/32.jpg 640w, assets/images/reviews-960/32.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 32"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/33.jpg" srcset="assets/images/reviews-640/33.jpg 640w, assets/images/reviews-960/33.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 33"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/34.jpg" srcset="assets/images/reviews-640/34.jpg 640w, assets/images/reviews-960/34.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 34"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/35.jpg" srcset="assets/images/reviews-640/35.jpg 640w, assets/images/reviews-960/35.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 35"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/36.jpg" srcset="assets/images/reviews-640/36.jpg 640w, assets/images/reviews-960/36.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 36"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/37.jpg" srcset="assets/images/reviews-640/37.jpg 640w, assets/images/reviews-960/37.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 37"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/38.jpg" srcset="assets/images/reviews-640/38.jpg 640w, assets/images/reviews-960/38.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 38"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/39.jpg" srcset="assets/images/reviews-640/39.jpg 640w, assets/images/reviews-960/39.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 39"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/40.jpg" srcset="assets/images/reviews-640/40.jpg 640w, assets/images/reviews-960/40.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 40"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/41.jpg" srcset="assets/images/reviews-640/41.jpg 640w, assets/images/reviews-960/41.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 41"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/42.jpg" srcset="assets/images/reviews-640/42.jpg 640w, assets/images/reviews-960/42.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 42"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/43.jpg" srcset="assets/images/reviews-640/43.jpg 640w, assets/images/reviews-960/43.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 43"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/44.jpg" srcset="assets/images/reviews-640/44.jpg 640w, assets/images/reviews-960/44.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 44"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/45.jpg" srcset="assets/images/reviews-640/45.jpg 640w, assets/images/reviews-960/45.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 45"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/46.jpg" srcset="assets/images/reviews-640/46.jpg 640w, assets/images/reviews-960/46.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 46"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/47.jpg" srcset="assets/images/reviews-640/47.jpg 640w, assets/images/reviews-960/47.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 47"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/48.jpg" srcset="assets/images/reviews-640/48.jpg 640w, assets/images/reviews-960/48.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 48"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/49.jpg" srcset="assets/images/reviews-640/49.jpg 640w, assets/images/reviews-960/49.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 49"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/50.jpg" srcset="assets/images/reviews-640/50.jpg 640w, assets/images/reviews-960/50.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 50"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/51.jpg" srcset="assets/images/reviews-640/51.jpg 640w, assets/images/reviews-960/51.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 51"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/52.jpg" srcset="assets/images/reviews-640/52.jpg 640w, assets/images/reviews-960/52.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 52"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/53.jpg" srcset="assets/images/reviews-640/53.jpg 640w, assets/images/reviews-960/53.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 53"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/54.jpg" srcset="assets/images/reviews-640/54.jpg 640w, assets/images/reviews-960/54.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 54"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/55.jpg" srcset="assets/images/reviews-640/55.jpg 640w, assets/images/reviews-960/55.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 55"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/56.jpg" srcset="assets/images/reviews-640/56.jpg 640w, assets/images/reviews-960/56.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 56"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/57.jpg" srcset="assets/images/reviews-640/57.jpg 640w, assets/images/reviews-960/57.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 57"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/58.jpg" srcset="assets/images/reviews-640/58.jpg 640w, assets/images/reviews-960/58.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 58"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/59.jpg" srcset="assets/images/reviews-640/59.jpg 640w, assets/images/reviews-960/59.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 59"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/60.jpg" srcset="assets/images/reviews-640/60.jpg 640w, assets/images/reviews-960/60.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 60"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/61.jpg" srcset="assets/images/reviews-640/61.jpg 640w, assets/images/reviews-960/61.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 61"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/62.jpg" srcset="assets/images/reviews-640/62.jpg 640w, assets/images/reviews-960/62.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 62"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/63.jpg" srcset="assets/images/reviews-640/63.jpg 640w, assets/images/reviews-960/63.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 63"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/64.jpg" srcset="assets/images/reviews-640/64.jpg 640w, assets/images/reviews-960/64.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 64"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/65.jpg" srcset="assets/images/reviews-640/65.jpg 640w, assets/images/reviews-960/65.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 65"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/66.jpg" srcset="assets/images/reviews-640/66.jpg 640w, assets/images/reviews-960/66.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 66"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/67.jpg" srcset="assets/images/reviews-640/67.jpg 640w, assets/images/reviews-960/67.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 67"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/68.jpg" srcset="assets/images/reviews-640/68.jpg 640w, assets/images/reviews-960/68.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 68"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/69.jpg" srcset="assets/images/reviews-640/69.jpg 640w, assets/images/reviews-960/69.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 69"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/70.jpg" srcset="assets/images/reviews-640/70.jpg 640w, assets/images/reviews-960/70.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 70"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/71.jpg" srcset="assets/images/reviews-640/71.jpg 640w, assets/images/reviews-960/71.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 71"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/72.jpg" srcset="assets/images/reviews-640/72.jpg 640w, assets/images/reviews-960/72.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 72"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/73.jpg" srcset="assets/images/reviews-640/73.jpg 640w, assets/images/reviews-960/73.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 73"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/74.jpg" srcset="assets/images/reviews-640/74.jpg 640w, assets/images/reviews-960/74.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 74"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/75.jpg" srcset="assets/images/reviews-640/75.jpg 640w, assets/images/reviews-960/75.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 75"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/76.jpg" srcset="assets/images/reviews-640/76.jpg 640w, assets/images/reviews-960/76.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 76"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/77.jpg" srcset="assets/images/reviews-640/77.jpg 640w, assets/images/reviews-960/77.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 77"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/78.jpg" srcset="assets/images/reviews-640/78.jpg 640w, assets/images/reviews-960/78.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 78"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/79.jpg" srcset="assets/images/reviews-640/79.jpg 640w, assets/images/reviews-960/79.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 79"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/80.jpg" srcset="assets/images/reviews-640/80.jpg 640w, assets/images/reviews-960/80.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 80"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/81.jpg" srcset="assets/images/reviews-640/81.jpg 640w, assets/images/reviews-960/81.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 81"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/82.jpg" srcset="assets/images/reviews-640/82.jpg 640w, assets/images/reviews-960/82.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 82"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/83.jpg" srcset="assets/images/reviews-640/83.jpg 640w, assets/images/reviews-960/83.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 83"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/84.jpg" srcset="assets/images/reviews-640/84.jpg 640w, assets/images/reviews-960/84.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 84"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/85.jpg" srcset="assets/images/reviews-640/85.jpg 640w, assets/images/reviews-960/85.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 85"></div>
+        <div class="review-slide"><img src="assets/images/reviews-640/86.jpg" srcset="assets/images/reviews-640/86.jpg 640w, assets/images/reviews-960/86.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="تقييم متدرب 86"></div>
       </div>
-      <button class="slider-btn slider-next"><i class="fa-solid fa-chevron-right"></i></button>
+      <button class="slider-btn slider-next" type="button" aria-label="التقييمات التالية"
+        data-label-ar="التقييمات التالية" data-label-en="Next reviews"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
     </div>
     <div class="section-action">
-      <a href="https://shorturl.at/qYjwF" target="_blank" class="btn-outline">
+      <a href="https://shorturl.at/qYjwF" target="_blank" rel="noopener noreferrer" class="btn-outline">
         <span class="lang-ar">شوف كل التقييمات ←</span>
         <span class="lang-en">See all reviews ←</span>
       </a>
@@ -878,21 +909,24 @@
         <span class="lang-en">Trainees' Achievements</span>
       </div>
       <div class="s-title section-title-ltr">
-        <span class="lang-ar">Mentorship Achievements : Success Stories & Job Placements 💼</span>
-        <span class="lang-en">Mentorship Achievements : Success Stories & Job Placements 💼</span>
+        <span class="lang-ar">Mentorship Achievements : Success Stories &amp; Job Placements 💼</span>
+        <span class="lang-en">Mentorship Achievements : Success Stories &amp; Job Placements 💼</span>
       </div>
     </div>
-    <div class="reviews-slider-container reveal">
-      <button class="slider-btn slider-prev"><i class="fa-solid fa-chevron-left"></i></button>
-      <div class="reviews-slider center-slider">
-        <div class="review-slide"><img src="assets/images/Achievements/1.png" alt="Achievement 1"></div>
-        <div class="review-slide"><img src="assets/images/Achievements/2.png" alt="Achievement 2"></div>
-        <div class="review-slide"><img src="assets/images/Achievements/3.png" alt="Achievement 3"></div>
+    <div class="reviews-slider-container reveal" role="region" aria-roledescription="carousel"
+      aria-label="إنجازات المتدربين" data-label-ar="إنجازات المتدربين" data-label-en="Mentee achievements">
+      <button class="slider-btn slider-prev" type="button" aria-label="الإنجازات السابقة"
+        data-label-ar="الإنجازات السابقة" data-label-en="Previous achievements"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+      <div class="reviews-slider center-slider" tabindex="0">
+        <div class="review-slide"><img src="assets/images/Achievements-640/1.jpg" srcset="assets/images/Achievements-640/1.jpg 640w, assets/images/Achievements-960/1.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="إنجاز متدرب 1"></div>
+        <div class="review-slide"><img src="assets/images/Achievements-640/2.jpg" srcset="assets/images/Achievements-640/2.jpg 640w, assets/images/Achievements-960/2.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="إنجاز متدرب 2"></div>
+        <div class="review-slide"><img src="assets/images/Achievements-640/3.jpg" srcset="assets/images/Achievements-640/3.jpg 640w, assets/images/Achievements-960/3.jpg 960w" sizes="(max-width: 480px) 82vw, (max-width: 768px) 42vw, 29vw" width="640" height="800" loading="lazy" decoding="async" alt="إنجاز متدرب 3"></div>
       </div>
-      <button class="slider-btn slider-next"><i class="fa-solid fa-chevron-right"></i></button>
+      <button class="slider-btn slider-next" type="button" aria-label="الإنجازات التالية"
+        data-label-ar="الإنجازات التالية" data-label-en="Next achievements"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
     </div>
     <div class="section-action">
-      <a href="https://shorturl.at/qYjwF" target="_blank" class="btn-outline">
+      <a href="https://shorturl.at/qYjwF" target="_blank" rel="noopener noreferrer" class="btn-outline">
         <span class="lang-ar">شوف كل التقييمات ←</span>
         <span class="lang-en">See all reviews ←</span>
       </a>
@@ -900,7 +934,7 @@
   </section>
 
 
-  <!-- MENTORSHIP & INTERNSHIP AT ELSEWEDY ELECTRIC -->
+  <!-- MENTORSHIP &amp; INTERNSHIP AT ELSEWEDY ELECTRIC -->
   <section class="t-section" id="elsewedy-mentorship">
     <div class="section-heading-centered">
       <div class="s-tag s-tag-centered">
@@ -918,34 +952,41 @@
           training and direct mentoring for students.</span>
       </p>
     </div>
-    <div class="reviews-slider-container reveal elsewedy-slider-container">
-      <button class="slider-btn slider-prev" id="elsewedy-prev"><i class="fa-solid fa-chevron-left"></i></button>
-      <div class="reviews-slider elsewedy-slider" id="elsewedy-slider">
+    <div class="reviews-slider-container reveal elsewedy-slider-container" role="region"
+      aria-roledescription="carousel" aria-label="صور برنامج التدريب في السويدي إليكتريك"
+      data-label-ar="صور برنامج التدريب في السويدي إليكتريك" data-label-en="Elsewedy Electric internship photos">
+      <button class="slider-btn slider-prev" id="elsewedy-prev" type="button" aria-label="الصورة السابقة"
+        data-label-ar="الصورة السابقة" data-label-en="Previous photo"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+      <div class="reviews-slider elsewedy-slider" id="elsewedy-slider" tabindex="0">
         <div class="review-slide elsewedy-slide">
-          <img src="assets/images/Mentorship&Internship/1.jpg"
-            alt="Mentorship &amp; Internship at ELSEWEDY ELECTRIC - Photo 1">
+          <img src="assets/images/Mentorship&amp;Internship/1.jpg" loading="lazy" decoding="async" width="2048" height="1536"
+            alt="برنامج التدريب في السويدي إليكتريك - صورة 1">
         </div>
         <div class="review-slide elsewedy-slide">
-          <img src="assets/images/Mentorship&Internship/2.jpg"
-            alt="Mentorship &amp; Internship at ELSEWEDY ELECTRIC - Photo 2">
+          <img src="assets/images/Mentorship&amp;Internship/2.jpg" loading="lazy" decoding="async" width="2048" height="1536"
+            alt="برنامج التدريب في السويدي إليكتريك - صورة 2">
         </div>
         <div class="review-slide elsewedy-slide">
-          <img src="assets/images/Mentorship&Internship/3.jpg"
-            alt="Mentorship &amp; Internship at ELSEWEDY ELECTRIC - Photo 3">
+          <img src="assets/images/Mentorship&amp;Internship/3.jpg" loading="lazy" decoding="async" width="2048" height="1536"
+            alt="برنامج التدريب في السويدي إليكتريك - صورة 3">
         </div>
       </div>
-      <button class="slider-btn slider-next" id="elsewedy-next"><i class="fa-solid fa-chevron-right"></i></button>
+      <button class="slider-btn slider-next" id="elsewedy-next" type="button" aria-label="الصورة التالية"
+        data-label-ar="الصورة التالية" data-label-en="Next photo"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
     </div>
     <!-- Dot indicators -->
     <div class="elsewedy-dots">
-      <span class="elsewedy-dot active" data-index="0"></span>
-      <span class="elsewedy-dot" data-index="1"></span>
-      <span class="elsewedy-dot" data-index="2"></span>
+      <button class="elsewedy-dot active" type="button" data-index="0" aria-current="true"
+        aria-label="الصورة 1 من 3" data-label-ar="الصورة 1 من 3" data-label-en="Photo 1 of 3"></button>
+      <button class="elsewedy-dot" type="button" data-index="1" aria-label="الصورة 2 من 3"
+        data-label-ar="الصورة 2 من 3" data-label-en="Photo 2 of 3"></button>
+      <button class="elsewedy-dot" type="button" data-index="2" aria-label="الصورة 3 من 3"
+        data-label-ar="الصورة 3 من 3" data-label-en="Photo 3 of 3"></button>
     </div>
     <!-- Article link -->
     <div class="section-action">
-      <a href="https://lnkd.in/dSStXQCj" target="_blank" class="btn-outline">
-        <i class="fab fa-linkedin-in linkedin-link-icon"></i>
+      <a href="https://lnkd.in/dSStXQCj" target="_blank" rel="noopener noreferrer" class="btn-outline">
+        <i aria-hidden="true" class="fab fa-linkedin-in linkedin-link-icon"></i>
         <span class="lang-ar">اقرأ المقال على LinkedIn ←</span>
         <span class="lang-en">Read the Article on LinkedIn ←</span>
       </a>
@@ -954,14 +995,14 @@
 
 
   <!-- SOCIAL HUB SECTION -->
-  <section class="social-hub reveal">
+  <section class="social-hub">
     <div class="s-tag s-tag-centered">
       <span class="lang-ar">قنواتنا ومنصاتنا الرسمية</span>
-      <span class="lang-en">Official Channels & Platforms</span>
+      <span class="lang-en">Official Channels &amp; Platforms</span>
     </div>
     <h2 class="s-title">
       <span class="lang-ar">اتصل بي وتعرف أكثر</span>
-      <span class="lang-en">Contact me & Know More</span>
+      <span class="lang-en">Contact me &amp; Know More</span>
     </h2>
     <p class="s-sub social-hub-intro">
       <span class="lang-ar">كل حساباتي الشخصية والصفحات والجروبات الرسمية في مكان واحد</span>
@@ -970,121 +1011,121 @@
 
     <div class="social-grid">
       <!-- Direct Personal Links -->
-      <a href="https://www.linkedin.com/in/mohamedtamer0/" target="_blank" class="social-card sc-linkedin">
-        <i class="fab fa-linkedin-in"></i>
+      <a href="https://www.linkedin.com/in/mohamedtamer0/" target="_blank" rel="noopener noreferrer" class="social-card sc-linkedin">
+        <i aria-hidden="true" class="fab fa-linkedin-in"></i>
         <span>LinkedIn</span>
         <div class="platform-detail">
           <span class="lang-ar">الحساب الشخصي</span>
           <span class="lang-en">Personal Profile</span>
         </div>
       </a>
-      <a href="https://wa.me/201032105166" target="_blank" class="social-card sc-whatsapp">
-        <i class="fab fa-whatsapp"></i>
+      <a href="https://wa.me/201032105166" target="_blank" rel="noopener noreferrer" class="social-card sc-whatsapp">
+        <i aria-hidden="true" class="fab fa-whatsapp"></i>
         <span>WhatsApp Business</span>
         <div class="platform-detail">
           <span class="lang-ar">مكالمات ورسائل</span>
-          <span class="lang-en">Calls & Messages</span>
+          <span class="lang-en">Calls &amp; Messages</span>
         </div>
       </a>
-      <a href="https://www.facebook.com/mohamedtamer42" target="_blank" class="social-card sc-facebook">
-        <i class="fab fa-facebook-f"></i>
+      <a href="https://www.facebook.com/mohamedtamer42" target="_blank" rel="noopener noreferrer" class="social-card sc-facebook">
+        <i aria-hidden="true" class="fab fa-facebook-f"></i>
         <span>Facebook</span>
         <div class="platform-detail">
           <span class="lang-ar">الحساب الشخصي</span>
           <span class="lang-en">Personal Profile</span>
         </div>
       </a>
-      <a href="https://www.facebook.com/MoTamer0" target="_blank" class="social-card sc-facebook">
-        <i class="fab fa-facebook-f"></i>
+      <a href="https://www.facebook.com/MoTamer0" target="_blank" rel="noopener noreferrer" class="social-card sc-facebook">
+        <i aria-hidden="true" class="fab fa-facebook-f"></i>
         <span>Official Page</span>
         <div class="platform-detail">
           <span class="lang-ar">الصفحة الرسمية</span>
           <span class="lang-en">Official Page</span>
         </div>
       </a>
-      <a href="https://www.facebook.com/mtss0" target="_blank" class="social-card sc-facebook">
-        <i class="fab fa-facebook-f"></i>
+      <a href="https://www.facebook.com/mtss0" target="_blank" rel="noopener noreferrer" class="social-card sc-facebook">
+        <i aria-hidden="true" class="fab fa-facebook-f"></i>
         <span>MT Software Solutions</span>
         <div class="platform-detail">
           <span class="lang-ar">صفحة الشركة</span>
           <span class="lang-en">Company Page</span>
         </div>
       </a>
-      <a href="https://www.facebook.com/mtacy0" target="_blank" class="social-card sc-facebook">
-        <i class="fab fa-facebook-f"></i>
+      <a href="https://www.facebook.com/mtacy0" target="_blank" rel="noopener noreferrer" class="social-card sc-facebook">
+        <i aria-hidden="true" class="fab fa-facebook-f"></i>
         <span>MT Academy</span>
         <div class="platform-detail">
           <span class="lang-ar">صفحة الأكاديمية</span>
           <span class="lang-en">Academy Page</span>
         </div>
       </a>
-      <a href="https://www.facebook.com/groups/mtsoftwaresolutionsacademy" target="_blank"
+      <a href="https://www.facebook.com/groups/mtsoftwaresolutionsacademy" target="_blank" rel="noopener noreferrer"
         class="social-card sc-facebook">
-        <i class="fab fa-facebook-f"></i>
+        <i aria-hidden="true" class="fab fa-facebook-f"></i>
         <span>MT Group</span>
         <div class="platform-detail">
           <span class="lang-ar">جروب المجتمع</span>
           <span class="lang-en">Community Group</span>
         </div>
       </a>
-      <a href="https://whatsapp.com/channel/0029VauCOzCJf05WsVevCl11" target="_blank" class="social-card sc-whatsapp">
-        <i class="fab fa-whatsapp"></i>
+      <a href="https://whatsapp.com/channel/0029VauCOzCJf05WsVevCl11" target="_blank" rel="noopener noreferrer" class="social-card sc-whatsapp">
+        <i aria-hidden="true" class="fab fa-whatsapp"></i>
         <span>WhatsApp Channel</span>
         <div class="platform-detail">
           <span class="lang-ar">قناة التحديثات</span>
           <span class="lang-en">Updates Channel</span>
         </div>
       </a>
-      <a href="https://www.youtube.com/MohamedTamer0" target="_blank" class="social-card sc-youtube">
-        <i class="fab fa-youtube"></i>
+      <a href="https://www.youtube.com/MohamedTamer0" target="_blank" rel="noopener noreferrer" class="social-card sc-youtube">
+        <i aria-hidden="true" class="fab fa-youtube"></i>
         <span>YouTube Channel</span>
         <div class="platform-detail">
           <span class="lang-ar">قناة اليوتيوب</span>
           <span class="lang-en">YouTube Channel</span>
         </div>
       </a>
-      <a href="https://www.udemy.com/user/mohamed-tamer-15" target="_blank" class="social-card sc-udemy">
-        <img src="assets/images/Udemy.svg" alt="Udemy" class="platform-logo">
+      <a href="https://www.udemy.com/user/mohamed-tamer-15" target="_blank" rel="noopener noreferrer" class="social-card sc-udemy">
+        <img src="assets/images/Udemy.svg" alt="" aria-hidden="true" class="platform-logo">
         <span>Udemy Courses</span>
         <div class="platform-detail">
           <span class="lang-ar">دورات أونلاين</span>
           <span class="lang-en">Online Courses</span>
         </div>
       </a>
-      <a href="https://twitter.com/MohamedTamer42" target="_blank" class="social-card sc-x">
-        <i class="fab fa-x-twitter"></i>
+      <a href="https://twitter.com/MohamedTamer42" target="_blank" rel="noopener noreferrer" class="social-card sc-x">
+        <i aria-hidden="true" class="fab fa-x-twitter"></i>
         <span>X (Twitter)</span>
         <div class="platform-detail">
           <span class="lang-ar">الحساب الرسمي</span>
           <span class="lang-en">Official Account</span>
         </div>
       </a>
-      <a href="https://medium.com/@mohamedtamer0" target="_blank" class="social-card sc-medium">
-        <i class="fab fa-medium"></i>
+      <a href="https://medium.com/@mohamedtamer0" target="_blank" rel="noopener noreferrer" class="social-card sc-medium">
+        <i aria-hidden="true" class="fab fa-medium"></i>
         <span>Medium Blog</span>
         <div class="platform-detail">
           <span class="lang-ar">مقالات برمجية</span>
           <span class="lang-en">Tech Articles</span>
         </div>
       </a>
-      <a href="https://www.instagram.com/mohamedtamer0" target="_blank" class="social-card sc-instagram">
-        <i class="fab fa-instagram"></i>
+      <a href="https://www.instagram.com/mohamedtamer0" target="_blank" rel="noopener noreferrer" class="social-card sc-instagram">
+        <i aria-hidden="true" class="fab fa-instagram"></i>
         <span>Instagram</span>
         <div class="platform-detail">
           <span class="lang-ar">صور وتحديثات</span>
-          <span class="lang-en">Photos & Updates</span>
+          <span class="lang-en">Photos &amp; Updates</span>
         </div>
       </a>
-      <a href="https://github.com/mohamedtamer0" target="_blank" class="social-card sc-github">
-        <i class="fab fa-github"></i>
+      <a href="https://github.com/mohamedtamer0" target="_blank" rel="noopener noreferrer" class="social-card sc-github">
+        <i aria-hidden="true" class="fab fa-github"></i>
         <span>GitHub</span>
         <div class="platform-detail">
           <span class="lang-ar">مشاريع برمجية</span>
           <span class="lang-en">Code Projects</span>
         </div>
       </a>
-      <a href="https://apex.oracle.com/pls/apex/r/intranet/mohamedtamer" target="_blank" class="social-card sc-website">
-        <i class="fas fa-globe"></i>
+      <a href="https://apex.oracle.com/pls/apex/r/intranet/mohamedtamer" target="_blank" rel="noopener noreferrer" class="social-card sc-website">
+        <i aria-hidden="true" class="fas fa-globe"></i>
         <span>Personal Portfolio</span>
         <div class="platform-detail">
           <span class="lang-ar">الموقع الرسمي (APEX)</span>
@@ -1093,6 +1134,8 @@
       </a>
     </div>
   </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer>
@@ -1103,17 +1146,17 @@
           <span class="lang-en">Online Mentorship <span>Program</span></span>
         </div>
         <p>
-          <span class="lang-ar">Software Engineer & Online Mentor متخصص في مساعدة المبرمجين يحققوا أهدافهم المهنية وصلنا
+          <span class="lang-ar">Software Engineer &amp; Online Mentor متخصص في مساعدة المبرمجين يحققوا أهدافهم المهنية وصلنا
             لأكتر من 127+ متدرب في 13+ دولة.</span>
-          <span class="lang-en">Software Engineer & Online Mentor specialized in helping developers achieve their
+          <span class="lang-en">Software Engineer &amp; Online Mentor specialized in helping developers achieve their
             professional goals. Reached 127+ mentees in 13+ countries.</span>
         </p>
         <div class="footer-social-lite">
-          <a href="https://www.linkedin.com/in/mohamedtamer0" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://wa.me/201032105166" target="_blank"><i class="fab fa-whatsapp"></i></a>
-          <a href="https://www.facebook.com/mohamedtamer42" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.youtube.com/MohamedTamer0" target="_blank"><i class="fab fa-youtube"></i></a>
-          <a href="https://github.com/mohamedtamer0" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/mohamedtamer0" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+          <a href="https://wa.me/201032105166" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+          <a href="https://www.facebook.com/mohamedtamer42" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="https://www.youtube.com/MohamedTamer0" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+          <a href="https://github.com/mohamedtamer0" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
         </div>
       </div>
       <div class="footer-col">
@@ -1143,7 +1186,7 @@
           <span class="lang-ar">تواصل</span>
           <span class="lang-en">Contact</span>
         </h4>
-        <a href="https://wa.me/201032105166" target="_blank">
+        <a href="https://wa.me/201032105166" target="_blank" rel="noopener noreferrer">
           <span class="lang-ar">واتساب</span>
           <span class="lang-en">WhatsApp</span>
         </a>
@@ -1151,8 +1194,8 @@
           <span class="lang-ar">إيميل</span>
           <span class="lang-en">Email</span>
         </a>
-        <a href="https://linkedin.com/in/mohamedtamer0" target="_blank">LinkedIn</a>
-        <a href="https://shorturl.at/0QnY2" target="_blank">
+        <a href="https://linkedin.com/in/mohamedtamer0" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://shorturl.at/0QnY2" target="_blank" rel="noopener noreferrer">
           <span class="lang-ar">تفاصيل البرنامج</span>
           <span class="lang-en">Program Details</span>
         </a>
