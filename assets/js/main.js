@@ -72,29 +72,200 @@
   };
 
   const initializeRevealAnimations = () => {
-    const reveals = [...document.querySelectorAll('.reveal')];
+    const revealElements = new Set();
+    const mobileMotion = window.matchMedia('(max-width: 700px)').matches;
+    const stagger = mobileMotion ? 35 : 55;
+
+    const register = (element, variant = 'fade-up', delay = 0) => {
+      if (!element || element.closest('.hero')) return;
+      element.dataset.reveal = variant;
+      element.style.setProperty('--reveal-delay', `${Math.min(delay, mobileMotion ? 160 : 330)}ms`);
+      revealElements.add(element);
+    };
+
+    const registerGroup = (selector, variant, columns = 4) => {
+      document.querySelectorAll(selector).forEach((element, index) => {
+        register(element, variant, (index % columns) * stagger);
+      });
+    };
+
+    document.querySelectorAll('main section:not(.hero), .social-hub').forEach((section) => {
+      register(section.querySelector(':scope > .s-tag'), 'fade-up');
+      register(section.querySelector(':scope > .s-title'), 'fade-up', stagger);
+      register(section.querySelector(':scope > .s-sub'), 'fade-in', stagger * 2);
+    });
+
+    register(document.querySelector('#about .about-inner > :first-child'), 'inline-start');
+    register(document.querySelector('#about .about-numbers'), 'inline-end', stagger);
+    registerGroup('#services .srv', 'fade-up', 3);
+    registerGroup('.countries-section .country-pill', 'scale-up', 4);
+    registerGroup('#plans .plan', 'fade-up', 4);
+    register(document.querySelector('#booking .booking-inner > :first-child'), 'inline-start');
+    register(document.querySelector('#booking .booking-info'), 'inline-end', stagger);
+    registerGroup('.social-grid .social-card', 'fade-up', 5);
+    registerGroup('.reviews-slider-container', 'scale-up', 2);
+
+    register(document.querySelector('.faq-eyebrow'), 'fade-up');
+    register(document.querySelector('.faq-hero h1'), 'fade-up', stagger);
+    register(document.querySelector('.faq-intro-copy'), 'inline-start', stagger * 2);
+    register(document.querySelector('.faq-quick-facts'), 'inline-end', stagger * 2);
+    register(document.querySelector('.faq-section-heading'), 'fade-up');
+    registerGroup('.faq-list .faq-item', 'fade-up', 4);
+    register(document.querySelector('.faq-closing'), 'scale-up');
+
+    registerGroup('.footer-inner > *', 'fade-up', 3);
+    register(document.querySelector('.footer-bottom'), 'fade-in', stagger * 2);
+
+    const reveals = [...revealElements];
+    const showImmediately = () => reveals.forEach((element) => element.classList.add('is-revealed'));
 
     if (!reveals.length || reducedMotionQuery.matches || !('IntersectionObserver' in window)) {
-      reveals.forEach((element) => element.classList.add('visible'));
+      showImmediately();
       return;
     }
 
     try {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
+          if (!entry.isIntersecting) return;
+
+          const clearRevealState = () => {
+            entry.target.removeEventListener('transitionend', finishReveal);
+            entry.target.removeAttribute('data-reveal');
+            entry.target.style.removeProperty('--reveal-delay');
+          };
+          const finishReveal = (event) => {
+            if (event.target !== entry.target || !['opacity', 'transform'].includes(event.propertyName)) return;
+            clearRevealState();
+          };
+          entry.target.addEventListener('transitionend', finishReveal);
+          entry.target.classList.add('is-revealed');
+          window.setTimeout(clearRevealState, 1200);
+          if (entry.target.matches('.plan.popular')) {
+            window.setTimeout(() => {
+              if (!reducedMotionQuery.matches) entry.target.classList.add('featured-highlight');
+            }, 180);
           }
+          observer.unobserve(entry.target);
         });
-      }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
+      }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
 
       html.classList.add('reveal-enabled');
       reveals.forEach((element) => observer.observe(element));
     } catch (_) {
       html.classList.remove('reveal-enabled');
-      reveals.forEach((element) => element.classList.add('visible'));
+      showImmediately();
     }
+  };
+
+  const initializeCounters = () => {
+    const candidates = [...document.querySelectorAll('.stat .num, .abox-num')]
+      .filter((element) => !element.querySelector('.rating-star'));
+    const counters = [];
+
+    candidates.forEach((element) => {
+      const finalText = element.textContent.trim().replace(/\s+/g, '');
+      const match = finalText.match(/^([\d,]+)(.*)$/);
+      if (!match) return;
+
+      const finalValue = Number(match[1].replace(/,/g, ''));
+      if (!Number.isFinite(finalValue)) return;
+
+      const suffix = match[2];
+      const accessibleText = document.createElement('span');
+      const visual = document.createElement('b');
+      const numberText = document.createTextNode(reducedMotionQuery.matches ? String(finalValue) : '0');
+      accessibleText.className = 'sr-only';
+      accessibleText.textContent = finalText;
+      visual.className = 'count-visual';
+      visual.setAttribute('aria-hidden', 'true');
+      visual.append(numberText);
+
+      if (suffix) {
+        const suffixElement = document.createElement('span');
+        suffixElement.className = 'count-suffix';
+        suffixElement.textContent = suffix;
+        visual.append(suffixElement);
+      }
+
+      element.replaceChildren(accessibleText, visual);
+      counters.push({ element, finalValue, numberText, started: false });
+    });
+
+    const finish = (counter) => {
+      counter.started = true;
+      counter.numberText.nodeValue = String(counter.finalValue);
+    };
+
+    const animate = (counter, duration = 900) => {
+      if (counter.started || reducedMotionQuery.matches) {
+        finish(counter);
+        return;
+      }
+
+      counter.started = true;
+      const startedAt = performance.now();
+      const tick = (now) => {
+        if (reducedMotionQuery.matches) {
+          finish(counter);
+          return;
+        }
+
+        const progress = Math.min((now - startedAt) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        counter.numberText.nodeValue = String(Math.round(counter.finalValue * eased));
+        if (progress < 1) window.requestAnimationFrame(tick);
+      };
+
+      window.requestAnimationFrame(tick);
+    };
+
+    if (!counters.length) return;
+
+    if (reducedMotionQuery.matches || !('IntersectionObserver' in window)) {
+      counters.forEach(finish);
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const counter = counters.find(({ element }) => element === entry.target);
+        if (counter?.element.closest('.hero')) {
+          window.setTimeout(() => animate(counter, 800), 500);
+        } else if (counter) {
+          animate(counter);
+        }
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.45 });
+
+    counters.forEach(({ element }) => observer.observe(element));
+    reducedMotionQuery.addEventListener('change', (event) => {
+      if (event.matches) counters.forEach(finish);
+    });
+  };
+
+  const initializeAttentionEffects = () => {
+    const bookingLink = document.querySelector('.payment-contact-link');
+    if (!bookingLink || reducedMotionQuery.matches || !('IntersectionObserver' in window)) return;
+
+    let interacted = false;
+    const stopAttention = () => {
+      interacted = true;
+      bookingLink.classList.remove('attention-once');
+    };
+    ['pointerdown', 'focusin', 'click'].forEach((eventName) => {
+      bookingLink.addEventListener(eventName, stopAttention, { once: true });
+    });
+    bookingLink.addEventListener('animationend', stopAttention, { once: true });
+
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      if (!interacted) bookingLink.classList.add('attention-once');
+      observer.disconnect();
+    }, { threshold: 0.65 });
+    observer.observe(bookingLink);
   };
 
   const initializeNavigation = () => {
@@ -439,8 +610,10 @@
     };
 
     const setAllItemsOpen = (open) => {
+      document.body.classList.add('bulk-faq-update');
       faqItems.forEach((item) => { item.open = open; });
       updateControls();
+      window.requestAnimationFrame(() => document.body.classList.remove('bulk-faq-update'));
     };
 
     faqItems.forEach((item) => item.addEventListener('toggle', updateControls));
@@ -450,17 +623,24 @@
   };
 
   document.addEventListener('DOMContentLoaded', () => {
+    if (reducedMotionQuery.matches) html.classList.remove('motion-enabled');
     updateLocalizedAttributes();
     initializeNavigation();
     initializeScrollControls();
     initializeRevealAnimations();
+    initializeCounters();
+    initializeAttentionEffects();
     initializeCarousels();
     initializeFaqControls();
 
     reducedMotionQuery.addEventListener('change', (event) => {
       if (event.matches) {
+        html.classList.remove('motion-enabled');
         html.classList.remove('reveal-enabled');
-        document.querySelectorAll('.reveal').forEach((element) => element.classList.add('visible'));
+        document.querySelectorAll('[data-reveal]').forEach((element) => element.classList.add('is-revealed'));
+        document.querySelectorAll('.featured-highlight, .attention-once').forEach((element) => {
+          element.classList.remove('featured-highlight', 'attention-once');
+        });
       }
     });
   });

@@ -14,6 +14,9 @@
           document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
         }
       } catch (_) { /* The default Arabic interface remains available. */ }
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('motion-enabled');
+      }
     })();
   </script>
   <link rel="icon" type="image/x-icon" href="assets/images/MT-Academy.png">
@@ -81,11 +84,12 @@
     <div class="hero-left">
       <div class="hero-eyebrow">Online Mentorship Program</div>
       <h1 id="hero-heading">
-        <span class="lang-ar">ابدأ رحلتك في عالم</span>
-        <span class="lang-en">Start Your Journey in</span>
-        <br>
-        <span class="gold">Software Engineering</span><br>
-        <span class="line2">
+        <span class="hero-title-line hero-title-line-1">
+          <span class="lang-ar">ابدأ رحلتك في عالم</span>
+          <span class="lang-en">Start Your Journey in</span>
+        </span>
+        <span class="hero-title-line hero-title-line-2 gold">Software Engineering</span>
+        <span class="hero-title-line hero-title-line-3 line2">
           <span class="lang-ar">مع مينتور خبير</span>
           <span class="lang-en">with an Expert Mentor</span>
         </span>
@@ -292,7 +296,7 @@
           </div>
         </div>
       </div>
-      <div class="about-numbers reveal">
+      <div class="about-numbers">
         <div class="abox">
           <div class="abox-num">13<span>+</span></div>
           <div class="abox-label">
@@ -352,7 +356,7 @@
       <span class="lang-ar">تغطية شاملة لكل المجالات اللي محتاجها كـ Software Engineer.</span>
       <span class="lang-en">Comprehensive coverage for every field you need as a Software Engineer.</span>
     </p>
-    <div class="services-grid reveal">
+    <div class="services-grid">
       <div class="srv">
         <i aria-hidden="true" class="fa-solid fa-laptop-code srv-icon"></i>
         <h3>Web Development</h3>
@@ -485,7 +489,7 @@
       <span class="lang-ar">4 خطط مختلفة حسب مستواك واحتياجاتك — كل جلسة 90 دقيقة!</span>
       <span class="lang-en">4 different plans depending on your level and needs — each session is 90 minutes!</span>
     </p>
-    <div class="plans-grid reveal">
+    <div class="plans-grid">
       <!-- Lite -->
       <div class="plan">
         <div class="plan-head">
@@ -667,7 +671,7 @@
           <span class="lang-ar">اختار الخطة المناسبة ليك واحجز دلوقتي.</span>
           <span class="lang-en">Choose the plan that suits you and book now.</span>
         </p>
-        <div class="booking-form-wrap payment-card reveal">
+        <div class="booking-form-wrap payment-card">
           <div class="form-header payment-card-title">
             <span class="lang-ar">طرق الدفع المتاحة</span>
             <span class="lang-en">Available Payment Methods</span>
@@ -708,7 +712,7 @@
         </div>
       </div>
 
-      <div class="booking-info reveal">
+      <div class="booking-info">
         <div class="info-block">
           <h4>
             <span class="lang-ar">تفاصيل مهمة</span>
@@ -1085,7 +1089,7 @@
         </div>
       </a>
       <a href="https://www.udemy.com/user/mohamed-tamer-15" target="_blank" rel="noopener noreferrer" class="social-card sc-udemy">
-        <img src="assets/images/Udemy.svg" alt="" aria-hidden="true" class="platform-logo">
+        <img src="assets/images/Udemy.svg" alt="" aria-hidden="true" width="30" height="58" class="platform-logo">
         <span>Udemy Courses</span>
         <div class="platform-detail">
           <span class="lang-ar">دورات أونلاين</span>
