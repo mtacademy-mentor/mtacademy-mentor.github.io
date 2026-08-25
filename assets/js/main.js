@@ -4,8 +4,220 @@
   const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   const mobileMenuQuery = window.matchMedia('(max-width: 1100px)');
 
+  const PROMOTION_CAMPAIGN_CONFIG = Object.freeze({
+    startTimestamp: '2026-08-25T20:40:00+03:00',
+    endTimestamp: '2026-08-30T20:40:00+03:00',
+    whatsappUrl: 'https://wa.me/201032105166',
+    whatsappMessages: Object.freeze({
+      ar: 'أهلاً م/ محمد، عايز أستفيد من عرض الخصم 35% على برنامج الـ Online Mentorship.',
+      en: 'Hi Mohamed, I’d like to claim the 35% discount on the Online Mentorship Program.'
+    })
+  });
+
+  const promotionState = {
+    banner: null,
+    compact: false,
+    endTime: null,
+    endTimeoutId: null,
+    evaluate: null,
+    intervalId: null,
+    listenersAttached: false,
+    resizeObserver: null,
+    scrollFrameId: null,
+    startTime: null,
+    startTimeoutId: null,
+    transitionMeasureTimeoutId: null
+  };
+
   const getLanguage = () => (html.lang === 'en' ? 'en' : 'ar');
   const getMotionBehavior = () => (reducedMotionQuery.matches ? 'auto' : 'smooth');
+
+  const measurePromotionHeight = () => {
+    const { banner } = promotionState;
+    if (!banner || banner.hidden || !document.body.classList.contains('promo-active')) return;
+
+    const height = Math.ceil(banner.getBoundingClientRect().height);
+    html.style.setProperty('--promo-banner-height', height > 0 ? `${height}px` : '0px');
+  };
+
+  const updatePromotionJourneyState = () => {
+    const { banner } = promotionState;
+    if (!banner || banner.hidden || !document.body.classList.contains('promo-active')) return;
+
+    // Hysteresis prevents the banner from rapidly switching states near one threshold.
+    const shouldCompact = promotionState.compact ? window.scrollY > 45 : window.scrollY > 220;
+    if (shouldCompact === promotionState.compact) return;
+
+    promotionState.compact = shouldCompact;
+    banner.classList.toggle('is-compact', shouldCompact);
+    measurePromotionHeight();
+    window.requestAnimationFrame(measurePromotionHeight);
+    window.clearTimeout(promotionState.transitionMeasureTimeoutId);
+    promotionState.transitionMeasureTimeoutId = window.setTimeout(measurePromotionHeight, 380);
+  };
+
+  const updatePromotionLocalization = () => {
+    const cta = promotionState.banner?.querySelector('[data-promo-cta]');
+    if (!cta) return;
+
+    const message = PROMOTION_CAMPAIGN_CONFIG.whatsappMessages[getLanguage()];
+    cta.href = `${PROMOTION_CAMPAIGN_CONFIG.whatsappUrl}?text=${encodeURIComponent(message).replace(/'/g, '%27')}`;
+
+    measurePromotionHeight();
+    window.requestAnimationFrame(measurePromotionHeight);
+  };
+
+  const initializePromotionCountdown = () => {
+    const banner = document.getElementById('promotion-banner');
+    if (!banner) return;
+
+    promotionState.banner = banner;
+    window.clearInterval(promotionState.intervalId);
+    window.clearTimeout(promotionState.startTimeoutId);
+    window.clearTimeout(promotionState.endTimeoutId);
+    promotionState.intervalId = null;
+    promotionState.startTimeoutId = null;
+    promotionState.endTimeoutId = null;
+    window.cancelAnimationFrame(promotionState.scrollFrameId);
+    window.clearTimeout(promotionState.transitionMeasureTimeoutId);
+    promotionState.scrollFrameId = null;
+    promotionState.transitionMeasureTimeoutId = null;
+    promotionState.resizeObserver?.disconnect();
+    promotionState.resizeObserver = null;
+
+    const startTime = Date.parse(PROMOTION_CAMPAIGN_CONFIG.startTimestamp);
+    const endTime = Date.parse(PROMOTION_CAMPAIGN_CONFIG.endTimestamp);
+    promotionState.startTime = startTime;
+    promotionState.endTime = endTime;
+
+    const timerElements = {
+      days: banner.querySelector('[data-promo-days]'),
+      hours: banner.querySelector('[data-promo-hours]'),
+      minutes: banner.querySelector('[data-promo-minutes]'),
+      seconds: banner.querySelector('[data-promo-seconds]')
+    };
+
+    const clearActiveTimers = () => {
+      window.clearInterval(promotionState.intervalId);
+      window.clearTimeout(promotionState.endTimeoutId);
+      promotionState.intervalId = null;
+      promotionState.endTimeoutId = null;
+    };
+
+    const renderCountdown = (remainingMilliseconds) => {
+      const remainingSeconds = Math.floor(Math.max(0, remainingMilliseconds) / 1000);
+      const days = Math.floor(remainingSeconds / 86400);
+      const hours = Math.floor((remainingSeconds % 86400) / 3600);
+      const minutes = Math.floor((remainingSeconds % 3600) / 60);
+      const seconds = remainingSeconds % 60;
+
+      Object.entries({ days, hours, minutes, seconds }).forEach(([unit, value]) => {
+        if (timerElements[unit]) timerElements[unit].textContent = String(value).padStart(2, '0');
+      });
+    };
+
+    const hidePromotion = ({ renderZero = false } = {}) => {
+      if (renderZero) renderCountdown(0);
+      clearActiveTimers();
+      window.cancelAnimationFrame(promotionState.scrollFrameId);
+      window.clearTimeout(promotionState.transitionMeasureTimeoutId);
+      promotionState.scrollFrameId = null;
+      promotionState.transitionMeasureTimeoutId = null;
+      promotionState.resizeObserver?.disconnect();
+      promotionState.resizeObserver = null;
+      promotionState.compact = false;
+      banner.classList.remove('is-compact');
+      banner.hidden = true;
+      document.body.classList.remove('promo-active');
+      html.style.setProperty('--promo-banner-height', '0px');
+    };
+
+    const revealPromotion = (remainingMilliseconds) => {
+      updatePromotionLocalization();
+      banner.hidden = false;
+      document.body.classList.add('promo-active');
+      renderCountdown(remainingMilliseconds);
+      measurePromotionHeight();
+      window.requestAnimationFrame(measurePromotionHeight);
+      updatePromotionJourneyState();
+
+      if ('ResizeObserver' in window && !promotionState.resizeObserver) {
+        try {
+          promotionState.resizeObserver = new ResizeObserver(measurePromotionHeight);
+          promotionState.resizeObserver.observe(banner);
+        } catch (_) { /* Direct measurements remain available as a fallback. */ }
+      }
+
+      if (!promotionState.intervalId) {
+        promotionState.intervalId = window.setInterval(() => promotionState.evaluate?.(), 1000);
+      }
+
+      if (!promotionState.endTimeoutId) {
+        promotionState.endTimeoutId = window.setTimeout(
+          () => promotionState.evaluate?.(),
+          Math.min(Math.max(remainingMilliseconds, 0), 2147483647)
+        );
+      }
+    };
+
+    promotionState.evaluate = () => {
+      const now = Date.now();
+
+      if (now < startTime) {
+        hidePromotion();
+        window.clearTimeout(promotionState.startTimeoutId);
+        promotionState.startTimeoutId = window.setTimeout(
+          () => promotionState.evaluate?.(),
+          Math.min(startTime - now, 2147483647)
+        );
+        return;
+      }
+
+      window.clearTimeout(promotionState.startTimeoutId);
+      promotionState.startTimeoutId = null;
+
+      if (now >= endTime) {
+        hidePromotion({ renderZero: true });
+        return;
+      }
+
+      const remainingMilliseconds = Math.max(0, endTime - Date.now());
+      if (remainingMilliseconds <= 0) {
+        hidePromotion({ renderZero: true });
+        return;
+      }
+
+      revealPromotion(remainingMilliseconds);
+    };
+
+    updatePromotionLocalization();
+
+    if (!Number.isFinite(startTime) || !Number.isFinite(endTime) || endTime <= startTime) {
+      promotionState.evaluate = null;
+      hidePromotion();
+      return;
+    }
+
+    if (!promotionState.listenersAttached) {
+      window.addEventListener('resize', measurePromotionHeight, { passive: true });
+      window.addEventListener('scroll', () => {
+        if (promotionState.scrollFrameId) return;
+        promotionState.scrollFrameId = window.requestAnimationFrame(() => {
+          updatePromotionJourneyState();
+          promotionState.scrollFrameId = null;
+        });
+      }, { passive: true });
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState !== 'visible') return;
+        promotionState.evaluate?.();
+        updatePromotionJourneyState();
+        measurePromotionHeight();
+      });
+      promotionState.listenersAttached = true;
+    }
+
+    promotionState.evaluate();
+  };
 
   const updateLocalizedAttributes = () => {
     const language = getLanguage();
@@ -61,6 +273,7 @@
     } catch (_) { /* Language still changes when storage is unavailable. */ }
 
     updateLocalizedAttributes();
+    updatePromotionLocalization();
     document.querySelectorAll('.slider-status').forEach((status) => {
       const slideCount = status.closest('.reviews-slider-container')?.querySelectorAll('.review-slide').length || 0;
       const itemNumber = Number(status.dataset.index || 0) + 1;
@@ -370,7 +583,11 @@
       navbar.classList.toggle('scrolled', window.scrollY > 50);
 
       if (sectionLinks.length) {
-        const marker = window.scrollY + Math.max(navbar.offsetHeight + 40, window.innerHeight * 0.28);
+        const promotionHeight = parseFloat(getComputedStyle(html).getPropertyValue('--promo-banner-height')) || 0;
+        const marker = window.scrollY + Math.max(
+          promotionHeight + navbar.offsetHeight + 40,
+          window.innerHeight * 0.28
+        );
         let current = sectionLinks[0];
 
         sectionLinks.forEach((candidate) => {
@@ -625,6 +842,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     if (reducedMotionQuery.matches) html.classList.remove('motion-enabled');
     updateLocalizedAttributes();
+    initializePromotionCountdown();
     initializeNavigation();
     initializeScrollControls();
     initializeRevealAnimations();

@@ -80,6 +80,9 @@
       --motion-inline-nudge: 4px;
       --motion-stagger: 55ms;
 
+      /* Measured at runtime while the global promotion is active. */
+      --promo-banner-height: 0px;
+
       /* Legacy / Compatibility Mapping */
       --ink: var(--color-brand-ink);
       --white: var(--color-white);
@@ -115,6 +118,10 @@
       font-feature-settings: "lnum";
     }
 
+    body.promo-active {
+      padding-block-start: var(--promo-banner-height);
+    }
+
     main,
     section,
     nav,
@@ -133,6 +140,19 @@
     img,
     svg {
       max-inline-size: 100%;
+    }
+
+    :where(a, button, summary, [tabindex]):focus-visible {
+      outline: 3px solid #8a6e16;
+      outline-offset: 3px;
+    }
+
+    main:focus {
+      outline: none;
+    }
+
+    section[id] {
+      scroll-margin-block-start: calc(5rem + var(--promo-banner-height));
     }
 
     .skip-link {
@@ -154,17 +174,621 @@
       transform: translateY(0);
     }
 
-    :where(a, button, summary, [tabindex]):focus-visible {
-      outline: 3px solid #8a6e16;
-      outline-offset: 3px;
+    /* ─── LIMITED-TIME PROMOTION ─── */
+    .promo-banner[hidden] {
+      display: none;
     }
 
-    main:focus {
-      outline: none;
+    .promo-banner {
+      position: fixed;
+      inset-block-start: 0;
+      inset-inline: 0;
+      z-index: 250;
+      inline-size: 100%;
+      overflow: hidden;
+      isolation: isolate;
+      border-block-end: 2px solid var(--color-brand-gold);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(232, 201, 106, 0.22), transparent 30%),
+        radial-gradient(circle at 86% 140%, rgba(44, 90, 68, 0.48), transparent 38%),
+        linear-gradient(112deg, #070707 0%, #111111 58%, #10291f 100%);
+      color: var(--color-white);
+      box-shadow: 0 8px 28px rgba(10, 10, 10, 0.28);
     }
 
-    section[id] {
-      scroll-margin-block-start: 5rem;
+    .promo-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.14;
+      background-image:
+        linear-gradient(115deg, transparent 0 48%, rgba(232, 201, 106, 0.22) 49% 50%, transparent 51% 100%),
+        repeating-linear-gradient(90deg, transparent 0 68px, rgba(255, 255, 255, 0.06) 69px 70px);
+      pointer-events: none;
+    }
+
+    .promo-banner::after {
+      content: '';
+      position: absolute;
+      inset-block: 0;
+      inset-inline-start: -25%;
+      z-index: -1;
+      inline-size: 18%;
+      background: linear-gradient(90deg, transparent, rgba(232, 201, 106, 0.18), transparent);
+      transform: skewX(-18deg);
+      pointer-events: none;
+    }
+
+    .promo-banner-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      gap: clamp(0.9rem, 2.2vw, 2rem);
+      align-items: center;
+      max-inline-size: 1440px;
+      min-inline-size: 0;
+      margin-inline: auto;
+      padding: 0.85rem clamp(1rem, 4vw, 3.75rem);
+      transition: padding var(--motion-standard) var(--motion-ease-emphasized);
+    }
+
+    .promo-banner-inner::before {
+      content: '';
+      position: absolute;
+      inset-block-start: 0;
+      inset-inline-start: clamp(1rem, 5vw, 5rem);
+      inline-size: clamp(4rem, 10vw, 8rem);
+      block-size: 3px;
+      background: var(--color-brand-gold-light);
+      box-shadow: 0 0 22px rgba(232, 201, 106, 0.72);
+      pointer-events: none;
+    }
+
+    .promo-offer {
+      display: flex;
+      align-items: center;
+      gap: clamp(0.8rem, 1.7vw, 1.35rem);
+      min-inline-size: 0;
+    }
+
+    .promo-deal-badge {
+      position: relative;
+      display: grid;
+      flex: 0 0 auto;
+      place-content: center;
+      inline-size: clamp(76px, 7vw, 94px);
+      block-size: clamp(76px, 7vw, 94px);
+      overflow: hidden;
+      clip-path: polygon(9% 0, 91% 0, 100% 9%, 100% 91%, 91% 100%, 9% 100%, 0 91%, 0 9%);
+      background: linear-gradient(145deg, var(--color-brand-gold-light), var(--color-brand-gold));
+      color: var(--color-brand-ink);
+      line-height: 0.9;
+      text-align: center;
+      transform: rotate(-3deg);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.18),
+        0 10px 30px rgba(201, 168, 76, 0.24);
+      transition:
+        inline-size var(--motion-standard) var(--motion-ease-emphasized),
+        block-size var(--motion-standard) var(--motion-ease-emphasized),
+        transform var(--motion-standard) var(--motion-ease-emphasized);
+    }
+
+    html[dir="rtl"] .promo-deal-badge {
+      transform: rotate(3deg);
+    }
+
+    .promo-deal-badge::before {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border: 1px solid rgba(10, 10, 10, 0.32);
+      clip-path: inherit;
+    }
+
+    .promo-deal-badge::after {
+      content: '';
+      position: absolute;
+      inset: -45% 48% -45% -20%;
+      background: rgba(255, 255, 255, 0.32);
+      transform: rotate(20deg);
+    }
+
+    .promo-deal-badge strong,
+    .promo-deal-badge span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .promo-deal-badge strong {
+      font-size: clamp(1.45rem, 2.4vw, 2rem);
+      font-weight: 900;
+      letter-spacing: -0.05em;
+    }
+
+    .promo-deal-badge span {
+      margin-block-start: 0.28rem;
+      font-size: clamp(0.58rem, 0.85vw, 0.72rem);
+      font-weight: 900;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .promo-offer-content {
+      display: grid;
+      justify-items: start;
+      min-inline-size: 0;
+    }
+
+    .promo-campaign-label {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.42rem;
+      min-block-size: 27px;
+      margin-block-end: 0.35rem;
+      padding: 0.3rem 0.8rem;
+      background: var(--color-brand-gold);
+      color: var(--color-brand-ink);
+      font-size: 0.62rem;
+      font-weight: 900;
+      letter-spacing: 0.07em;
+      line-height: 1.2;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .promo-campaign-label::after {
+      content: '';
+      position: absolute;
+      inset-block: 0;
+      inset-inline-end: -8px;
+      inline-size: 9px;
+      background: var(--color-brand-gold);
+      clip-path: polygon(0 0, 100% 50%, 0 100%);
+    }
+
+    html[dir="rtl"] .promo-campaign-label::after {
+      clip-path: polygon(100% 0, 0 50%, 100% 100%);
+    }
+
+    .promo-journey-label {
+      display: none;
+      color: var(--color-brand-gold-light);
+      font-size: 0.72rem;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    .promo-copy {
+      min-inline-size: 0;
+    }
+
+    .promo-copy h2 {
+      max-inline-size: 620px;
+      color: var(--color-white);
+      font-family: 'Cairo', sans-serif;
+      font-size: clamp(1rem, 1.55vw, 1.32rem);
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    .promo-discount {
+      display: inline-block;
+      color: var(--color-brand-gold-light);
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.14em;
+      font-weight: 900;
+      white-space: nowrap;
+      text-shadow: 0 0 18px rgba(232, 201, 106, 0.32);
+    }
+
+    .promo-copy p {
+      margin-block-start: 0.08rem;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: clamp(0.68rem, 0.9vw, 0.78rem);
+      line-height: 1.5;
+    }
+
+    .promo-countdown-wrap {
+      display: grid;
+      gap: 0.28rem;
+      min-inline-size: 0;
+    }
+
+    .promo-countdown-intro {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.64rem;
+      font-weight: 700;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .promo-countdown {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr) auto) minmax(0, 1fr);
+      gap: 0.28rem;
+      align-items: center;
+      inline-size: clamp(245px, 22vw, 315px);
+      color: var(--color-white);
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum";
+    }
+
+    .promo-time-unit {
+      display: grid;
+      place-items: center;
+      min-inline-size: 0;
+      min-block-size: 54px;
+      padding: 0.32rem 0.22rem;
+      border: 1px solid rgba(201, 168, 76, 0.55);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.045));
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 5px 14px rgba(0, 0, 0, 0.12);
+      transition:
+        min-block-size var(--motion-standard) var(--motion-ease-emphasized),
+        padding var(--motion-standard) var(--motion-ease-emphasized);
+    }
+
+    .promo-time-unit bdi {
+      color: var(--color-white);
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.06rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .promo-time-unit small {
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 0.51rem;
+      font-weight: 600;
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+
+    .promo-time-separator {
+      color: var(--color-brand-gold-light);
+      font-size: 0.9rem;
+      font-weight: 900;
+    }
+
+    .promo-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-block-size: 50px;
+      padding: 0.7rem clamp(0.9rem, 1.8vw, 1.35rem);
+      border: 1px solid var(--color-brand-gold);
+      border-radius: 2px;
+      background: linear-gradient(135deg, var(--color-brand-green-hover), var(--color-brand-green));
+      color: var(--color-white);
+      font-size: clamp(0.74rem, 1vw, 0.88rem);
+      font-weight: 900;
+      line-height: 1.3;
+      text-align: center;
+      text-decoration: none;
+      white-space: nowrap;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+      transition:
+        min-block-size var(--motion-standard) var(--motion-ease-emphasized),
+        padding var(--motion-standard) var(--motion-ease-emphasized),
+        background-color var(--motion-fast) ease,
+        transform var(--motion-fast) var(--motion-ease-standard),
+        box-shadow var(--motion-fast) ease;
+    }
+
+    .promo-cta i {
+      color: #72e39b;
+      font-size: 1.12rem;
+    }
+
+    .promo-cta:hover,
+    .promo-cta:focus-visible {
+      background: linear-gradient(135deg, #367256, var(--color-brand-green-hover));
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.3);
+    }
+
+    .promo-cta:focus-visible {
+      outline-color: var(--color-brand-gold-light);
+    }
+
+    .promo-cta:active {
+      transform: translateY(0);
+    }
+
+    /* The compact state keeps the campaign present without dominating the journey. */
+    .promo-banner.is-compact .promo-banner-inner {
+      gap: clamp(0.65rem, 1.6vw, 1.2rem);
+      padding-block: 0.38rem;
+    }
+
+    .promo-banner.is-compact .promo-deal-badge {
+      inline-size: 48px;
+      block-size: 48px;
+      transform: rotate(0);
+    }
+
+    .promo-banner.is-compact .promo-deal-badge strong {
+      font-size: 1.02rem;
+    }
+
+    .promo-banner.is-compact .promo-deal-badge span {
+      margin-block-start: 0.12rem;
+      font-size: 0.45rem;
+    }
+
+    .promo-banner.is-compact .promo-campaign-label,
+    .promo-banner.is-compact .promo-copy p,
+    .promo-banner.is-compact .promo-countdown-intro {
+      display: none;
+    }
+
+    .promo-banner.is-compact .promo-copy h2 {
+      font-size: clamp(0.76rem, 1vw, 0.9rem);
+      line-height: 1.3;
+    }
+
+    .promo-banner.is-compact .promo-countdown {
+      inline-size: clamp(215px, 19vw, 260px);
+    }
+
+    .promo-banner.is-compact .promo-time-unit {
+      min-block-size: 39px;
+      padding-block: 0.18rem;
+    }
+
+    .promo-banner.is-compact .promo-time-unit bdi {
+      font-size: 0.84rem;
+    }
+
+    .promo-banner.is-compact .promo-time-unit small {
+      font-size: 0.43rem;
+    }
+
+    .promo-banner.is-compact .promo-cta {
+      min-block-size: 42px;
+      padding-block: 0.5rem;
+      font-size: 0.75rem;
+    }
+
+    @keyframes promoBannerEntrance {
+      from { opacity: 0; transform: translateY(-18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes promoBadgeArrival {
+      0% { opacity: 0; transform: rotate(-10deg) scale(0.55); }
+      65% { opacity: 1; transform: rotate(2deg) scale(1.08); }
+      100% { opacity: 1; transform: rotate(-3deg) scale(1); }
+    }
+
+    @keyframes promoTimerArrival {
+      from { opacity: 0; transform: translateY(8px) scale(0.94); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes promoCtaAttention {
+      0%, 100% { box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22); }
+      50% { box-shadow: 0 8px 24px rgba(37, 211, 102, 0.32), 0 0 0 5px rgba(37, 211, 102, 0.08); }
+    }
+
+    @keyframes promoSheen {
+      from { inset-inline-start: -25%; }
+      to { inset-inline-start: 120%; }
+    }
+
+    html.motion-enabled .promo-banner:not([hidden]) .promo-banner-inner {
+      animation: promoBannerEntrance 520ms var(--motion-ease-emphasized) both;
+    }
+
+    html.motion-enabled .promo-banner:not([hidden])::after {
+      animation: promoSheen 1.15s 380ms var(--motion-ease-standard) both;
+    }
+
+    html.motion-enabled .promo-banner:not([hidden]) .promo-deal-badge {
+      animation: promoBadgeArrival 680ms 160ms var(--motion-ease-emphasized) both;
+    }
+
+    html.motion-enabled .promo-banner:not([hidden]) .promo-time-unit {
+      animation: promoTimerArrival 440ms var(--motion-ease-emphasized) both;
+    }
+
+    html.motion-enabled .promo-banner:not([hidden]) .promo-time-unit:nth-of-type(1) { animation-delay: 360ms; }
+    html.motion-enabled .promo-banner:not([hidden]) .promo-time-unit:nth-of-type(3) { animation-delay: 420ms; }
+    html.motion-enabled .promo-banner:not([hidden]) .promo-time-unit:nth-of-type(5) { animation-delay: 480ms; }
+    html.motion-enabled .promo-banner:not([hidden]) .promo-time-unit:nth-of-type(7) { animation-delay: 540ms; }
+
+    html.motion-enabled .promo-banner:not([hidden]) .promo-cta {
+      animation: promoCtaAttention 1.2s 1.15s ease-in-out 2;
+    }
+
+    @media (max-width: 1000px) {
+      .promo-banner-inner {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 0.65rem 1rem;
+        padding-block: 0.68rem;
+      }
+
+      .promo-offer {
+        grid-column: 1 / -1;
+      }
+
+      .promo-countdown-wrap {
+        justify-self: end;
+      }
+
+      .promo-cta {
+        justify-self: start;
+      }
+
+      .promo-banner.is-compact .promo-banner-inner {
+        grid-template-columns: minmax(0, 1fr) auto auto;
+      }
+
+      .promo-banner.is-compact .promo-offer {
+        grid-column: auto;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .promo-banner-inner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.52rem;
+        padding: 0.65rem clamp(0.65rem, 4vw, 1rem) 0.72rem;
+      }
+
+      .promo-offer {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        grid-column: auto;
+        gap: 0.72rem;
+      }
+
+      .promo-deal-badge {
+        inline-size: 74px;
+        block-size: 74px;
+      }
+
+      .promo-deal-badge strong {
+        font-size: 1.4rem;
+      }
+
+      .promo-offer-content {
+        align-content: center;
+      }
+
+      .promo-campaign-label {
+        min-block-size: 24px;
+        margin-block-end: 0.26rem;
+        padding: 0.25rem 0.62rem;
+        font-size: 0.53rem;
+      }
+
+      .promo-copy h2 {
+        font-size: clamp(0.82rem, 4vw, 0.96rem);
+        line-height: 1.32;
+      }
+
+      .promo-copy p {
+        font-size: clamp(0.6rem, 2.75vw, 0.69rem);
+        line-height: 1.36;
+      }
+
+      .promo-countdown-wrap,
+      .promo-cta {
+        justify-self: stretch;
+      }
+
+      .promo-countdown {
+        inline-size: 100%;
+        max-inline-size: 350px;
+        margin-inline: auto;
+      }
+
+      .promo-countdown-intro {
+        font-size: 0.56rem;
+      }
+
+      .promo-time-unit {
+        min-block-size: 43px;
+        padding-block: 0.2rem;
+      }
+
+      .promo-time-unit bdi {
+        font-size: 0.9rem;
+      }
+
+      .promo-time-unit small {
+        font-size: 0.47rem;
+      }
+
+      .promo-cta {
+        min-block-size: 45px;
+        padding-block: 0.56rem;
+        font-size: 0.75rem;
+      }
+
+      .promo-banner.is-compact .promo-banner-inner {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 0.28rem 0.55rem;
+        padding: 0.35rem 0.55rem 0.42rem;
+      }
+
+      .promo-banner.is-compact .promo-offer {
+        grid-column: 1;
+        grid-row: 1;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 0.5rem;
+      }
+
+      .promo-banner.is-compact .promo-deal-badge {
+        inline-size: 46px;
+        block-size: 46px;
+      }
+
+      .promo-banner.is-compact .promo-offer-content {
+        align-content: center;
+      }
+
+      .promo-banner.is-compact .promo-journey-label {
+        display: block;
+      }
+
+      .promo-banner.is-compact .promo-copy {
+        display: none;
+      }
+
+      .promo-banner.is-compact .promo-countdown-wrap {
+        grid-column: 1 / -1;
+        grid-row: 2;
+      }
+
+      .promo-banner.is-compact .promo-countdown {
+        inline-size: 100%;
+        max-inline-size: none;
+      }
+
+      .promo-banner.is-compact .promo-time-unit {
+        min-block-size: 31px;
+        padding-block: 0.12rem;
+      }
+
+      .promo-banner.is-compact .promo-time-unit bdi {
+        font-size: 0.75rem;
+      }
+
+      .promo-banner.is-compact .promo-time-unit small {
+        font-size: 0.39rem;
+      }
+
+      .promo-banner.is-compact .promo-cta {
+        align-self: center;
+        grid-column: 2;
+        grid-row: 1;
+        min-block-size: 44px;
+        padding: 0.48rem 0.72rem;
+        font-size: 0.67rem;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .promo-deal-badge {
+        inline-size: 68px;
+        block-size: 68px;
+      }
+
+      .promo-banner.is-compact .promo-cta {
+        inline-size: 44px;
+        padding-inline: 0;
+      }
+
+      .promo-banner.is-compact .promo-cta span {
+        display: none;
+      }
     }
 
     /* ─── SCROLLBAR ─── */
@@ -185,7 +809,7 @@
     nav {
       --nav-height: 4.25rem;
       position: fixed;
-      inset-block-start: 0;
+      inset-block-start: var(--promo-banner-height);
       inline-size: 100%;
       z-index: 200;
       display: flex;
@@ -273,15 +897,16 @@
       nav .nav-links {
         display: flex;
         position: fixed;
-        inset-block-start: var(--nav-height);
+        /* The nav already starts below the promotion; 100% uses its actual rendered height. */
+        inset-block-start: 100%;
         inset-block-end: auto;
         inset-inline: 0;
         z-index: 199;
         flex-direction: column;
         gap: 0.25rem;
         inline-size: 100%;
-        block-size: calc(100vh - var(--nav-height));
-        block-size: calc(100dvh - var(--nav-height));
+        block-size: calc(100vh - var(--promo-banner-height) - 100%);
+        block-size: calc(100dvh - var(--promo-banner-height) - 100%);
         padding: 1rem clamp(1rem, 5vw, 2rem) 1.5rem;
         border-bottom: 2px solid var(--gold);
         background: rgba(248, 246, 242, 0.98);
@@ -3815,6 +4440,7 @@ html[dir="rtl"] .faq-answer::before {
   }
 
   html.reveal-enabled [data-reveal],
+  html.motion-enabled .promo-banner:not([hidden]) .promo-banner-inner,
   html.motion-enabled .hero-eyebrow,
   html.motion-enabled .hero-title-line,
   html.motion-enabled .hero-desc,
@@ -3839,6 +4465,7 @@ html[dir="rtl"] .faq-answer::before {
   .company-logo:hover,
   .btn-primary:hover,
   .btn-outline:hover,
+  .promo-cta:hover,
   .btn-nav:hover,
   .btn-book:hover,
   .plan:hover,
@@ -3859,6 +4486,7 @@ html[dir="rtl"] .faq-answer::before {
   }
 
   .photo-countries:focus-within,
+  .promo-cta:focus-visible,
   .btn-nav:focus-visible,
   .btn-primary:focus-visible,
   .btn-outline:focus-visible,
@@ -3885,6 +4513,7 @@ html[dir="rtl"] .faq-answer::before {
   }
 
   .faq-chevron,
+  .promo-cta,
   .faq-control,
   .faq-back-link,
   .faq-item {
@@ -3911,6 +4540,7 @@ html[dir="rtl"] .faq-answer::before {
   .social-btn:hover,
   .btn-primary:hover,
   .btn-outline:hover,
+  .promo-cta:hover,
   .btn-nav:hover,
   .btn-book:hover,
   .plan:hover,
