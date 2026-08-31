@@ -326,7 +326,11 @@
     registerGroup('.faq-list .faq-item', 'fade-up', 4);
     register(document.querySelector('.faq-closing'), 'scale-up');
 
-    registerGroup('.footer-inner > *', 'fade-up', 3);
+    register(document.querySelector('.terms-hero h1'), 'fade-up');
+    register(document.querySelector('.terms-intro'), 'fade-up', stagger);
+    registerGroup('.terms-section', 'fade-up', 3);
+
+    registerGroup('.footer-inner > *', 'fade-up', 4);
     register(document.querySelector('.footer-bottom'), 'fade-in', stagger * 2);
 
     const reveals = [...revealElements];

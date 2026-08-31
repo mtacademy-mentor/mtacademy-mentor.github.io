@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (() => {
+      try {
+        const language = localStorage.getItem('preferredLanguage');
+        if (language === 'en' || language === 'ar') {
+          document.documentElement.lang = language;
+          document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+        }
+      } catch (_) { /* The default Arabic interface remains available. */ }
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('motion-enabled');
+      }
+    })();
+  </script>
+  <title data-ar="الشروط والأحكام | MT Academy Mentoring"
+    data-en="Terms &amp; Conditions | MT Academy Mentoring">الشروط والأحكام | MT Academy Mentoring</title>
+  <meta name="description"
+    content="الشروط والأحكام وسياسة الاشتراك في برنامج المينتورينج، بما يشمل الجلسات والدفع والتجديد وإعادة الجدولة وسياسة الإلغاء."
+    data-ar="الشروط والأحكام وسياسة الاشتراك في برنامج المينتورينج، بما يشمل الجلسات والدفع والتجديد وإعادة الجدولة وسياسة الإلغاء."
+    data-en="Terms, conditions, and subscription policy for the mentoring program, including sessions, payment, renewal, rescheduling, and cancellation policy.">
+  <meta name="author" content="Mohamed Tamer">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="الشروط والأحكام | MT Academy Mentoring"
+    data-ar="الشروط والأحكام | MT Academy Mentoring"
+    data-en="Terms &amp; Conditions | MT Academy Mentoring">
+  <meta property="og:description"
+    content="الشروط والأحكام وسياسة الاشتراك في برنامج المينتورينج، بما يشمل الجلسات والدفع والتجديد وإعادة الجدولة وسياسة الإلغاء."
+    data-ar="الشروط والأحكام وسياسة الاشتراك في برنامج المينتورينج، بما يشمل الجلسات والدفع والتجديد وإعادة الجدولة وسياسة الإلغاء."
+    data-en="Terms, conditions, and subscription policy for the mentoring program, including sessions, payment, renewal, rescheduling, and cancellation policy.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mtacademy-mentor.github.io/terms.html">
+  <meta property="og:site_name" content="Online Mentorship Program">
+  <meta property="og:locale" content="ar_EG" data-ar="ar_EG" data-en="en_US">
+  <meta name="twitter:title" content="الشروط والأحكام | MT Academy Mentoring"
+    data-ar="الشروط والأحكام | MT Academy Mentoring"
+    data-en="Terms &amp; Conditions | MT Academy Mentoring">
+  <meta name="twitter:description"
+    content="الشروط والأحكام وسياسة الاشتراك في برنامج المينتورينج، بما يشمل الجلسات والدفع والتجديد وإعادة الجدولة وسياسة الإلغاء."
+    data-ar="الشروط والأحكام وسياسة الاشتراك في برنامج المينتورينج، بما يشمل الجلسات والدفع والتجديد وإعادة الجدولة وسياسة الإلغاء."
+    data-en="Terms, conditions, and subscription policy for the mentoring program, including sessions, payment, renewal, rescheduling, and cancellation policy.">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://mtacademy-mentor.github.io/terms.html">
+  <link rel="icon" type="image/x-icon" href="assets/images/MT-Academy.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&amp;family=Playfair+Display:ital,wght@0,700;0,900;1,700&amp;display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">
+    <span class="lang-ar">تخطَّ إلى المحتوى الرئيسي</span>
+    <span class="lang-en">Skip to main content</span>
+  </a>
+
+  <nav id="navbar" aria-label="التنقل الرئيسي" data-label-ar="التنقل الرئيسي" data-label-en="Primary navigation">
+    <a href="index.html" class="nav-logo" aria-label="العودة إلى الصفحة الرئيسية"
+      data-label-ar="العودة إلى الصفحة الرئيسية" data-label-en="Return to the homepage">
+      <div class="nav-logo-text">
+        <span class="lang-ar">
+          <span class="main-title"><span class="brand-gold">Online</span> <span class="brand-ink">Mentorship
+              Program</span></span>
+          <span class="sub-title">Powered By <span class="brand-company">MT Software Solutions &amp; Academy</span></span>
+        </span>
+        <span class="lang-en">
+          <span class="main-title"><span class="brand-gold">Online</span> <span class="brand-ink">Mentorship
+              Program</span></span>
+          <span class="sub-title">Powered By <span class="brand-company">MT Software Solutions &amp; Academy</span></span>
+        </span>
+      </div>
+    </a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-label="فتح قائمة التنقل"
+      aria-expanded="false" aria-controls="nav-links" data-label-open-ar="فتح قائمة التنقل"
+      data-label-open-en="Open navigation menu" data-label-close-ar="إغلاق قائمة التنقل"
+      data-label-close-en="Close navigation menu">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html"><span class="lang-ar">الرئيسية</span><span class="lang-en">Home</span></a></li>
+      <li><a href="index.html#about"><span class="lang-ar">عن المينتور</span><span class="lang-en">About</span></a></li>
+      <li><a href="index.html#services"><span class="lang-ar">الخدمات</span><span class="lang-en">Services</span></a></li>
+      <li><a href="index.html#plans"><span class="lang-ar">الخطط</span><span class="lang-en">Plans</span></a></li>
+      <li><a href="faq.html"><span class="lang-ar">الأسئلة الشائعة</span><span class="lang-en">FAQ</span></a></li>
+      <li><a href="terms.html" class="active" aria-current="page"><span class="lang-ar">الشروط والأحكام</span><span class="lang-en">Terms &amp; Conditions</span></a></li>
+      <li><a href="index.html#booking" class="nav-book-link"><span class="lang-ar">احجز جلسة</span><span class="lang-en">Book Now</span></a></li>
+      <li class="nav-mobile-cta">
+        <a href="https://wa.me/201032105166" target="_blank" rel="noopener noreferrer">
+          <span class="lang-ar">تواصل معايا 💬</span>
+          <span class="lang-en">Get in Touch 💬</span>
+        </a>
+      </li>
+    </ul>
+    <button class="lang-switch" id="lang-switch" type="button" aria-label="Switch to English"
+      data-label-ar="Switch to English" data-label-en="التبديل إلى العربية">
+      <i class="fa-solid fa-globe" aria-hidden="true"></i>
+      <span class="lang-ar">English</span>
+      <span class="lang-en">العربية</span>
+    </button>
+  </nav>
+
+  <main class="terms-page" id="main-content" tabindex="-1">
+    <header class="terms-hero" aria-labelledby="terms-page-title">
+      <div class="terms-shell">
+        <h1 id="terms-page-title">
+          <span class="lang-ar">الشروط والأحكام وسياسة الاشتراك في برنامج المينتورينج</span>
+          <span class="lang-en">Terms &amp; Conditions and Mentoring Program Subscription Policy</span>
+        </h1>
+        <p class="terms-intro">
+          <span class="lang-ar">تهدف هذه الشروط إلى تنظيم الاشتراك في برنامج المينتورينج وتوضيح آلية الجلسات والدفع والتجديد وإعادة الجدولة، بما يضمن وضوح حقوق والتزامات الطرفين قبل بدء الاشتراك.</span>
+          <span class="lang-en">These terms are intended to regulate subscription to the mentoring program and clarify how sessions, payment, renewal, and rescheduling work, ensuring that both parties' rights and obligations are clear before the subscription begins.</span>
+        </p>
+      </div>
+    </header>
+
+    <div class="terms-content">
+      <article class="terms-document" aria-labelledby="terms-page-title">
+        <section class="terms-section" aria-labelledby="terms-section-1">
+          <h2 id="terms-section-1"><span class="terms-section-number" dir="ltr">1.</span> <span class="lang-ar">نطاق الخدمة</span><span class="lang-en">Scope of Service</span></h2>
+          <p><span class="lang-ar">برنامج المينتورينج هو خدمة إرشاد واستشارات فردية تهدف إلى مساعدة المتدرب في تطوير مستواه المهني والتقني واتخاذ قرارات أفضل بخصوص التعلم والمسار الوظيفي والعمل في مجال هندسة البرمجيات.</span><span class="lang-en">The mentoring program is an individual guidance and consultation service that aims to help the mentee develop their professional and technical level and make better decisions about learning, their career path, and working in software engineering.</span></p>
+          <p><span class="lang-ar">قد تشمل الخدمة حسب الباقة المتفق عليها جلسات <bdi dir="ltr">Mentoring</bdi> أو مراجعة <bdi dir="ltr">Roadmap</bdi> أو <bdi dir="ltr">CV</bdi> أو <bdi dir="ltr">LinkedIn</bdi> أو <bdi dir="ltr">GitHub</bdi> أو <bdi dir="ltr">Projects</bdi> أو <bdi dir="ltr">Mock Interviews</bdi> أو <bdi dir="ltr">Code Review</bdi> أو <bdi dir="ltr">System Design</bdi> أو غيرها من الموضوعات التي يتم الاتفاق عليها.</span><span class="lang-en">Depending on the agreed package, the service may include Mentoring sessions or a review of a Roadmap, CV, LinkedIn, GitHub, Projects, Mock Interviews, Code Review, System Design, or other topics agreed upon.</span></p>
+          <p><span class="lang-ar">برنامج المينتورينج لا يمثل ضمانًا للحصول على وظيفة أو ترقية أو زيادة راتب أو تحقيق نتيجة مهنية محددة، حيث تعتمد النتائج بشكل أساسي على مستوى المتدرب والتزامه وتنفيذه للتوصيات والعمل المطلوب منه.</span><span class="lang-en">The mentoring program does not guarantee obtaining a job, promotion, salary increase, or any specific professional outcome, as results depend primarily on the mentee's level, commitment, implementation of the recommendations, and completion of the required work.</span></p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="terms-section-2">
+          <h2 id="terms-section-2"><span class="terms-section-number" dir="ltr">2.</span> <span class="lang-ar">الدفع وبدء الاشتراك</span><span class="lang-en">Payment and Start of Subscription</span></h2>
+          <p><span class="lang-ar">يتم سداد قيمة الاشتراك مقدمًا قبل بدء فترة الاشتراك أو قبل تقديم الجلسات والاستشارات المتفق عليها.</span><span class="lang-en">The subscription fee must be paid in advance before the subscription period begins or before the agreed sessions and consultations are provided.</span></p>
+          <p><span class="lang-ar">ويعتبر إتمام عملية الدفع تأكيدًا للاشتراك والموافقة على الشروط والأحكام الخاصة بالخدمة.</span><span class="lang-en">Completing the payment is considered confirmation of the subscription and acceptance of the service's terms and conditions.</span></p>
+          <p><span class="lang-ar">تبدأ فترة الاشتراك من التاريخ المتفق عليه بين الطرفين.</span><span class="lang-en">The subscription period begins on the date agreed upon by both parties.</span></p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="terms-section-3">
+          <h2 id="terms-section-3"><span class="terms-section-number" dir="ltr">3.</span> <span class="lang-ar">الجلسات والاستشارات</span><span class="lang-en">Sessions and Consultations</span></h2>
+          <p><span class="lang-ar">عدد الجلسات ومدتها ونوع الخدمات المقدمة يتم تحديدها وفقًا للباقة التي قام المتدرب بالاشتراك بها.</span><span class="lang-en">The number and duration of sessions and the type of services provided are determined according to the package selected by the mentee.</span></p>
+          <p><span class="lang-ar">يتم تحديد مواعيد الجلسات مسبقًا بالاتفاق بين الطرفين ووفقًا للمواعيد المتاحة.</span><span class="lang-en">Session times are scheduled in advance by mutual agreement and according to available times.</span></p>
+          <p><span class="lang-ar">المتدرب مسؤول عن متابعة مواعيده والتواصل لحجز الجلسات والاستفادة من الخدمات المتاحة ضمن اشتراكه.</span><span class="lang-en">The mentee is responsible for keeping track of their appointments, communicating to book sessions, and making use of the services available within their subscription.</span></p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="terms-section-4">
+          <h2 id="terms-section-4"><span class="terms-section-number" dir="ltr">4.</span> <span class="lang-ar">ترحيل الجلسات والاستشارات</span><span class="lang-en">Carrying Over Sessions and Consultations</span></h2>
+          <p><span class="lang-ar">في حالة وجود جلسات أو استشارات متبقية من فترة الاشتراك السابقة وتجديد المتدرب لاشتراكه، يتم ترحيل الجلسات أو الاستشارات المتبقية تلقائيًا إلى فترة الاشتراك الجديدة.</span><span class="lang-en">If sessions or consultations remain from the previous subscription period and the mentee renews their subscription, the remaining sessions or consultations are automatically carried over to the new subscription period.</span></p>
+          <p><span class="lang-ar">يهدف ذلك إلى ضمان استفادة المتدرب من الجلسات والخدمات التي قام بالاشتراك بها دون فقدانها بسبب انتهاء الشهر فقط.</span><span class="lang-en">This is intended to ensure that the mentee benefits from the sessions and services included in their subscription without losing them solely because the month has ended.</span></p>
+          <p><span class="lang-ar">ويخضع ترحيل الجلسات كذلك لبند انقطاع التواصل وصلاحية الاشتراك الموضح لاحقًا.</span><span class="lang-en">Carrying over sessions is also subject to the communication interruption and subscription validity clause described later.</span></p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="terms-section-5">
+          <h2 id="terms-section-5"><span class="terms-section-number" dir="ltr">5.</span> <span class="lang-ar">تجديد الاشتراك</span><span class="lang-en">Subscription Renewal</span></h2>
+          <p><span class="lang-ar">يتم تجديد الاشتراك بشكل شهري يوم <bdi dir="ltr">30</bdi> من كل شهر.</span><span class="lang-en">The subscription is renewed monthly on the 30th of each month.</span></p>
+          <p><span class="lang-ar">وفي الشهور التي لا يوجد بها يوم <bdi dir="ltr">30</bdi> يتم التجديد في آخر يوم من الشهر.</span><span class="lang-en">In months that do not have a 30th day, renewal takes place on the last day of the month.</span></p>
+          <p><span class="lang-ar">في حالة عدم رغبة المتدرب في تجديد الاشتراك، يجب الإبلاغ قبل موعد التجديد بـ <bdi dir="ltr">7</bdi> أيام على الأقل حتى يمكن تنظيم الجلسات والمواعيد المتبقية.</span><span class="lang-en">If the mentee does not wish to renew the subscription, they must provide notice at least 7 days before the renewal date so that the remaining sessions and appointments can be organized.</span></p>
+          <p><span class="lang-ar">ولا يعتبر الاشتراك مجددًا إلا بعد سداد قيمة فترة الاشتراك الجديدة ما لم يتم الاتفاق على خلاف ذلك.</span><span class="lang-en">The subscription is not considered renewed until payment for the new subscription period has been made, unless otherwise agreed.</span></p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="terms-section-6">
+          <h2 id="terms-section-6"><span class="terms-section-number" dir="ltr">6.</span> <span class="lang-ar">الالتزام بالمواعيد والتأخير</span><span class="lang-en">Punctuality and Delays</span></h2>
+          <p><span class="lang-ar">يُسمح بالتأخير لمدة لا تتجاوز <bdi dir="ltr">15</bdi> دقيقة من موعد بدء الجلسة.</span><span class="lang-en">A delay of no more than 15 minutes from the session's scheduled start time is permitted.</span></p>
+          <p><span class="lang-ar">في حالة تأخر المتدرب يتم استكمال الجلسة خلال الوقت المتبقي من موعدها الأصلي، ولا يتم تمديد مدة الجلسة بسبب التأخير.</span><span class="lang-en">If the mentee is late, the session continues for the remaining time of its original appointment, and the session duration is not extended because of the delay.</span></p>
+          <p><span class="lang-ar">وفي حالة التأخير لأكثر من <bdi dir="ltr">15</bdi> دقيقة دون إبلاغ مسبق، تُحتسب الجلسة كأنها تمت ولا يحق المطالبة بجلسة بديلة.</span><span class="lang-en">If the delay exceeds 15 minutes without prior notice, the session is counted as completed and the mentee is not entitled to request a replacement session.</span></p>
+          <p><span class="lang-ar">وفي حالة وجود ظرف طارئ يتم التعامل مع الأمر بشكل مرن وفقًا للحالة وبعد التواصل.</span><span class="lang-en">In the event of an emergency, the matter will be handled flexibly according to the circumstances and after communication.</span></p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="terms-section-7">
+          <h2 id="terms-section-7"><span class="terms-section-number" dir="ltr">7.</span> <span class="lang-ar">عدم الحضور وإعادة الجدولة</span><span class="lang-en">No-Shows and Rescheduling</span></h2>
+          <p><span class="lang-ar">في حالة عدم قدرة المتدرب على حضور الجلسة، يجب الإبلاغ قبل الموعد بـ <bdi dir="ltr">24</bdi> ساعة على الأقل.</span><span class="lang-en">If the mentee is unable to attend a session, they must provide notice at least 24 hours before the appointment.</span></p>
+          <p><span class="lang-ar">عند الإبلاغ خلال المدة المحددة يمكن إعادة جدولة الجلسة وفقًا للمواعيد المتاحة.</span><span class="lang-en">When notice is provided within the specified period, the session may be rescheduled according to available times.</span></p>
+          <p><span class="lang-ar">أما في حالة عدم الحضور دون إبلاغ مسبق أو الإبلاغ قبل الموعد بمدة أقل من <bdi dir="ltr">24</bdi> ساعة، فيحق احتساب الجلسة كأنها تمت.</span><span class="lang-en">In the event of a no-show without prior notice, or if notice is provided less than 24 hours before the appointment, the session may be counted as completed.</span></p>
+          <p><span class="lang-ar">ويجوز استثناء الحالات الطارئة أو الظروف الخارجة عن الإرادة بعد التواصل والاتفاق بين الطرفين.</span><span class="lang-en">Emergencies or circumstances beyond the mentee's control may be treated as exceptions after communication and mutual agreement.</span></p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="terms-section-8">
+          <h2 id="terms-section-8"><span class="terms-section-number" dir="ltr">8.</span> <span class="lang-ar">إلغاء الاشتراك واسترداد المبلغ</span><span class="lang-en">Subscription Cancellation and Refunds</span></h2>
+          <p><span class="lang-ar">لا يتم استرداد قيمة الاشتراك بعد بدء الاستفادة الفعلية من الخدمة أو بدء فترة الاشتراك، وذلك دون الإخلال بأي حقوق إلزامية يقررها القانون.</span><span class="lang-en">The subscription fee is not refunded after the mentee has actually begun using the service or after the subscription period has started, without prejudice to any mandatory rights established by law.</span></p>
+          <p><span class="lang-ar">وفي حالة وجود ظروف طارئة تمنع المتدرب من الاستمرار مؤقتًا، يمكن مناقشة إمكانية تأجيل الجلسات أو إعادة تنظيمها وفقًا للحالة وبعد الاتفاق المسبق.</span><span class="lang-en">If emergency circumstances temporarily prevent the mentee from continuing, the possibility of postponing or reorganizing the sessions may be discussed according to the circumstances and following prior agreement.</span></p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="terms-section-9">
+          <h2 id="terms-section-9"><span class="terms-section-number" dir="ltr">9.</span> <span class="lang-ar">مسؤولية المتدرب</span><span class="lang-en">Mentee Responsibilities</span></h2>
+          <p><span class="lang-ar">دور برنامج المينتورينج هو التوجيه والإرشاد والمساعدة في اتخاذ القرارات وتحديد نقاط القوة والضعف ووضع خطوات عملية للتطوير.</span><span class="lang-en">The role of the mentoring program is to provide direction and guidance, assist with decision-making, identify strengths and weaknesses, and establish practical steps for development.</span></p>
+          <p><span class="lang-ar">ويظل المتدرب مسؤولًا عن تنفيذ التوصيات والمذاكرة والتطبيق والتقديم على الوظائف والعمل على تطوير مستواه.</span><span class="lang-en">The mentee remains responsible for implementing the recommendations, studying, practicing, applying for jobs, and working to improve their level.</span></p>
+          <p><span class="lang-ar">ولا يتحمل البرنامج مسؤولية النتائج الناتجة عن عدم تنفيذ المتدرب للتوصيات أو عدم التزامه بالخطة المتفق عليها.</span><span class="lang-en">The program is not responsible for outcomes resulting from the mentee's failure to implement the recommendations or follow the agreed plan.</span></p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="terms-section-10">
+          <h2 id="terms-section-10"><span class="terms-section-number" dir="ltr">10.</span> <span class="lang-ar">التواصل وتنظيم المواعيد</span><span class="lang-en">Communication and Scheduling</span></h2>
+          <p><span class="lang-ar">يتم التواصل الأساسي بخصوص الجلسات والمواعيد والتحديثات المتعلقة بالاشتراك عبر <bdi dir="ltr">WhatsApp</bdi> أو وسيلة التواصل التي يتم الاتفاق عليها.</span><span class="lang-en">Primary communication regarding sessions, appointments, and subscription-related updates takes place through WhatsApp or another agreed communication method.</span></p>
+          <p><span class="lang-ar">يتم تحديد مواعيد الجلسات مسبقًا، وأي تعديل أو إعادة جدولة يجب أن تتم بالتنسيق بين الطرفين.</span><span class="lang-en">Session times are scheduled in advance, and any changes or rescheduling must be coordinated between both parties.</span></p>
+          <p><span class="lang-ar">ويُنصح المتدرب بعدم الانتظار حتى نهاية فترة الاشتراك لحجز جميع الجلسات المتبقية، حيث تخضع المواعيد للتوافر.</span><span class="lang-en">The mentee is advised not to wait until the end of the subscription period to book all remaining sessions, as appointments are subject to availability.</span></p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="terms-section-11">
+          <h2 id="terms-section-11"><span class="terms-section-number" dir="ltr">11.</span> <span class="lang-ar">انقطاع التواصل وصلاحية الاشتراك</span><span class="lang-en">Communication Interruption and Subscription Validity</span></h2>
+          <p><span class="lang-ar">في حالة انقطاع المتدرب عن التواصل أو عدم حجز أو حضور أي جلسة لمدة <bdi dir="ltr">30</bdi> يومًا متتالية دون إبلاغ مسبق، يتم اعتبار الاشتراك متوقفًا مؤقتًا.</span><span class="lang-en">If the mentee stops communicating or does not book or attend any session for 30 consecutive days without prior notice, the subscription is considered temporarily paused.</span></p>
+          <p><span class="lang-ar">وفي حالة استمرار عدم التواصل لمدة <bdi dir="ltr">45</bdi> يومًا من تاريخ آخر جلسة أو آخر تواصل فعلي، يُعتبر الاشتراك منتهي الصلاحية.</span><span class="lang-en">If the lack of communication continues for 45 days from the date of the last session or last actual communication, the subscription is considered expired.</span></p>
+          <p><span class="lang-ar">وفي هذه الحالة لا يتم ترحيل الجلسات أو الاستشارات المتبقية تلقائيًا، ويمكن إعادة تفعيلها فقط بعد التواصل والاتفاق المسبق وفقًا للظروف والمواعيد المتاحة.</span><span class="lang-en">In this case, the remaining sessions or consultations are not automatically carried over and may only be reactivated after communication and prior agreement, according to the circumstances and available times.</span></p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="terms-section-12">
+          <h2 id="terms-section-12"><span class="terms-section-number" dir="ltr">12.</span> <span class="lang-ar">تسجيل الجلسات والمحتوى</span><span class="lang-en">Session Recordings and Content</span></h2>
+          <p><span class="lang-ar">لا يجوز تسجيل الجلسات أو إعادة نشرها أو مشاركة أي محتوى أو ملفات أو مواد خاصة يتم تقديمها خلال برنامج المينتورينج مع أطراف أخرى دون الحصول على موافقة مسبقة.</span><span class="lang-en">Sessions may not be recorded or republished, and no private content, files, or materials provided during the mentoring program may be shared with third parties without prior approval.</span></p>
+          <p><span class="lang-ar">وأي <bdi dir="ltr">Materials</bdi> أو <bdi dir="ltr">Templates</bdi> أو <bdi dir="ltr">Documents</bdi> يتم تقديمها للمتدرب تكون للاستخدام الشخصي ما لم يتم الاتفاق على خلاف ذلك.</span><span class="lang-en">Any Materials, Templates, or Documents provided to the mentee are for personal use unless otherwise agreed.</span></p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="terms-section-13">
+          <h2 id="terms-section-13"><span class="terms-section-number" dir="ltr">13.</span> <span class="lang-ar">خصوصية المعلومات</span><span class="lang-en">Information Privacy</span></h2>
+          <p><span class="lang-ar">يتم التعامل مع المعلومات التي يشاركها المتدرب خلال جلسات المينتورينج باحترام وخصوصية.</span><span class="lang-en">Information shared by the mentee during mentoring sessions is treated with respect and privacy.</span></p>
+          <p><span class="lang-ar">وقد يتم استخدام تجارب أو نتائج أو <bdi dir="ltr">Feedback</bdi> المتدربين لأغراض تعليمية أو تسويقية فقط بعد الحصول على الموافقة اللازمة أو بعد إزالة أي معلومات تسمح بالتعرف على صاحب التجربة.</span><span class="lang-en">Mentees' experiences, results, or Feedback may be used for educational or marketing purposes only after obtaining the necessary consent or removing any information that could identify the person concerned.</span></p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="terms-section-14">
+          <h2 id="terms-section-14"><span class="terms-section-number" dir="ltr">14.</span> <span class="lang-ar">تعديل الشروط والسياسات</span><span class="lang-en">Changes to Terms and Policies</span></h2>
+          <p><span class="lang-ar">قد يتم تحديث بعض شروط الاشتراك أو سياسات البرنامج مستقبلًا بهدف تحسين وتنظيم الخدمة.</span><span class="lang-en">Some subscription terms or program policies may be updated in the future to improve and organize the service.</span></p>
+          <p><span class="lang-ar">ولا تؤثر أي تعديلات جديدة على فترة اشتراك تم الاتفاق عليها بالفعل إلا بعد إخطار المتدرب أو عند بدء فترة اشتراك جديدة.</span><span class="lang-en">Any new changes do not affect a subscription period that has already been agreed upon unless the mentee is notified or a new subscription period begins.</span></p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="terms-section-15">
+          <h2 id="terms-section-15"><span class="terms-section-number" dir="ltr">15.</span> <span class="lang-ar">الموافقة على الشروط</span><span class="lang-en">Acceptance of the Terms</span></h2>
+          <p><span class="lang-ar">بإتمام عملية الاشتراك أو سداد قيمة الخدمة، يقر المتدرب بأنه قام بقراءة هذه الشروط والأحكام وفهمها والموافقة عليها قبل بدء الاستفادة من برنامج المينتورينج.</span><span class="lang-en">By completing the subscription process or paying the service fee, the mentee acknowledges that they have read, understood, and agreed to these terms and conditions before beginning to use the mentoring program.</span></p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo">
+          <span class="lang-ar">Online Mentorship <span>Program</span></span>
+          <span class="lang-en">Online Mentorship <span>Program</span></span>
+        </div>
+        <p>
+          <span class="lang-ar">Software Engineer &amp; Online Mentor متخصص في مساعدة المبرمجين يحققوا أهدافهم المهنية وصلنا لأكتر من 127+ متدرب في 13+ دولة.</span>
+          <span class="lang-en">Software Engineer &amp; Online Mentor specialized in helping developers achieve their professional goals. Reached 127+ mentees in 13+ countries.</span>
+        </p>
+        <div class="footer-social-lite">
+          <a href="https://www.linkedin.com/in/mohamedtamer0" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+          <a href="https://wa.me/201032105166" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+          <a href="https://www.facebook.com/mohamedtamer42" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="https://www.youtube.com/MohamedTamer0" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+          <a href="https://github.com/mohamedtamer0" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>
+          <span class="lang-ar">استكشف</span>
+          <span class="lang-en">Explore</span>
+        </h4>
+        <a href="index.html#about"><span class="lang-ar">عن المينتور</span><span class="lang-en">About Mentor</span></a>
+        <a href="index.html#services"><span class="lang-ar">الخدمات</span><span class="lang-en">Services</span></a>
+        <a href="index.html#plans"><span class="lang-ar">الخطط</span><span class="lang-en">Plans</span></a>
+        <a href="index.html#booking"><span class="lang-ar">احجز جلسة</span><span class="lang-en">Book a Session</span></a>
+      </div>
+      <div class="footer-col">
+        <h4>
+          <span class="lang-ar">الدعم والمعلومات القانونية</span>
+          <span class="lang-en">Support &amp; Legal</span>
+        </h4>
+        <a href="faq.html"><span class="lang-ar">الأسئلة الشائعة</span><span class="lang-en">FAQ</span></a>
+        <a href="terms.html" aria-current="page"><span class="lang-ar">الشروط والأحكام</span><span class="lang-en">Terms &amp; Conditions</span></a>
+        <a href="https://shorturl.at/0QnY2" target="_blank" rel="noopener noreferrer">
+          <span class="lang-ar">تفاصيل البرنامج</span><span class="lang-en">Program Details</span>
+        </a>
+      </div>
+      <div class="footer-col">
+        <h4>
+          <span class="lang-ar">تواصل</span>
+          <span class="lang-en">Contact</span>
+        </h4>
+        <a href="https://wa.me/201032105166" target="_blank" rel="noopener noreferrer">
+          <span class="lang-ar">واتساب</span><span class="lang-en">WhatsApp</span>
+        </a>
+        <a href="mailto:mohamedtamerdev@gmail.com">
+          <span class="lang-ar">إيميل</span><span class="lang-en">Email</span>
+        </a>
+        <a href="https://linkedin.com/in/mohamedtamer0" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        <span class="lang-ar">© 2026 Online Mentorship <span>Program</span>. جميع الحقوق محفوظة.</span>
+        <span class="lang-en">© 2026 Online Mentorship <span>Program</span>. All rights reserved.</span>
+      </div>
+      <div class="footer-copy">
+        <span class="lang-ar">وصلنا لأكتر من 13+ دولة | 127+ متدرب</span>
+        <span class="lang-en">Reached 13+ countries | 127+ mentees</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>
