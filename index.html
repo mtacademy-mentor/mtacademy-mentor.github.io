@@ -30,20 +30,22 @@
 
 <body>
 
-  <aside class="promo-banner" id="promotion-banner" role="region" aria-label="عرض خصم محدود لمدة 5 أيام"
-    data-label-ar="عرض خصم محدود لمدة 5 أيام" data-label-en="Limited five-day discount offer" hidden>
+  <aside class="promo-banner" id="promotion-banner" role="region"
+    aria-label="عرض سبتمبر: خصم 35% على برنامج الـ Online Mentorship"
+    data-label-ar="عرض سبتمبر: خصم 35% على برنامج الـ Online Mentorship"
+    data-label-en="September offer: 35% off the Online Mentorship Program" hidden>
     <div class="promo-banner-inner">
       <div class="promo-offer">
         <div class="promo-deal-badge" aria-hidden="true">
-          <strong>35%</strong>
+          <strong data-promo-discount-value>35%</strong>
           <span class="lang-ar">خصم</span>
           <span class="lang-en">OFF</span>
         </div>
         <div class="promo-offer-content">
           <span class="promo-campaign-label">
             <i class="fa-solid fa-bolt" aria-hidden="true"></i>
-            <span class="lang-ar">عرض محدود لمدة 5 أيام</span>
-            <span class="lang-en">5-DAY LIMITED OFFER</span>
+            <span class="lang-ar">عرض سبتمبر لفترة محدودة</span>
+            <span class="lang-en">SEPTEMBER LIMITED-TIME OFFER</span>
           </span>
           <span class="promo-journey-label">
             <span class="lang-ar">عرض الـ Online Mentorship</span>
@@ -51,12 +53,12 @@
           </span>
           <div class="promo-copy">
             <h2>
-              <span class="lang-ar">وفر <bdi class="promo-discount" dir="ltr">35%</bdi> وابدأ رحلتك مع مينتور خبير</span>
-              <span class="lang-en">Save <bdi class="promo-discount" dir="ltr">35%</bdi> and start with an expert mentor</span>
+              <span class="lang-ar">خصم <bdi class="promo-discount" dir="ltr">35%</bdi> على برنامج الـ Online Mentorship</span>
+              <span class="lang-en">Get <bdi class="promo-discount" dir="ltr">35%</bdi> off the Online Mentorship Program</span>
             </h2>
             <p>
-              <span class="lang-ar">جلسات فردية 1:1 — احجز مكانك قبل انتهاء العرض.</span>
-              <span class="lang-en">Private 1:1 mentorship — reserve your spot before time runs out.</span>
+              <span class="lang-ar">ابدأ بخطة واضحة وجلسات فردية 1:1 قبل انتهاء سبتمبر.</span>
+              <span class="lang-en">Start with a clear plan and private 1:1 sessions before September ends.</span>
             </p>
           </div>
         </div>
@@ -79,8 +81,8 @@
       </div>
 
       <p class="sr-only">
-        <span class="lang-ar">خصم 35% على برنامج الـ Online Mentorship متاح حتى 30 أغسطس 2026 الساعة 8:40 مساءً بتوقيت القاهرة.</span>
-        <span class="lang-en">A 35% discount on the Online Mentorship Program is available until August 30, 2026 at 8:40 PM Cairo time.</span>
+        <span class="lang-ar">خصم 35% على برنامج الـ Online Mentorship متاح حتى نهاية يوم 30 سبتمبر 2026 بتوقيت القاهرة.</span>
+        <span class="lang-en">A 35% discount on the Online Mentorship Program is available through the end of September 30, 2026, Cairo time.</span>
       </p>
       <a class="promo-cta" data-promo-cta href="https://wa.me/201032105166" target="_blank"
         rel="noopener noreferrer" aria-label="احجز بخصم 35% عبر واتساب"
@@ -547,6 +549,11 @@
       <span class="lang-ar">4 خطط مختلفة حسب مستواك واحتياجاتك — كل جلسة 90 دقيقة!</span>
       <span class="lang-en">4 different plans depending on your level and needs — each session is 90 minutes!</span>
     </p>
+    <div class="plans-promotion-callout" data-promo-callout role="note" hidden>
+      <span class="plans-promotion-badge" data-promo-discount-value aria-hidden="true">35%</span>
+      <span class="lang-ar">خصم 35% على برنامج الـ Online Mentorship حتى نهاية سبتمبر</span>
+      <span class="lang-en">35% off the Online Mentorship Program through the end of September</span>
+    </div>
     <div class="plans-grid">
       <!-- Lite -->
       <div class="plan">
@@ -1283,7 +1290,71 @@
     </div>
   </footer>
 
-  <!-- MODAL -->
+  <div class="promotion-popup" id="promotion-popup" data-promo-popup hidden>
+    <section class="promotion-popup-dialog" role="dialog" aria-modal="true" tabindex="-1"
+      aria-labelledby="promotion-popup-title" aria-describedby="promotion-popup-description">
+      <button class="promotion-popup-close" type="button" data-promo-popup-close
+        aria-label="إغلاق عرض سبتمبر" data-label-ar="إغلاق عرض سبتمبر"
+        data-label-en="Close September offer">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+      <div class="promotion-popup-header">
+        <div class="promotion-popup-badge" aria-hidden="true">
+          <strong data-promo-discount-value>35%</strong>
+          <span class="lang-ar">خصم</span>
+          <span class="lang-en">OFF</span>
+        </div>
+        <div class="promotion-popup-heading">
+          <span class="promotion-popup-label">
+            <span class="lang-ar">عرض سبتمبر</span>
+            <span class="lang-en">SEPTEMBER OFFER</span>
+          </span>
+          <h2 id="promotion-popup-title">
+            <span class="lang-ar">وفّر 35% على برنامج الـ Online Mentorship</span>
+            <span class="lang-en">Save 35% on the Online Mentorship Program</span>
+          </h2>
+        </div>
+      </div>
+      <p class="promotion-popup-description" id="promotion-popup-description">
+        <span class="lang-ar">ابدأ بخطة واضحة وجلسات فردية 1:1 تناسب هدفك. العرض متاح حتى نهاية يوم 30 سبتمبر 2026.</span>
+        <span class="lang-en">Start with a clear plan and private 1:1 sessions tailored to your goal. Available through September 30, 2026.</span>
+      </p>
+      <div class="promotion-popup-countdown-wrap">
+        <p>
+          <span class="lang-ar">الوقت المتبقي على العرض</span>
+          <span class="lang-en">Time remaining</span>
+        </p>
+        <div class="promo-countdown promotion-popup-countdown" dir="ltr" aria-hidden="true">
+          <span class="promo-time-unit"><bdi data-promo-days>00</bdi><small><span class="lang-ar">يوم</span><span class="lang-en">Days</span></small></span>
+          <span class="promo-time-separator" aria-hidden="true">:</span>
+          <span class="promo-time-unit"><bdi data-promo-hours>00</bdi><small><span class="lang-ar">ساعة</span><span class="lang-en">Hours</span></small></span>
+          <span class="promo-time-separator" aria-hidden="true">:</span>
+          <span class="promo-time-unit"><bdi data-promo-minutes>00</bdi><small><span class="lang-ar">دقيقة</span><span class="lang-en">Minutes</span></small></span>
+          <span class="promo-time-separator" aria-hidden="true">:</span>
+          <span class="promo-time-unit"><bdi data-promo-seconds>00</bdi><small><span class="lang-ar">ثانية</span><span class="lang-en">Seconds</span></small></span>
+        </div>
+      </div>
+      <div class="promotion-popup-actions">
+        <a class="promotion-popup-primary" data-promo-cta data-promo-popup-primary
+          href="https://wa.me/201032105166" target="_blank" rel="noopener noreferrer"
+          aria-label="استفد من عرض سبتمبر بخصم 35% عبر واتساب"
+          data-label-ar="استفد من عرض سبتمبر بخصم 35% عبر واتساب"
+          data-label-en="Claim the September 35% offer on WhatsApp">
+          <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+          <span class="lang-ar">استفد من العرض عبر واتساب</span>
+          <span class="lang-en">Claim the Offer on WhatsApp</span>
+        </a>
+        <button class="promotion-popup-secondary" type="button" data-promo-popup-close>
+          <span class="lang-ar">ليس الآن</span>
+          <span class="lang-en">Maybe Later</span>
+        </button>
+      </div>
+      <a class="promotion-popup-terms" href="terms.html">
+        <span class="lang-ar">تطبق الشروط والأحكام</span>
+        <span class="lang-en">Terms and conditions apply</span>
+      </a>
+    </section>
+  </div>
 
   <script src="assets/js/main.js"></script>
 </body>

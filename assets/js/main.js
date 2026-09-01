@@ -5,23 +5,35 @@
   const mobileMenuQuery = window.matchMedia('(max-width: 1100px)');
 
   const PROMOTION_CAMPAIGN_CONFIG = Object.freeze({
-    startTimestamp: '2026-08-25T20:40:00+03:00',
-    endTimestamp: '2026-08-30T20:40:00+03:00',
+    campaignId: 'september-2026-35off',
+    discountPercentage: 35,
+    startTimestamp: '2026-09-01T00:00:00+03:00',
+    endTimestamp: '2026-10-01T00:00:00+03:00',
     whatsappUrl: 'https://wa.me/201032105166',
     whatsappMessages: Object.freeze({
-      ar: 'أهلاً م/ محمد، عايز أستفيد من عرض الخصم 35% على برنامج الـ Online Mentorship.',
-      en: 'Hi Mohamed, I’d like to claim the 35% discount on the Online Mentorship Program.'
-    })
+      ar: 'أهلاً م/ محمد، عايز أستفيد من عرض سبتمبر وخصم 35% على برنامج الـ Online Mentorship.',
+      en: 'Hi Mohamed, I’d like to claim the September 35% discount on the Online Mentorship Program.'
+    }),
+    popupStorageKey: 'promotionPopupSeen:september-2026-35off',
+    popupOpeningDelay: 900
   });
 
   const promotionState = {
+    active: false,
     banner: null,
+    callouts: [],
     compact: false,
+    countdownElements: null,
     endTime: null,
     endTimeoutId: null,
     evaluate: null,
     intervalId: null,
     listenersAttached: false,
+    popup: null,
+    popupDialog: null,
+    popupSeenFallback: false,
+    popupTimeoutId: null,
+    previouslyFocusedElement: null,
     resizeObserver: null,
     scrollFrameId: null,
     startTime: null,
@@ -31,6 +43,11 @@
 
   const getLanguage = () => (html.lang === 'en' ? 'en' : 'ar');
   const getMotionBehavior = () => (reducedMotionQuery.matches ? 'auto' : 'smooth');
+  const getPromotionWhatsappUrl = () => {
+    const message = PROMOTION_CAMPAIGN_CONFIG.whatsappMessages[getLanguage()];
+    const encodedMessage = encodeURIComponent(message).replace(/'/g, '%27');
+    return `${PROMOTION_CAMPAIGN_CONFIG.whatsappUrl}?text=${encodedMessage}`;
+  };
 
   const measurePromotionHeight = () => {
     const { banner } = promotionState;
@@ -57,27 +74,187 @@
   };
 
   const updatePromotionLocalization = () => {
-    const cta = promotionState.banner?.querySelector('[data-promo-cta]');
-    if (!cta) return;
+    document.querySelectorAll('[data-promo-cta]').forEach((cta) => {
+      cta.href = getPromotionWhatsappUrl();
+    });
 
-    const message = PROMOTION_CAMPAIGN_CONFIG.whatsappMessages[getLanguage()];
-    cta.href = `${PROMOTION_CAMPAIGN_CONFIG.whatsappUrl}?text=${encodeURIComponent(message).replace(/'/g, '%27')}`;
+    document.querySelectorAll('[data-promo-discount-value]').forEach((element) => {
+      element.textContent = `${PROMOTION_CAMPAIGN_CONFIG.discountPercentage}%`;
+    });
 
     measurePromotionHeight();
     window.requestAnimationFrame(measurePromotionHeight);
   };
 
-  const initializePromotionCountdown = () => {
-    const banner = document.getElementById('promotion-banner');
-    if (!banner) return;
+  const renderPromotionCountdown = (remainingMilliseconds) => {
+    const remainingSeconds = Math.floor(Math.max(0, remainingMilliseconds) / 1000);
+    const values = {
+      days: Math.floor(remainingSeconds / 86400),
+      hours: Math.floor((remainingSeconds % 86400) / 3600),
+      minutes: Math.floor((remainingSeconds % 3600) / 60),
+      seconds: remainingSeconds % 60
+    };
 
-    promotionState.banner = banner;
+    Object.entries(values).forEach(([unit, value]) => {
+      promotionState.countdownElements?.[unit]?.forEach((element) => {
+        element.textContent = String(value).padStart(2, '0');
+      });
+    });
+  };
+
+  const hasSeenPromotionPopup = () => {
+    try {
+      return promotionState.popupSeenFallback
+        || sessionStorage.getItem(PROMOTION_CAMPAIGN_CONFIG.popupStorageKey) === 'true';
+    } catch (_) {
+      return promotionState.popupSeenFallback;
+    }
+  };
+
+  const markPromotionPopupSeen = () => {
+    promotionState.popupSeenFallback = true;
+    try {
+      sessionStorage.setItem(PROMOTION_CAMPAIGN_CONFIG.popupStorageKey, 'true');
+    } catch (_) { /* The in-memory flag prevents repeat openings on this page. */ }
+  };
+
+  const getPromotionPopupFocusableElements = () => {
+    if (!promotionState.popupDialog) return [];
+
+    return [...promotionState.popupDialog.querySelectorAll(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )].filter((element) => !element.hidden && element.getAttribute('aria-hidden') !== 'true');
+  };
+
+  const closePromotionPopup = ({ restoreFocus = true } = {}) => {
+    const { popup } = promotionState;
+    const wasOpen = Boolean(popup && !popup.hidden);
+
+    if (popup) {
+      popup.classList.remove('is-open');
+      popup.hidden = true;
+    }
+    document.body.classList.remove('promotion-popup-open');
+
+    if (wasOpen && restoreFocus) {
+      const previousFocus = promotionState.previouslyFocusedElement;
+      const safeFallback = document.getElementById('lang-switch')
+        || document.querySelector('a[href], button:not([disabled])');
+      const focusTarget = previousFocus?.isConnected ? previousFocus : safeFallback;
+      try {
+        focusTarget?.focus({ preventScroll: true });
+      } catch (_) { /* Focus restoration must never block the page. */ }
+    }
+
+    promotionState.previouslyFocusedElement = null;
+  };
+
+  const openPromotionPopup = () => {
+    const { popup } = promotionState;
+    if (!promotionState.active || !popup || !popup.hidden || hasSeenPromotionPopup()) return;
+
+    promotionState.previouslyFocusedElement = document.activeElement instanceof HTMLElement
+      ? document.activeElement
+      : null;
+    markPromotionPopupSeen();
+    popup.hidden = false;
+    document.body.classList.add('promotion-popup-open');
+    window.requestAnimationFrame(() => {
+      if (popup.hidden || !promotionState.active) return;
+      popup.classList.add('is-open');
+      popup.querySelector('[data-promo-popup-close]')?.focus({ preventScroll: true });
+    });
+  };
+
+  const clearPromotionTimers = ({ includeStart = false } = {}) => {
     window.clearInterval(promotionState.intervalId);
-    window.clearTimeout(promotionState.startTimeoutId);
     window.clearTimeout(promotionState.endTimeoutId);
+    window.clearTimeout(promotionState.popupTimeoutId);
     promotionState.intervalId = null;
-    promotionState.startTimeoutId = null;
     promotionState.endTimeoutId = null;
+    promotionState.popupTimeoutId = null;
+
+    if (includeStart) {
+      window.clearTimeout(promotionState.startTimeoutId);
+      promotionState.startTimeoutId = null;
+    }
+  };
+
+  const hidePromotion = ({ renderZero = false, includeStart = false } = {}) => {
+    if (renderZero) renderPromotionCountdown(0);
+    promotionState.active = false;
+    clearPromotionTimers({ includeStart });
+    window.cancelAnimationFrame(promotionState.scrollFrameId);
+    window.clearTimeout(promotionState.transitionMeasureTimeoutId);
+    promotionState.scrollFrameId = null;
+    promotionState.transitionMeasureTimeoutId = null;
+    promotionState.resizeObserver?.disconnect();
+    promotionState.resizeObserver = null;
+    promotionState.compact = false;
+    promotionState.banner?.classList.remove('is-compact');
+    if (promotionState.banner) promotionState.banner.hidden = true;
+    promotionState.callouts.forEach((callout) => { callout.hidden = true; });
+    closePromotionPopup();
+    document.body.classList.remove('promo-active');
+    html.style.setProperty('--promo-banner-height', '0px');
+  };
+
+  const schedulePromotionPopup = () => {
+    if (!promotionState.popup || !promotionState.popup.hidden
+      || promotionState.popupTimeoutId || hasSeenPromotionPopup()) return;
+
+    promotionState.popupTimeoutId = window.setTimeout(() => {
+      promotionState.popupTimeoutId = null;
+      openPromotionPopup();
+    }, PROMOTION_CAMPAIGN_CONFIG.popupOpeningDelay);
+  };
+
+  const revealPromotion = (remainingMilliseconds) => {
+    const { banner } = promotionState;
+    promotionState.active = true;
+    updatePromotionLocalization();
+    if (banner) banner.hidden = false;
+    promotionState.callouts.forEach((callout) => { callout.hidden = false; });
+    if (banner) document.body.classList.add('promo-active');
+    renderPromotionCountdown(remainingMilliseconds);
+    measurePromotionHeight();
+    window.requestAnimationFrame(measurePromotionHeight);
+    updatePromotionJourneyState();
+
+    if (banner && 'ResizeObserver' in window && !promotionState.resizeObserver) {
+      try {
+        promotionState.resizeObserver = new ResizeObserver(measurePromotionHeight);
+        promotionState.resizeObserver.observe(banner);
+      } catch (_) { /* Direct measurements remain available as a fallback. */ }
+    }
+
+    if (!promotionState.intervalId) {
+      promotionState.intervalId = window.setInterval(() => promotionState.evaluate?.(), 1000);
+    }
+
+    if (!promotionState.endTimeoutId) {
+      promotionState.endTimeoutId = window.setTimeout(() => {
+        promotionState.endTimeoutId = null;
+        promotionState.evaluate?.();
+      }, Math.min(Math.max(remainingMilliseconds, 0), 2147483647));
+    }
+
+    schedulePromotionPopup();
+  };
+
+  const initializePromotionCountdown = () => {
+    promotionState.banner = document.getElementById('promotion-banner');
+    promotionState.callouts = [...document.querySelectorAll('[data-promo-callout]')];
+    promotionState.popup = document.querySelector('[data-promo-popup]');
+    promotionState.popupDialog = promotionState.popup?.querySelector('[role="dialog"]') || null;
+    promotionState.countdownElements = {
+      days: [...document.querySelectorAll('[data-promo-days]')],
+      hours: [...document.querySelectorAll('[data-promo-hours]')],
+      minutes: [...document.querySelectorAll('[data-promo-minutes]')],
+      seconds: [...document.querySelectorAll('[data-promo-seconds]')]
+    };
+
+    clearPromotionTimers({ includeStart: true });
     window.cancelAnimationFrame(promotionState.scrollFrameId);
     window.clearTimeout(promotionState.transitionMeasureTimeoutId);
     promotionState.scrollFrameId = null;
@@ -90,86 +267,16 @@
     promotionState.startTime = startTime;
     promotionState.endTime = endTime;
 
-    const timerElements = {
-      days: banner.querySelector('[data-promo-days]'),
-      hours: banner.querySelector('[data-promo-hours]'),
-      minutes: banner.querySelector('[data-promo-minutes]'),
-      seconds: banner.querySelector('[data-promo-seconds]')
-    };
-
-    const clearActiveTimers = () => {
-      window.clearInterval(promotionState.intervalId);
-      window.clearTimeout(promotionState.endTimeoutId);
-      promotionState.intervalId = null;
-      promotionState.endTimeoutId = null;
-    };
-
-    const renderCountdown = (remainingMilliseconds) => {
-      const remainingSeconds = Math.floor(Math.max(0, remainingMilliseconds) / 1000);
-      const days = Math.floor(remainingSeconds / 86400);
-      const hours = Math.floor((remainingSeconds % 86400) / 3600);
-      const minutes = Math.floor((remainingSeconds % 3600) / 60);
-      const seconds = remainingSeconds % 60;
-
-      Object.entries({ days, hours, minutes, seconds }).forEach(([unit, value]) => {
-        if (timerElements[unit]) timerElements[unit].textContent = String(value).padStart(2, '0');
-      });
-    };
-
-    const hidePromotion = ({ renderZero = false } = {}) => {
-      if (renderZero) renderCountdown(0);
-      clearActiveTimers();
-      window.cancelAnimationFrame(promotionState.scrollFrameId);
-      window.clearTimeout(promotionState.transitionMeasureTimeoutId);
-      promotionState.scrollFrameId = null;
-      promotionState.transitionMeasureTimeoutId = null;
-      promotionState.resizeObserver?.disconnect();
-      promotionState.resizeObserver = null;
-      promotionState.compact = false;
-      banner.classList.remove('is-compact');
-      banner.hidden = true;
-      document.body.classList.remove('promo-active');
-      html.style.setProperty('--promo-banner-height', '0px');
-    };
-
-    const revealPromotion = (remainingMilliseconds) => {
-      updatePromotionLocalization();
-      banner.hidden = false;
-      document.body.classList.add('promo-active');
-      renderCountdown(remainingMilliseconds);
-      measurePromotionHeight();
-      window.requestAnimationFrame(measurePromotionHeight);
-      updatePromotionJourneyState();
-
-      if ('ResizeObserver' in window && !promotionState.resizeObserver) {
-        try {
-          promotionState.resizeObserver = new ResizeObserver(measurePromotionHeight);
-          promotionState.resizeObserver.observe(banner);
-        } catch (_) { /* Direct measurements remain available as a fallback. */ }
-      }
-
-      if (!promotionState.intervalId) {
-        promotionState.intervalId = window.setInterval(() => promotionState.evaluate?.(), 1000);
-      }
-
-      if (!promotionState.endTimeoutId) {
-        promotionState.endTimeoutId = window.setTimeout(
-          () => promotionState.evaluate?.(),
-          Math.min(Math.max(remainingMilliseconds, 0), 2147483647)
-        );
-      }
-    };
-
     promotionState.evaluate = () => {
       const now = Date.now();
 
       if (now < startTime) {
         hidePromotion();
         window.clearTimeout(promotionState.startTimeoutId);
-        promotionState.startTimeoutId = window.setTimeout(
-          () => promotionState.evaluate?.(),
-          Math.min(startTime - now, 2147483647)
-        );
+        promotionState.startTimeoutId = window.setTimeout(() => {
+          promotionState.startTimeoutId = null;
+          promotionState.evaluate?.();
+        }, Math.min(startTime - now, 2147483647));
         return;
       }
 
@@ -177,13 +284,13 @@
       promotionState.startTimeoutId = null;
 
       if (now >= endTime) {
-        hidePromotion({ renderZero: true });
+        hidePromotion({ renderZero: true, includeStart: true });
         return;
       }
 
       const remainingMilliseconds = Math.max(0, endTime - Date.now());
       if (remainingMilliseconds <= 0) {
-        hidePromotion({ renderZero: true });
+        hidePromotion({ renderZero: true, includeStart: true });
         return;
       }
 
@@ -194,7 +301,7 @@
 
     if (!Number.isFinite(startTime) || !Number.isFinite(endTime) || endTime <= startTime) {
       promotionState.evaluate = null;
-      hidePromotion();
+      hidePromotion({ includeStart: true });
       return;
     }
 
@@ -212,6 +319,45 @@
         promotionState.evaluate?.();
         updatePromotionJourneyState();
         measurePromotionHeight();
+      });
+      document.addEventListener('click', (event) => {
+        if (event.target.closest('[data-promo-popup-close]')) {
+          closePromotionPopup();
+          return;
+        }
+
+        if (event.target.closest('[data-promo-popup-primary]')) {
+          closePromotionPopup();
+          return;
+        }
+
+        if (event.target === promotionState.popup) closePromotionPopup();
+      });
+      document.addEventListener('keydown', (event) => {
+        if (!promotionState.popup || promotionState.popup.hidden) return;
+
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          closePromotionPopup();
+          return;
+        }
+
+        if (event.key !== 'Tab') return;
+        const focusableElements = getPromotionPopupFocusableElements();
+        const first = focusableElements[0];
+        const last = focusableElements[focusableElements.length - 1];
+        const focusIsInside = promotionState.popupDialog?.contains(document.activeElement);
+
+        if (!first || !last) {
+          event.preventDefault();
+          promotionState.popupDialog?.focus({ preventScroll: true });
+        } else if (event.shiftKey && (document.activeElement === first || !focusIsInside)) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && (document.activeElement === last || !focusIsInside)) {
+          event.preventDefault();
+          first.focus();
+        }
       });
       promotionState.listenersAttached = true;
     }
@@ -274,6 +420,7 @@
 
     updateLocalizedAttributes();
     updatePromotionLocalization();
+    promotionState.evaluate?.();
     document.querySelectorAll('.slider-status').forEach((status) => {
       const slideCount = status.closest('.reviews-slider-container')?.querySelectorAll('.review-slide').length || 0;
       const itemNumber = Number(status.dataset.index || 0) + 1;
