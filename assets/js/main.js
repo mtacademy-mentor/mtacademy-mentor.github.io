@@ -457,6 +457,7 @@
 
     register(document.querySelector('#about .about-inner > :first-child'), 'inline-start');
     register(document.querySelector('#about .about-numbers'), 'inline-end', stagger);
+    registerGroup('#favikon-rankings .favikon-card', 'fade-up', 3);
     registerGroup('#services .srv', 'fade-up', 3);
     registerGroup('.countries-section .country-pill', 'scale-up', 4);
     registerGroup('#plans .plan', 'fade-up', 4);
