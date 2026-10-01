@@ -5,16 +5,16 @@
   const mobileMenuQuery = window.matchMedia('(max-width: 1100px)');
 
   const PROMOTION_CAMPAIGN_CONFIG = Object.freeze({
-    campaignId: 'september-2026-35off',
+    campaignId: 'october-2026-35off',
     discountPercentage: 35,
-    startTimestamp: '2026-09-01T00:00:00+03:00',
-    endTimestamp: '2026-10-01T00:00:00+03:00',
+    startTimestamp: '2026-10-01T00:00:00+03:00',
+    endTimestamp: '2026-11-01T00:00:00+02:00',
     whatsappUrl: 'https://wa.me/201032105166',
     whatsappMessages: Object.freeze({
-      ar: 'أهلاً م/ محمد، عايز أستفيد من عرض سبتمبر وخصم 35% على برنامج الـ Online Mentorship.',
-      en: 'Hi Mohamed, I’d like to claim the September 35% discount on the Online Mentorship Program.'
+      ar: 'أهلاً م/ محمد، عايز أستفيد من عرض أكتوبر وخصم 35% على برنامج الـ Online Mentorship.',
+      en: 'Hi Mohamed, I’d like to claim the October 35% discount on the Online Mentorship Program.'
     }),
-    popupStorageKey: 'promotionPopupSeen:september-2026-35off',
+    popupStorageKey: 'promotionPopupSeen:october-2026-35off',
     popupOpeningDelay: 900
   });
 
