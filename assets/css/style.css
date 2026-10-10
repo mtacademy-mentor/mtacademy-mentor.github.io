@@ -2429,6 +2429,7 @@
     html.motion-enabled .flags img:nth-child(11) { animation-delay: 770ms; }
     html.motion-enabled .flags img:nth-child(12) { animation-delay: 790ms; }
     html.motion-enabled .flags img:nth-child(13) { animation-delay: 810ms; }
+    html.motion-enabled .flags img:nth-child(14) { animation-delay: 830ms; }
 
     html.motion-enabled .company-logo {
       animation-name: fadeUp;
@@ -3319,8 +3320,9 @@
       grid-column: span 2;
     }
 
-    .country-pill:last-child {
-      grid-column: 4 / span 2;
+    /* Center the final pair in the 14-country grid. */
+    .country-pill:nth-last-child(2) {
+      grid-column: 3 / span 2;
     }
 
     @media (max-width: 768px) {
@@ -3329,8 +3331,8 @@
         gap: 1.5rem;
       }
 
-      .country-pill:last-child {
-        grid-column: 3 / span 2;
+      .country-pill:nth-last-child(2) {
+        grid-column: 2 / span 2;
       }
     }
 
@@ -3340,8 +3342,8 @@
         gap: 1.2rem;
       }
 
-      .country-pill:last-child {
-        grid-column: 2 / span 2;
+      .country-pill:nth-last-child(2) {
+        grid-column: span 2;
       }
     }
 

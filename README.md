@@ -24,8 +24,8 @@ This responsive, bilingual website introduces the mentorship program, its servic
 
 ## Program at a Glance
 
-- **140+** mentees
-- **13+** countries reached
+- **145+** mentees
+- **14+** countries reached
 - **22K** Udemy students
 - **7+** years of software engineering experience
 
